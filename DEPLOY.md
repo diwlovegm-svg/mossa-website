@@ -22,11 +22,11 @@
 6. ทดสอบ Web App URL:
    - `check` ต้องตอบสถานะคูปองได้
    - `validateEditorPasscode` ควรรองรับหลัง deploy เวอร์ชันใหม่
-7. อัปโหลดไฟล์เว็บขึ้น GitHub Pages repository ที่ serve `https://mossa-coupon.github.io/srirayong/`
+7. อัปโหลดไฟล์เว็บขึ้น GitHub Pages repository
 8. เปิดหน้าเคาน์เตอร์บนคอมพนักงาน:
-   - `https://mossa-coupon.github.io/srirayong/admin/`
+   - `https://diwlovegm-svg.github.io/mossa-website/srirayong/admin/`
 9. เปิดหน้าแก้คูปองเฉพาะเจ้าของ:
-   - `https://mossa-coupon.github.io/srirayong/config/`
+   - `https://diwlovegm-svg.github.io/mossa-website/srirayong/config/`
 
 ## Smoke Test หลังออนไลน์
 

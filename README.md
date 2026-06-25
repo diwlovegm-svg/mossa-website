@@ -19,18 +19,19 @@ This is now structured as an installable web app/PWA. It includes:
 - Counter coupon check page: `/srirayong/admin/`
 - Owner coupon config page: `/srirayong/config/`
 
-For the target GitHub Pages domain, these become:
+Current GitHub Pages deployment:
 
-- `https://mossa-coupon.github.io/srirayong/`
-- `https://mossa-coupon.github.io/srirayong/claim/`
-- `https://mossa-coupon.github.io/srirayong/admin/`
-- `https://mossa-coupon.github.io/srirayong/config/`
+- `https://diwlovegm-svg.github.io/mossa-website/srirayong/`
+- `https://diwlovegm-svg.github.io/mossa-website/srirayong/claim/`
+- `https://diwlovegm-svg.github.io/mossa-website/srirayong/admin/`
+- `https://diwlovegm-svg.github.io/mossa-website/srirayong/config/`
 
 ## Editable Coupon Template
 
 Use the owner config page to edit coupon design and campaign rules:
 
 - `https://mossa-coupon.github.io/srirayong/config/`
+- current deployment: `https://diwlovegm-svg.github.io/mossa-website/srirayong/config/`
 - local preview: `http://127.0.0.1:4175/srirayong/config/`
 
 The config page asks for the coupon editor passcode before showing the form. It saves template settings to the `CouponConfig` tab in Google Sheets. Newly issued coupons use the latest saved template immediately.
@@ -61,9 +62,9 @@ Coupons already saved as images on customer phones do not change, but admin vali
 
 1. Deploy the latest `apps-script/Code.gs` as a new Apps Script Web App version.
 2. Confirm Apps Script Script Properties include `COUPON_EDITOR_PASSCODE`.
-3. Publish this folder to the GitHub Pages repository that serves `https://mossa-coupon.github.io/srirayong/`.
-4. On the counter computer, open `https://mossa-coupon.github.io/srirayong/admin/` for barcode checking.
-5. Keep `https://mossa-coupon.github.io/srirayong/config/` for the owner-only coupon editor.
+3. Publish this folder to the GitHub Pages repository.
+4. On the counter computer, open `https://diwlovegm-svg.github.io/mossa-website/srirayong/admin/` for barcode checking.
+5. Keep `https://diwlovegm-svg.github.io/mossa-website/srirayong/config/` for the owner-only coupon editor.
 
 ## Google Sheets Backend Setup
 
