@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f766e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MOSSA Coupon">
+    <title>MOSSA Coupon App | ศรีระยอง</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./shared/styles.css">
+  </head>
+  <body>
+    <main class="page-shell launcher-shell">
+      <header class="app-topbar">
+        <a class="app-home" href="./index.html">MOSSA Coupon</a>
+        <div class="app-actions">
+          <span id="runtimeStatus" class="runtime-chip"></span>
+          <button id="installApp" class="install-button" type="button" hidden>ติดตั้งแอพ</button>
+        </div>
+      </header>
+
+      <section class="launcher-hero">
+        <div class="brand-mark" aria-label="MOSSA">MOSSA</div>
+        <p class="eyebrow">Srirayong Campaign</p>
+        <h1>เว็บแอพคูปอง MOSSA</h1>
+        <p>ออกคูปองให้ลูกค้า ตรวจสอบสถานะ และยืนยันใช้สิทธิ์จากฐานข้อมูลกลาง</p>
+      </section>
+
+      <section class="app-grid" aria-label="ทางเข้าใช้งาน">
+        <a class="app-card" href="./claim/index.html">
+          <span>สำหรับลูกค้า</span>
+          <strong>รับคูปองทดลองฟรี 1 วัน</strong>
+          <em>เปิดหน้านี้ให้ลูกค้าสแกน QR ที่บูธ</em>
+        </a>
+        <a class="app-card" href="./admin/index.html">
+          <span>สำหรับพนักงาน</span>
+          <strong>ตรวจสอบและใช้สิทธิ์คูปอง</strong>
+          <em>ยิงบาร์โค้ดหรือพิมพ์รหัส แล้วกดยืนยันใช้สิทธิ์</em>
+        </a>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

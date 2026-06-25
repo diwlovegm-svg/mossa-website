@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f766e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MOSSA Coupon Config">
+    <title>แก้ไขคูปอง | MOSSA Coupon Config</title>
+    <link rel="manifest" href="../manifest.webmanifest">
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../shared/styles.css">
+  </head>
+  <body>
+    <main class="page-shell admin-shell">
+      <header class="app-topbar">
+        <a class="app-home" href="../index.html">MOSSA Coupon</a>
+        <div class="app-actions">
+          <span id="runtimeStatus" class="runtime-chip"></span>
+          <button id="installApp" class="install-button" type="button" hidden>ติดตั้งแอพ</button>
+          <a class="text-link" href="../admin/index.html">ตรวจคูปอง</a>
+        </div>
+      </header>
+
+      <section class="admin-header">
+        <div>
+          <div class="brand-mark compact" aria-label="MOSSA">MOSSA</div>
+          <p class="eyebrow">Owner Config</p>
+          <h1>แก้ไขรูปแบบคูปอง</h1>
+        </div>
+      </section>
+
+      <section id="lockPanel" class="form-panel lock-panel" aria-labelledby="lock-title">
+        <h2 id="lock-title">ใส่รหัสเข้าแก้ไขคูปอง</h2>
+        <form id="lockForm" class="stacked-form admin-form">
+          <label>
+            <span>รหัสแก้ไขคูปอง</span>
+            <input id="editorPasscode" name="editorPasscode" type="password" inputmode="numeric" autocomplete="current-password" required autofocus>
+          </label>
+          <button id="unlockButton" class="primary-button" type="submit">เข้าแก้ไขคูปอง</button>
+        </form>
+        <div id="lockNotice" class="notice" role="status" aria-live="polite"></div>
+      </section>
+
+      <section id="editorPanel" class="form-panel config-panel" aria-labelledby="template-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Coupon Template</p>
+            <h2 id="template-title">ปรับแต่งคูปอง</h2>
+          </div>
+          <button id="reloadTemplate" class="secondary-button" type="button">โหลดค่าล่าสุด</button>
+        </div>
+
+        <form id="templateForm" class="template-form">
+          <label>
+            <span>ชื่อแคมเปญ</span>
+            <input name="campaignName" required>
+          </label>
+          <label>
+            <span>สาขา</span>
+            <input name="branchLabel" required>
+          </label>
+          <label>
+            <span>หัวข้อคูปอง</span>
+            <input name="title" required>
+          </label>
+          <label>
+            <span>ข้อความรอง</span>
+            <input name="subtitle" required>
+          </label>
+          <label class="wide-field">
+            <span>ข้อความบนคูปอง</span>
+            <textarea name="bodyText" rows="3" required></textarea>
+          </label>
+          <label>
+            <span>คำบน badge</span>
+            <input name="badgeText" required>
+          </label>
+          <label>
+            <span>ข้อความวันหมดอายุ</span>
+            <input name="expiresLabel" required>
+          </label>
+          <label>
+            <span>วันหมดอายุจริง</span>
+            <input name="expiresAt" required placeholder="2026-06-29T23:59:59+07:00">
+          </label>
+          <label>
+            <span>วันหมดอายุที่แสดงบนคูปอง</span>
+            <input name="displayText" required>
+          </label>
+          <label>
+            <span>Prefix รหัสคูปอง</span>
+            <input name="codePrefix" required>
+          </label>
+          <label>
+            <span>Date token ในรหัส</span>
+            <input name="dateToken" required>
+          </label>
+          <label>
+            <span>โลโก้ข้อความ</span>
+            <input name="logoText" required>
+          </label>
+          <label class="wide-field">
+            <span>โลโก้ URL</span>
+            <input name="logoUrl" placeholder="เว้นว่างเพื่อใช้โลโก้ข้อความ">
+          </label>
+          <label>
+            <span>สีหลัก</span>
+            <input name="primaryColor" type="color">
+          </label>
+          <label>
+            <span>สีรอง</span>
+            <input name="accentColor" type="color">
+          </label>
+          <label>
+            <span>สีพื้นหลัง</span>
+            <input name="backgroundColor" type="color">
+          </label>
+          <label>
+            <span>สีตัวอักษร</span>
+            <input name="textColor" type="color">
+          </label>
+          <label class="wide-field">
+            <span>เงื่อนไขการใช้งาน (1 บรรทัดต่อ 1 ข้อ)</span>
+            <textarea name="terms" rows="5" required></textarea>
+          </label>
+          <label class="checkbox-field">
+            <input name="showBarcode" type="checkbox">
+            <span>แสดง Barcode</span>
+          </label>
+          <label class="checkbox-field">
+            <input name="showQrCode" type="checkbox">
+            <span>แสดง QR Code</span>
+          </label>
+
+          <div class="wide-field form-actions">
+            <button id="saveTemplate" class="primary-button" type="submit">บันทึก Template</button>
+            <button id="previewTemplate" class="secondary-button" type="button">ดูตัวอย่าง</button>
+          </div>
+        </form>
+        <div id="templateNotice" class="notice" role="status" aria-live="polite"></div>
+        <div id="templatePreview" class="template-preview"></div>
+      </section>
+    </main>
+
+    <script type="module" src="./config.js"></script>
+  </body>
+</html>

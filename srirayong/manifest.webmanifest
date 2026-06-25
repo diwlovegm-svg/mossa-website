@@ -1,0 +1,46 @@
+{
+  "name": "MOSSA Coupon Srirayong",
+  "short_name": "MOSSA Coupon",
+  "description": "เว็บแอพรับคูปองและตรวจสอบคูปอง MOSSA Sport Society สาขาศรีระยอง",
+  "lang": "th",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ecfeff",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "รับคูปอง",
+      "short_name": "รับคูปอง",
+      "url": "./claim/",
+      "icons": [
+        {
+          "src": "./assets/icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "ตรวจสอบคูปอง",
+      "short_name": "Admin",
+      "url": "./admin/",
+      "icons": [
+        {
+          "src": "./assets/icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}

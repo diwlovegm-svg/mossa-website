@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f766e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MOSSA Admin">
+    <title>ตรวจสอบคูปอง | MOSSA Admin</title>
+    <link rel="manifest" href="../manifest.webmanifest">
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../shared/styles.css">
+  </head>
+  <body>
+    <main class="page-shell admin-shell">
+      <header class="app-topbar">
+        <a class="app-home" href="../index.html">MOSSA Coupon</a>
+        <div class="app-actions">
+          <span id="runtimeStatus" class="runtime-chip"></span>
+          <button id="installApp" class="install-button" type="button" hidden>ติดตั้งแอพ</button>
+          <a class="text-link" href="../claim/index.html">Claim</a>
+        </div>
+      </header>
+
+      <section class="admin-header">
+        <div>
+          <div class="brand-mark compact" aria-label="MOSSA">MOSSA</div>
+          <p class="eyebrow">MOSSA Counter</p>
+          <h1>ตรวจสอบคูปอง</h1>
+        </div>
+        <a class="text-link" href="../claim/index.html">ไปหน้ารับคูปอง</a>
+      </section>
+
+      <section class="form-panel" aria-labelledby="check-title">
+        <h2 id="check-title">ยิงบาร์โค้ดหรือพิมพ์รหัส</h2>
+        <form id="checkForm" class="stacked-form admin-form" novalidate>
+          <label>
+            <span>รหัสคูปอง</span>
+            <input id="couponCode" name="couponCode" autocomplete="off" inputmode="text" placeholder="SRH-290669-001-A7K" autofocus>
+          </label>
+          <button id="checkButton" class="primary-button" type="submit">ตรวจสอบ</button>
+        </form>
+        <div id="adminNotice" class="notice" role="status" aria-live="polite"></div>
+      </section>
+
+      <section id="resultPanel" class="result-panel" hidden>
+        <div id="statusBadge" class="status-badge"></div>
+        <h2 id="statusMessage"></h2>
+        <dl id="couponDetails" class="details-list"></dl>
+        <button id="redeemButton" class="primary-button redeem-button" type="button" hidden>ยืนยันใช้สิทธิ์</button>
+      </section>
+    </main>
+
+    <script type="module" src="./admin.js"></script>
+  </body>
+</html>

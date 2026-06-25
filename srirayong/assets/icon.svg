@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">MOSSA Coupon</title>
+  <desc id="desc">MOSSA coupon app icon</desc>
+  <rect width="512" height="512" rx="96" fill="#0f766e"/>
+  <path fill="#14b8a6" d="M0 354c64-46 139-69 226-69 104 0 199 33 286 98v129H0z"/>
+  <rect x="72" y="146" width="368" height="220" rx="36" fill="#fff"/>
+  <path fill="#0f766e" d="M72 210h368v88H72z"/>
+  <circle cx="118" cy="254" r="18" fill="#ecfeff"/>
+  <circle cx="394" cy="254" r="18" fill="#ecfeff"/>
+  <path fill="#0f172a" d="M120 170h272v24H120zm34 160h204v20H154z"/>
+  <path fill="#fff" d="M132 280h24v-52h-24zm38 0h12v-52h-12zm26 0h20v-52h-20zm34 0h12v-52h-12zm26 0h26v-52h-26zm40 0h14v-52h-14zm28 0h20v-52h-20zm34 0h24v-52h-24z"/>
+</svg>
