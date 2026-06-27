@@ -84,6 +84,7 @@ function setupInitialProperties() {
 
 function doGet(event) {
   const callback = event.parameter.callback;
+  const frameRequestId = event.parameter.frameRequestId;
   let response;
 
   try {
@@ -96,6 +97,10 @@ function doGet(event) {
     };
   }
 
+  if (frameRequestId) {
+    return renderFrameResponse_(frameRequestId, response, event.parameter.parentOrigin);
+  }
+
   const body = callback
     ? `${callback}(${JSON.stringify(response)});`
     : JSON.stringify(response);
@@ -103,6 +108,21 @@ function doGet(event) {
   return ContentService
     .createTextOutput(body)
     .setMimeType(callback ? ContentService.MimeType.JAVASCRIPT : ContentService.MimeType.JSON);
+}
+
+function renderFrameResponse_(requestId, response, parentOrigin) {
+  const targetOrigin = parentOrigin || '*';
+  const messageJson = JSON.stringify({
+    type: 'mossaCouponFrameResponse',
+    requestId,
+    response,
+  }).replace(/</g, '\\u003c');
+  const originJson = JSON.stringify(targetOrigin).replace(/</g, '\\u003c');
+  const html = `<!doctype html><meta charset="utf-8"><script>window.parent.postMessage(${messageJson}, ${originJson});</script>`;
+
+  return HtmlService
+    .createHtmlOutput(html)
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 function handleRequest_(payload) {
@@ -180,6 +200,20 @@ function claimCoupon_(data, templateVersion) {
 
     if (existing) {
       const existingStatus = getEffectiveStatus_(existing);
+      if (existingStatus === 'ISSUED') {
+        updateRecordStatus_(sheet, existing.rowNumber, 'PENDING', '', existing);
+        existing.status = 'PENDING';
+        existing.updatedAt = new Date().toISOString();
+        return {
+          ok: true,
+          approvalRequired: true,
+          approvalFlowVersion: APPROVAL_FLOW_VERSION,
+          status: 'PENDING',
+          message: 'ส่งคำขอรับคูปองอีกครั้งแล้ว กรุณารอพนักงานอนุมัติ',
+          coupon: toCouponResponse_(existing),
+        };
+      }
+
       return {
         ok: true,
         approvalRequired: true,

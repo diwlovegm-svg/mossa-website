@@ -5,6 +5,8 @@ const STORAGE_KEY = `mossa-coupons:${defaultCampaignConfig.campaignId}`;
 const CONFIG_STORAGE_KEY = `mossa-coupon-config:${defaultCampaignConfig.campaignId}`;
 const APPROVAL_FLOW_VERSION = '2026-06-27-a';
 const JSONP_RETRY_ATTEMPTS = 3;
+const FRAME_RETRY_ATTEMPTS = 2;
+const API_TIMEOUT_MS = 12000;
 
 export function claimCoupon(payload) {
   return request('claim', payload);
@@ -67,25 +69,40 @@ async function request(action, data) {
     return mockRequest(action, data);
   }
 
-  return jsonpRequestWithRetry(action, data);
+  return remoteRequestWithRetry(action, data);
 }
 
-async function jsonpRequestWithRetry(action, data) {
+async function remoteRequestWithRetry(action, data) {
   let lastError;
+  const totalAttempts = Math.max(JSONP_RETRY_ATTEMPTS, FRAME_RETRY_ATTEMPTS);
 
-  for (let attempt = 1; attempt <= JSONP_RETRY_ATTEMPTS; attempt += 1) {
+  for (let attempt = 1; attempt <= totalAttempts; attempt += 1) {
     try {
       return await jsonpRequest(action, data);
     } catch (error) {
       lastError = error;
-      if (attempt >= JSONP_RETRY_ATTEMPTS || !isRetryableApiError(error)) {
+      if (!isRetryableApiError(error)) {
         break;
       }
-      await wait(600 * attempt);
+    }
+
+    if (attempt <= FRAME_RETRY_ATTEMPTS) {
+      try {
+        return await frameRequest(action, data);
+      } catch (error) {
+        lastError = error;
+        if (!isRetryableApiError(error)) {
+          break;
+        }
+      }
+    }
+
+    if (attempt < totalAttempts) {
+      await wait(700 * attempt);
     }
   }
 
-  throw lastError;
+  throw new Error(lastError?.message || 'เชื่อมต่อระบบหลังบ้านไม่ได้ กรุณาเช็กอินเทอร์เน็ตแล้วลองใหม่');
 }
 
 function jsonpRequest(action, data) {
@@ -104,7 +121,7 @@ function jsonpRequest(action, data) {
     const timeoutId = window.setTimeout(() => {
       cleanup();
       reject(new Error('เชื่อมต่อ Apps Script ไม่สำเร็จ กรุณาเช็กอินเทอร์เน็ตแล้วลองใหม่'));
-    }, 15000);
+    }, API_TIMEOUT_MS);
 
     window[callbackName] = (response) => {
       cleanup();
@@ -131,6 +148,64 @@ function jsonpRequest(action, data) {
       delete window[callbackName];
       script.remove();
     }
+  });
+}
+
+function frameRequest(action, data) {
+  const campaignConfig = getCampaignConfig();
+  const couponTemplate = getCouponTemplate();
+  const requestId = `mossaCouponFrame_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  const payload = {
+    action,
+    campaignId: campaignConfig.campaignId,
+    templateVersion: couponTemplate.version,
+    data,
+  };
+
+  return new Promise((resolve, reject) => {
+    const iframe = document.createElement('iframe');
+    iframe.hidden = true;
+    iframe.tabIndex = -1;
+    iframe.setAttribute('aria-hidden', 'true');
+
+    const timeoutId = window.setTimeout(() => {
+      cleanup();
+      reject(new Error('เชื่อมต่อ Apps Script ไม่สำเร็จ กรุณาเช็กอินเทอร์เน็ตแล้วลองใหม่'));
+    }, API_TIMEOUT_MS);
+
+    function handleMessage(event) {
+      const message = event.data;
+      if (message?.type !== 'mossaCouponFrameResponse' || message.requestId !== requestId) {
+        return;
+      }
+
+      cleanup();
+      const response = message.response;
+      if (response?.ok) {
+        resolve(response);
+        return;
+      }
+      reject(new Error(response?.message || 'ระบบคูปองตอบกลับไม่สำเร็จ'));
+    }
+
+    function cleanup() {
+      window.clearTimeout(timeoutId);
+      window.removeEventListener('message', handleMessage);
+      iframe.remove();
+    }
+
+    const url = new URL(campaignConfig.apiEndpoint);
+    url.searchParams.set('frameRequestId', requestId);
+    url.searchParams.set('parentOrigin', window.location.origin);
+    url.searchParams.set('payload', JSON.stringify(payload));
+    iframe.src = url.toString();
+    iframe.onerror = () => {
+      cleanup();
+      reject(new Error('โหลด Apps Script ไม่ได้ อาจถูก Chrome หรือ Extension บล็อก กรุณาอนุญาต script.google.com'));
+    };
+
+    window.addEventListener('message', handleMessage);
+    document.body.append(iframe);
   });
 }
 
@@ -217,6 +292,22 @@ function mockClaim(coupons, data) {
 
   if (existingCoupon) {
     const effectiveCoupon = withEffectiveStatus(existingCoupon);
+    if (effectiveCoupon.effectiveStatus === 'ISSUED') {
+      existingCoupon.status = 'PENDING';
+      existingCoupon.updatedAt = new Date().toISOString();
+      writeCoupons(coupons);
+      const pendingCoupon = withEffectiveStatus(existingCoupon);
+      return {
+        ok: true,
+        approvalRequired: true,
+        approvalFlowVersion: APPROVAL_FLOW_VERSION,
+        status: 'PENDING',
+        message: 'ส่งคำขอรับคูปองอีกครั้งแล้ว กรุณารอพนักงานอนุมัติ',
+        coupon: pendingCoupon,
+        source: 'mock',
+      };
+    }
+
     return {
       ok: true,
       approvalRequired: true,
