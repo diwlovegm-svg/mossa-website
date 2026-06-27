@@ -4,6 +4,7 @@ import { applyCouponSettings, getCampaignConfig, getCouponSettings, getCouponTem
 const STORAGE_KEY = `mossa-coupons:${defaultCampaignConfig.campaignId}`;
 const CONFIG_STORAGE_KEY = `mossa-coupon-config:${defaultCampaignConfig.campaignId}`;
 const APPROVAL_FLOW_VERSION = '2026-06-27-a';
+const JSONP_RETRY_ATTEMPTS = 3;
 
 export function claimCoupon(payload) {
   return request('claim', payload);
@@ -66,7 +67,25 @@ async function request(action, data) {
     return mockRequest(action, data);
   }
 
-  return jsonpRequest(action, data);
+  return jsonpRequestWithRetry(action, data);
+}
+
+async function jsonpRequestWithRetry(action, data) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= JSONP_RETRY_ATTEMPTS; attempt += 1) {
+    try {
+      return await jsonpRequest(action, data);
+    } catch (error) {
+      lastError = error;
+      if (attempt >= JSONP_RETRY_ATTEMPTS || !isRetryableApiError(error)) {
+        break;
+      }
+      await wait(600 * attempt);
+    }
+  }
+
+  throw lastError;
 }
 
 function jsonpRequest(action, data) {
@@ -113,6 +132,15 @@ function jsonpRequest(action, data) {
       script.remove();
     }
   });
+}
+
+function isRetryableApiError(error) {
+  const message = String(error?.message || '');
+  return message.includes('เชื่อมต่อ Apps Script') || message.includes('โหลด Apps Script');
+}
+
+function wait(milliseconds) {
+  return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 }
 
 function mockRequest(action, data) {
