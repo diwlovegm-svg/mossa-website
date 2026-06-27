@@ -135,7 +135,27 @@ function renderFrameResponse_(requestId, response, parentOrigin) {
 function renderRelayRedirect_(returnUrl, action, response) {
   const redirectUrl = buildRelayReturnUrl_(returnUrl, action, response);
   const redirectJson = JSON.stringify(redirectUrl).replace(/</g, '\\u003c');
-  const html = `<!doctype html><meta charset="utf-8"><script>window.location.replace(${redirectJson});</script>`;
+  const redirectHref = redirectUrl
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  const html = `<!doctype html>
+<meta charset="utf-8">
+<base target="_top">
+<p>กำลังกลับหน้าเว็บคูปอง...</p>
+<p><a id="relay-link" href="${redirectHref}" target="_top">กลับหน้าเว็บคูปอง</a></p>
+<script>
+const redirectUrl = ${redirectJson};
+try { window.top.location.replace(redirectUrl); } catch (error) {}
+window.setTimeout(() => {
+  const link = document.getElementById('relay-link');
+  if (link) link.click();
+}, 100);
+window.setTimeout(() => {
+  window.location.replace(redirectUrl);
+}, 800);
+</script>`;
 
   return HtmlService
     .createHtmlOutput(html)
