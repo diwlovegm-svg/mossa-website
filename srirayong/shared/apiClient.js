@@ -184,7 +184,7 @@ function mockClaim(coupons, data) {
   }
 
   const existingCoupon = coupons.find((coupon) => {
-    return coupon.customerPhone === customerPhone && coupon.status !== 'VOID';
+    return normalizeStoredPhone(coupon.customerPhone) === customerPhone && coupon.status !== 'VOID';
   });
 
   if (existingCoupon) {
@@ -233,7 +233,7 @@ function mockClaimStatus(coupons, data) {
     throw new Error('กรุณากรอกเบอร์โทรให้ครบ 10 หลัก');
   }
 
-  const coupon = coupons.find((item) => item.customerPhone === customerPhone && item.status !== 'VOID');
+  const coupon = coupons.find((item) => normalizeStoredPhone(item.customerPhone) === customerPhone && item.status !== 'VOID');
   if (!coupon) {
     return {
       ok: true,
@@ -405,6 +405,7 @@ function withEffectiveStatus(coupon) {
   const effectiveStatus = getEffectiveStatus(coupon);
   return {
     ...coupon,
+    customerPhone: normalizeStoredPhone(coupon.customerPhone),
     effectiveStatus,
   };
 }
@@ -424,6 +425,14 @@ function getEffectiveStatus(coupon) {
 
 function normalizePhone(value) {
   return String(value || '').replace(/\D/g, '');
+}
+
+function normalizeStoredPhone(value) {
+  const digits = normalizePhone(value);
+  if (digits.length === 9) {
+    return `0${digits}`;
+  }
+  return digits;
 }
 
 function isValidPhone(value) {

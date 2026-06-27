@@ -174,7 +174,7 @@ function claimCoupon_(data, templateVersion) {
     const records = getRecords_(sheet);
     const existing = records.find((record) => {
       return record.campaignId === CAMPAIGN_CONFIG.campaignId
-        && record.customerPhone === customerPhone
+        && normalizeStoredPhone_(record.customerPhone) === customerPhone
         && record.status !== 'VOID';
     });
 
@@ -231,7 +231,7 @@ function claimStatus_(customerPhoneValue) {
   const records = getRecords_(sheet);
   const record = records.find((item) => {
     return item.campaignId === CAMPAIGN_CONFIG.campaignId
-      && item.customerPhone === customerPhone
+      && normalizeStoredPhone_(item.customerPhone) === customerPhone
       && item.status !== 'VOID';
   });
 
@@ -529,6 +529,15 @@ function ensureHeaders_(sheet) {
     headerRange.setValues([HEADERS]);
     sheet.setFrozenRows(1);
   }
+
+  ensureColumnFormats_(sheet);
+}
+
+function ensureColumnFormats_(sheet) {
+  const phoneColumn = HEADERS.indexOf('customerPhone') + 1;
+  if (phoneColumn > 0) {
+    sheet.getRange(1, phoneColumn, sheet.getMaxRows(), 1).setNumberFormat('@');
+  }
 }
 
 function getRecords_(sheet) {
@@ -548,7 +557,15 @@ function getRecords_(sheet) {
 }
 
 function appendRecord_(sheet, record) {
-  sheet.appendRow(HEADERS.map((header) => record[header] || ''));
+  const rowNumber = Math.max(sheet.getLastRow() + 1, 2);
+  const values = HEADERS.map((header) => header === 'customerPhone'
+    ? String(record[header] || '')
+    : record[header] || '');
+  const phoneColumn = HEADERS.indexOf('customerPhone') + 1;
+  if (phoneColumn > 0) {
+    sheet.getRange(rowNumber, phoneColumn).setNumberFormat('@');
+  }
+  sheet.getRange(rowNumber, 1, 1, HEADERS.length).setValues([values]);
 }
 
 function updateRecordStatus_(sheet, rowNumber, status, redeemedAt, record) {
@@ -605,7 +622,7 @@ function toCouponResponse_(record) {
     status: record.status,
     effectiveStatus: getEffectiveStatus_(record),
     customerName: record.customerName,
-    customerPhone: record.customerPhone,
+    customerPhone: normalizeStoredPhone_(record.customerPhone),
     issuedAt: record.issuedAt,
     expiresAt: record.expiresAt,
     redeemedAt: record.redeemedAt,
@@ -616,6 +633,14 @@ function toCouponResponse_(record) {
 
 function normalizePhone_(value) {
   return String(value || '').replace(/\D/g, '');
+}
+
+function normalizeStoredPhone_(value) {
+  const digits = normalizePhone_(value);
+  if (digits.length === 9) {
+    return `0${digits}`;
+  }
+  return digits;
 }
 
 function isValidPhone_(value) {

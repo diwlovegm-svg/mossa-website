@@ -20,6 +20,7 @@ const runtimeStatus = document.querySelector('#runtimeStatus');
 let currentCoupon = null;
 let currentPhone = '';
 let approvalPollTimer = null;
+let isApprovalPollRunning = false;
 
 registerPwa();
 mountInstallButton(installButton);
@@ -152,27 +153,8 @@ function showApprovedCoupon(coupon, message) {
 
 function startApprovalPolling() {
   if (!currentPhone) return;
-  approvalPollTimer = window.setInterval(async () => {
-    try {
-      const response = await getClaimStatus({ customerPhone: currentPhone });
-      assertApprovalBackend(response);
-      const status = response.status || response.coupon?.effectiveStatus || response.coupon?.status;
-      if (status === 'ISSUED') {
-        showApprovedCoupon(response.coupon, response.message || 'อนุมัติแล้ว บันทึกคูปองไว้ใช้สิทธิ์');
-        return;
-      }
-      if (status === 'PENDING') {
-        pendingStatus.textContent = `ยังรอพนักงานอนุมัติ อัปเดตล่าสุด ${formatClock(new Date())}`;
-        return;
-      }
-      handleClaimResponse(response, {
-        customerName: nameInput.value.trim(),
-        customerPhone: currentPhone,
-      });
-    } catch (error) {
-      pendingStatus.textContent = error.message || 'เช็กสถานะไม่สำเร็จ ระบบจะลองใหม่อัตโนมัติ';
-    }
-  }, 5000);
+  pollApprovalStatus();
+  approvalPollTimer = window.setInterval(pollApprovalStatus, 3000);
 }
 
 async function ensureApprovalBackendReady(customerPhone) {
@@ -189,6 +171,37 @@ function stopApprovalPolling() {
   if (!approvalPollTimer) return;
   window.clearInterval(approvalPollTimer);
   approvalPollTimer = null;
+}
+
+async function pollApprovalStatus() {
+  if (!currentPhone || isApprovalPollRunning) return;
+
+  isApprovalPollRunning = true;
+  try {
+    const response = await getClaimStatus({ customerPhone: currentPhone });
+    assertApprovalBackend(response);
+    const status = response.status || response.coupon?.effectiveStatus || response.coupon?.status;
+    if (status === 'ISSUED') {
+      showApprovedCoupon(response.coupon, response.message || 'อนุมัติแล้ว บันทึกคูปองไว้ใช้สิทธิ์');
+      return;
+    }
+    if (status === 'PENDING') {
+      pendingStatus.textContent = `ยังรอพนักงานอนุมัติ อัปเดตล่าสุด ${formatClock(new Date())}`;
+      return;
+    }
+    if (status === 'NOT_FOUND') {
+      pendingStatus.textContent = `กำลังรอข้อมูลคำขอ อัปเดตล่าสุด ${formatClock(new Date())}`;
+      return;
+    }
+    handleClaimResponse(response, {
+      customerName: nameInput.value.trim(),
+      customerPhone: currentPhone,
+    });
+  } catch (error) {
+    pendingStatus.textContent = error.message || 'เช็กสถานะไม่สำเร็จ ระบบจะลองใหม่อัตโนมัติ';
+  } finally {
+    isApprovalPollRunning = false;
+  }
 }
 
 function normalizePhone(value) {
