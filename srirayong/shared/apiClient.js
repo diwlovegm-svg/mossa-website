@@ -3,6 +3,7 @@ import { applyCouponSettings, getCampaignConfig, getCouponSettings, getCouponTem
 
 const STORAGE_KEY = `mossa-coupons:${defaultCampaignConfig.campaignId}`;
 const CONFIG_STORAGE_KEY = `mossa-coupon-config:${defaultCampaignConfig.campaignId}`;
+const APPROVAL_FLOW_VERSION = '2026-06-27-a';
 
 export function claimCoupon(payload) {
   return request('claim', payload);
@@ -190,6 +191,8 @@ function mockClaim(coupons, data) {
     const effectiveCoupon = withEffectiveStatus(existingCoupon);
     return {
       ok: true,
+      approvalRequired: true,
+      approvalFlowVersion: APPROVAL_FLOW_VERSION,
       status: effectiveCoupon.effectiveStatus,
       message: getClaimMessage(effectiveCoupon.effectiveStatus),
       coupon: effectiveCoupon,
@@ -215,6 +218,8 @@ function mockClaim(coupons, data) {
 
   return {
     ok: true,
+    approvalRequired: true,
+    approvalFlowVersion: APPROVAL_FLOW_VERSION,
     status: 'PENDING',
     message: 'ส่งคำขอรับคูปองแล้ว กรุณารอพนักงานอนุมัติ',
     coupon,
@@ -232,6 +237,8 @@ function mockClaimStatus(coupons, data) {
   if (!coupon) {
     return {
       ok: true,
+      approvalRequired: true,
+      approvalFlowVersion: APPROVAL_FLOW_VERSION,
       status: 'NOT_FOUND',
       coupon: null,
       source: 'mock',
@@ -241,6 +248,8 @@ function mockClaimStatus(coupons, data) {
   const effectiveCoupon = withEffectiveStatus(coupon);
   return {
     ok: true,
+    approvalRequired: true,
+    approvalFlowVersion: APPROVAL_FLOW_VERSION,
     status: effectiveCoupon.effectiveStatus,
     message: getClaimMessage(effectiveCoupon.effectiveStatus),
     coupon: effectiveCoupon,
@@ -251,6 +260,8 @@ function mockClaimStatus(coupons, data) {
 function mockListPendingCoupons(coupons) {
   return {
     ok: true,
+    approvalRequired: true,
+    approvalFlowVersion: APPROVAL_FLOW_VERSION,
     coupons: coupons
       .filter((coupon) => coupon.status === 'PENDING')
       .map((coupon) => withEffectiveStatus(coupon))
@@ -266,6 +277,8 @@ function mockApproveCoupon(coupons, data) {
   if (index < 0) {
     return {
       ok: true,
+      approvalRequired: true,
+      approvalFlowVersion: APPROVAL_FLOW_VERSION,
       status: 'NOT_FOUND',
       coupon: null,
       source: 'mock',
@@ -276,6 +289,8 @@ function mockApproveCoupon(coupons, data) {
     const current = withEffectiveStatus(coupons[index]);
     return {
       ok: true,
+      approvalRequired: true,
+      approvalFlowVersion: APPROVAL_FLOW_VERSION,
       status: current.effectiveStatus,
       message: 'คำขอนี้ไม่ได้อยู่ในสถานะรออนุมัติ',
       coupon: current,
@@ -292,6 +307,8 @@ function mockApproveCoupon(coupons, data) {
 
   return {
     ok: true,
+    approvalRequired: true,
+    approvalFlowVersion: APPROVAL_FLOW_VERSION,
     status: 'ISSUED',
     message: 'อนุมัติคูปองแล้ว ลูกค้าจะเห็นคูปองในหน้ารับคูปอง',
     coupon: withEffectiveStatus(coupons[index]),

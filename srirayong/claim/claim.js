@@ -46,7 +46,9 @@ form.addEventListener('submit', async (event) => {
   setLoading(true);
   try {
     await fetchCouponSettings();
+    await ensureApprovalBackendReady(customerPhone);
     const response = await claimCoupon({ customerName, customerPhone });
+    assertApprovalBackend(response);
     handleClaimResponse(response, { customerName, customerPhone });
   } catch (error) {
     showNotice(error.message || 'ไม่สามารถออกคูปองได้ กรุณาลองใหม่อีกครั้ง', 'error');
@@ -153,6 +155,7 @@ function startApprovalPolling() {
   approvalPollTimer = window.setInterval(async () => {
     try {
       const response = await getClaimStatus({ customerPhone: currentPhone });
+      assertApprovalBackend(response);
       const status = response.status || response.coupon?.effectiveStatus || response.coupon?.status;
       if (status === 'ISSUED') {
         showApprovedCoupon(response.coupon, response.message || 'อนุมัติแล้ว บันทึกคูปองไว้ใช้สิทธิ์');
@@ -170,6 +173,16 @@ function startApprovalPolling() {
       pendingStatus.textContent = error.message || 'เช็กสถานะไม่สำเร็จ ระบบจะลองใหม่อัตโนมัติ';
     }
   }, 5000);
+}
+
+async function ensureApprovalBackendReady(customerPhone) {
+  const response = await getClaimStatus({ customerPhone });
+  assertApprovalBackend(response);
+}
+
+function assertApprovalBackend(response) {
+  if (response?.approvalRequired === true) return;
+  throw new Error('ระบบหลังบ้านยังไม่ได้อัปเดตระบบอนุมัติคูปอง กรุณาแจ้งพนักงานให้ deploy Apps Script เวอร์ชันล่าสุดก่อน');
 }
 
 function stopApprovalPolling() {

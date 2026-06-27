@@ -1,6 +1,7 @@
 const SHEET_NAME = 'Coupons';
 const CONFIG_SHEET_NAME = 'CouponConfig';
 const DEFAULT_SPREADSHEET_ID = '12TeNknzibjJeNylekXK48O6s6AxMvDBhPJT3uINQENs';
+const APPROVAL_FLOW_VERSION = '2026-06-27-a';
 const CAMPAIGN_CONFIG = {
   campaignId: 'srirayong-free-trial-2026-06',
   codePrefix: 'SRH',
@@ -181,6 +182,8 @@ function claimCoupon_(data, templateVersion) {
       const existingStatus = getEffectiveStatus_(existing);
       return {
         ok: true,
+        approvalRequired: true,
+        approvalFlowVersion: APPROVAL_FLOW_VERSION,
         status: existingStatus,
         message: getClaimMessage_(existingStatus),
         coupon: toCouponResponse_(existing),
@@ -206,6 +209,8 @@ function claimCoupon_(data, templateVersion) {
 
     return {
       ok: true,
+      approvalRequired: true,
+      approvalFlowVersion: APPROVAL_FLOW_VERSION,
       status: 'PENDING',
       message: 'ส่งคำขอรับคูปองแล้ว กรุณารอพนักงานอนุมัติ',
       coupon,
@@ -233,6 +238,8 @@ function claimStatus_(customerPhoneValue) {
   if (!record) {
     return {
       ok: true,
+      approvalRequired: true,
+      approvalFlowVersion: APPROVAL_FLOW_VERSION,
       status: 'NOT_FOUND',
       coupon: null,
     };
@@ -241,6 +248,8 @@ function claimStatus_(customerPhoneValue) {
   const effectiveStatus = getEffectiveStatus_(record);
   return {
     ok: true,
+    approvalRequired: true,
+    approvalFlowVersion: APPROVAL_FLOW_VERSION,
     status: effectiveStatus,
     message: getClaimMessage_(effectiveStatus),
     coupon: toCouponResponse_(record),
@@ -259,6 +268,8 @@ function listPendingCoupons_() {
 
   return {
     ok: true,
+    approvalRequired: true,
+    approvalFlowVersion: APPROVAL_FLOW_VERSION,
     coupons,
   };
 }
@@ -281,6 +292,8 @@ function approveCoupon_(couponCode) {
     if (!record) {
       return {
         ok: true,
+        approvalRequired: true,
+        approvalFlowVersion: APPROVAL_FLOW_VERSION,
         status: 'NOT_FOUND',
         coupon: null,
       };
@@ -289,6 +302,8 @@ function approveCoupon_(couponCode) {
     if (record.status !== 'PENDING') {
       return {
         ok: true,
+        approvalRequired: true,
+        approvalFlowVersion: APPROVAL_FLOW_VERSION,
         status: getEffectiveStatus_(record),
         message: 'คำขอนี้ไม่ได้อยู่ในสถานะรออนุมัติ',
         coupon: toCouponResponse_(record),
@@ -301,6 +316,8 @@ function approveCoupon_(couponCode) {
 
     return {
       ok: true,
+      approvalRequired: true,
+      approvalFlowVersion: APPROVAL_FLOW_VERSION,
       status: 'ISSUED',
       message: 'อนุมัติคูปองแล้ว ลูกค้าจะเห็นคูปองในหน้ารับคูปอง',
       coupon: toCouponResponse_(record),

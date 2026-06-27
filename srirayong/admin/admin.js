@@ -101,10 +101,18 @@ async function loadPendingApprovals() {
     showPendingNotice(response.coupons?.length ? `มีคำขอรออนุมัติ ${response.coupons.length} รายการ` : 'ยังไม่มีคำขอรออนุมัติ', response.coupons?.length ? 'info' : 'success');
   } catch (error) {
     renderPendingApprovals([]);
-    showPendingNotice(error.message || 'โหลดคำขอรออนุมัติไม่สำเร็จ', 'error');
+    showPendingNotice(formatApprovalError(error), 'error');
   } finally {
     setButtonLoading(refreshPendingButton, false, 'รีเฟรช');
   }
+}
+
+function formatApprovalError(error) {
+  const message = String(error?.message || '');
+  if (message.includes('Unknown action')) {
+    return 'ระบบอนุมัติยังไม่พร้อม ต้อง deploy Apps Script เวอร์ชันล่าสุดก่อน';
+  }
+  return message || 'โหลดคำขอรออนุมัติไม่สำเร็จ';
 }
 
 function renderPendingApprovals(coupons) {
