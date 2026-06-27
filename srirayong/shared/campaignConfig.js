@@ -21,6 +21,11 @@ export const campaignConfig = {
 };
 
 export const statusPresentations = {
+  PENDING: {
+    label: 'รออนุมัติ',
+    message: '⏳ คูปองนี้รอพนักงานอนุมัติ',
+    type: 'muted',
+  },
   ISSUED: {
     label: 'ใช้งานได้',
     message: '✅ คูปองใช้งานได้',

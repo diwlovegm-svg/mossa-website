@@ -8,12 +8,24 @@ export function claimCoupon(payload) {
   return request('claim', payload);
 }
 
+export function getClaimStatus(payload) {
+  return request('claimStatus', payload);
+}
+
 export function checkCoupon(payload) {
   return request('check', payload);
 }
 
 export function redeemCoupon(payload) {
   return request('redeem', payload);
+}
+
+export function listPendingCoupons() {
+  return request('listPendingCoupons', {});
+}
+
+export function approveCoupon(payload) {
+  return request('approveCoupon', payload);
 }
 
 export async function fetchCouponSettings() {
@@ -132,6 +144,15 @@ function mockRequest(action, data) {
   if (action === 'claim') {
     return mockClaim(coupons, data);
   }
+  if (action === 'claimStatus') {
+    return mockClaimStatus(coupons, data);
+  }
+  if (action === 'listPendingCoupons') {
+    return mockListPendingCoupons(coupons);
+  }
+  if (action === 'approveCoupon') {
+    return mockApproveCoupon(coupons, data);
+  }
   if (action === 'check') {
     return mockCheck(coupons, data);
   }
@@ -157,16 +178,21 @@ function mockClaim(coupons, data) {
   if (!customerName || !customerPhone) {
     throw new Error('กรุณากรอกชื่อและเบอร์โทรให้ครบ');
   }
+  if (!isValidPhone(customerPhone)) {
+    throw new Error('กรุณากรอกเบอร์โทรให้ครบ 10 หลัก');
+  }
 
   const existingCoupon = coupons.find((coupon) => {
     return coupon.customerPhone === customerPhone && coupon.status !== 'VOID';
   });
 
   if (existingCoupon) {
+    const effectiveCoupon = withEffectiveStatus(existingCoupon);
     return {
       ok: true,
-      message: 'เบอร์นี้มีคูปองอยู่แล้ว ระบบดึงคูปองเดิมให้',
-      coupon: withEffectiveStatus(existingCoupon),
+      status: effectiveCoupon.effectiveStatus,
+      message: getClaimMessage(effectiveCoupon.effectiveStatus),
+      coupon: effectiveCoupon,
       source: 'mock',
     };
   }
@@ -174,7 +200,7 @@ function mockClaim(coupons, data) {
   const coupon = {
     code: generateCouponCode(coupons),
     campaignId: campaignConfig.campaignId,
-    status: 'ISSUED',
+    status: 'PENDING',
     customerName,
     customerPhone,
     issuedAt: new Date().toISOString(),
@@ -189,8 +215,86 @@ function mockClaim(coupons, data) {
 
   return {
     ok: true,
-    message: 'ออกคูปองเรียบร้อยแล้ว',
+    status: 'PENDING',
+    message: 'ส่งคำขอรับคูปองแล้ว กรุณารอพนักงานอนุมัติ',
     coupon,
+    source: 'mock',
+  };
+}
+
+function mockClaimStatus(coupons, data) {
+  const customerPhone = normalizePhone(data.customerPhone);
+  if (!isValidPhone(customerPhone)) {
+    throw new Error('กรุณากรอกเบอร์โทรให้ครบ 10 หลัก');
+  }
+
+  const coupon = coupons.find((item) => item.customerPhone === customerPhone && item.status !== 'VOID');
+  if (!coupon) {
+    return {
+      ok: true,
+      status: 'NOT_FOUND',
+      coupon: null,
+      source: 'mock',
+    };
+  }
+
+  const effectiveCoupon = withEffectiveStatus(coupon);
+  return {
+    ok: true,
+    status: effectiveCoupon.effectiveStatus,
+    message: getClaimMessage(effectiveCoupon.effectiveStatus),
+    coupon: effectiveCoupon,
+    source: 'mock',
+  };
+}
+
+function mockListPendingCoupons(coupons) {
+  return {
+    ok: true,
+    coupons: coupons
+      .filter((coupon) => coupon.status === 'PENDING')
+      .map((coupon) => withEffectiveStatus(coupon))
+      .reverse(),
+    source: 'mock',
+  };
+}
+
+function mockApproveCoupon(coupons, data) {
+  const code = normalizeCode(data.couponCode);
+  const index = coupons.findIndex((item) => item.code === code);
+
+  if (index < 0) {
+    return {
+      ok: true,
+      status: 'NOT_FOUND',
+      coupon: null,
+      source: 'mock',
+    };
+  }
+
+  if (coupons[index].status !== 'PENDING') {
+    const current = withEffectiveStatus(coupons[index]);
+    return {
+      ok: true,
+      status: current.effectiveStatus,
+      message: 'คำขอนี้ไม่ได้อยู่ในสถานะรออนุมัติ',
+      coupon: current,
+      source: 'mock',
+    };
+  }
+
+  coupons[index] = {
+    ...coupons[index],
+    status: 'ISSUED',
+    updatedAt: new Date().toISOString(),
+  };
+  writeCoupons(coupons);
+
+  return {
+    ok: true,
+    status: 'ISSUED',
+    message: 'อนุมัติคูปองแล้ว ลูกค้าจะเห็นคูปองในหน้ารับคูปอง',
+    coupon: withEffectiveStatus(coupons[index]),
     source: 'mock',
   };
 }
@@ -252,6 +356,7 @@ function mockRedeem(coupons, data) {
   return {
     ok: true,
     status: 'REDEEMED',
+    redeemedNow: true,
     message: 'ยืนยันใช้สิทธิ์เรียบร้อยแล้ว',
     coupon: withEffectiveStatus(coupons[index]),
     source: 'mock',
@@ -302,6 +407,19 @@ function getEffectiveStatus(coupon) {
 
 function normalizePhone(value) {
   return String(value || '').replace(/\D/g, '');
+}
+
+function isValidPhone(value) {
+  return /^\d{10}$/.test(normalizePhone(value));
+}
+
+function getClaimMessage(status) {
+  if (status === 'PENDING') return 'คำขอรับคูปองกำลังรอพนักงานอนุมัติ';
+  if (status === 'ISSUED') return 'คำขอได้รับการอนุมัติแล้ว ระบบดึงคูปองให้';
+  if (status === 'REDEEMED') return 'เบอร์นี้ใช้สิทธิ์ไปแล้ว ไม่สามารถรับคูปองซ้ำได้';
+  if (status === 'EXPIRED') return 'คูปองของเบอร์นี้หมดอายุแล้ว';
+  if (status === 'VOID') return 'คูปองของเบอร์นี้ถูกยกเลิกแล้ว';
+  return 'พบข้อมูลคำขอรับคูปอง';
 }
 
 function normalizeCode(value) {

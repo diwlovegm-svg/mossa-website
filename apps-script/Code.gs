@@ -132,6 +132,15 @@ function handleRequest_(payload) {
   if (action === 'claim') {
     return claimCoupon_(data, payload.templateVersion || '');
   }
+  if (action === 'claimStatus') {
+    return claimStatus_(data.customerPhone);
+  }
+  if (action === 'listPendingCoupons') {
+    return listPendingCoupons_();
+  }
+  if (action === 'approveCoupon') {
+    return approveCoupon_(data.couponCode);
+  }
   if (action === 'check') {
     return checkCoupon_(data.couponCode);
   }
@@ -151,6 +160,9 @@ function claimCoupon_(data, templateVersion) {
   if (!customerName || !customerPhone) {
     throw new Error('กรุณากรอกชื่อและเบอร์โทรให้ครบ');
   }
+  if (!isValidPhone_(customerPhone)) {
+    throw new Error('กรุณากรอกเบอร์โทรให้ครบ 10 หลัก');
+  }
 
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -166,9 +178,11 @@ function claimCoupon_(data, templateVersion) {
     });
 
     if (existing) {
+      const existingStatus = getEffectiveStatus_(existing);
       return {
         ok: true,
-        message: 'เบอร์นี้มีคูปองอยู่แล้ว ระบบดึงคูปองเดิมให้',
+        status: existingStatus,
+        message: getClaimMessage_(existingStatus),
         coupon: toCouponResponse_(existing),
       };
     }
@@ -177,7 +191,7 @@ function claimCoupon_(data, templateVersion) {
     const coupon = {
       code: generateCouponCode_(records, campaign),
       campaignId: CAMPAIGN_CONFIG.campaignId,
-      status: 'ISSUED',
+      status: 'PENDING',
       customerName,
       customerPhone,
       issuedAt: now.toISOString(),
@@ -192,8 +206,104 @@ function claimCoupon_(data, templateVersion) {
 
     return {
       ok: true,
-      message: 'ออกคูปองเรียบร้อยแล้ว',
+      status: 'PENDING',
+      message: 'ส่งคำขอรับคูปองแล้ว กรุณารอพนักงานอนุมัติ',
       coupon,
+    };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function claimStatus_(customerPhoneValue) {
+  const customerPhone = normalizePhone_(customerPhoneValue);
+  if (!isValidPhone_(customerPhone)) {
+    throw new Error('กรุณากรอกเบอร์โทรให้ครบ 10 หลัก');
+  }
+
+  const sheet = getCouponSheet_();
+  ensureHeaders_(sheet);
+  const records = getRecords_(sheet);
+  const record = records.find((item) => {
+    return item.campaignId === CAMPAIGN_CONFIG.campaignId
+      && item.customerPhone === customerPhone
+      && item.status !== 'VOID';
+  });
+
+  if (!record) {
+    return {
+      ok: true,
+      status: 'NOT_FOUND',
+      coupon: null,
+    };
+  }
+
+  const effectiveStatus = getEffectiveStatus_(record);
+  return {
+    ok: true,
+    status: effectiveStatus,
+    message: getClaimMessage_(effectiveStatus),
+    coupon: toCouponResponse_(record),
+  };
+}
+
+function listPendingCoupons_() {
+  const sheet = getCouponSheet_();
+  ensureHeaders_(sheet);
+  const coupons = getRecords_(sheet)
+    .filter((record) => {
+      return record.campaignId === CAMPAIGN_CONFIG.campaignId && record.status === 'PENDING';
+    })
+    .reverse()
+    .map((record) => toCouponResponse_(record));
+
+  return {
+    ok: true,
+    coupons,
+  };
+}
+
+function approveCoupon_(couponCode) {
+  const code = normalizeCode_(couponCode);
+  if (!code) {
+    throw new Error('กรุณากรอกรหัสคูปอง');
+  }
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+
+  try {
+    const sheet = getCouponSheet_();
+    ensureHeaders_(sheet);
+    const records = getRecords_(sheet);
+    const record = records.find((item) => normalizeCode_(item.code) === code);
+
+    if (!record) {
+      return {
+        ok: true,
+        status: 'NOT_FOUND',
+        coupon: null,
+      };
+    }
+
+    if (record.status !== 'PENDING') {
+      return {
+        ok: true,
+        status: getEffectiveStatus_(record),
+        message: 'คำขอนี้ไม่ได้อยู่ในสถานะรออนุมัติ',
+        coupon: toCouponResponse_(record),
+      };
+    }
+
+    updateRecordStatus_(sheet, record.rowNumber, 'ISSUED', '', record);
+    record.status = 'ISSUED';
+    record.updatedAt = new Date().toISOString();
+
+    return {
+      ok: true,
+      status: 'ISSUED',
+      message: 'อนุมัติคูปองแล้ว ลูกค้าจะเห็นคูปองในหน้ารับคูปอง',
+      coupon: toCouponResponse_(record),
     };
   } finally {
     lock.releaseLock();
@@ -274,6 +384,7 @@ function redeemCoupon_(couponCode) {
     return {
       ok: true,
       status: 'REDEEMED',
+      redeemedNow: true,
       message: 'ยืนยันใช้สิทธิ์เรียบร้อยแล้ว',
       coupon: toCouponResponse_(record),
     };
@@ -488,6 +599,19 @@ function toCouponResponse_(record) {
 
 function normalizePhone_(value) {
   return String(value || '').replace(/\D/g, '');
+}
+
+function isValidPhone_(value) {
+  return /^\d{10}$/.test(normalizePhone_(value));
+}
+
+function getClaimMessage_(status) {
+  if (status === 'PENDING') return 'คำขอรับคูปองกำลังรอพนักงานอนุมัติ';
+  if (status === 'ISSUED') return 'คำขอได้รับการอนุมัติแล้ว ระบบดึงคูปองให้';
+  if (status === 'REDEEMED') return 'เบอร์นี้ใช้สิทธิ์ไปแล้ว ไม่สามารถรับคูปองซ้ำได้';
+  if (status === 'EXPIRED') return 'คูปองของเบอร์นี้หมดอายุแล้ว';
+  if (status === 'VOID') return 'คูปองของเบอร์นี้ถูกยกเลิกแล้ว';
+  return 'พบข้อมูลคำขอรับคูปอง';
 }
 
 function normalizeCode_(value) {

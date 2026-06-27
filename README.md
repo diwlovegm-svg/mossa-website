@@ -11,6 +11,7 @@ This is now structured as an installable web app/PWA. It includes:
 - app manifest
 - service worker and offline fallback
 - install button where the browser supports PWA install prompts
+- approval queue for new coupon claims before the coupon image is shown
 
 ## Routes
 
@@ -36,7 +37,7 @@ Use the owner config page to edit coupon design and campaign rules:
 
 The config page asks for the coupon editor passcode before showing the form. It saves template settings to the `CouponConfig` tab in Google Sheets. Newly issued coupons use the latest saved template immediately.
 
-The counter admin page at `/srirayong/admin/` is only for checking and redeeming coupons. It does not show coupon template controls.
+The counter admin page at `/srirayong/admin/` is for approving pending coupon requests, checking coupon status, and redeeming coupons. It does not show coupon template controls.
 
 The local fallback files still exist for default values:
 
@@ -111,5 +112,7 @@ The coupon image is only customer-facing proof. Real authorization comes from th
 - `REDEEMED`: already used
 - `EXPIRED`: expired by status or expiration date
 - `VOID`: manually cancelled
+
+New customer claims start as `PENDING`. Staff approve the pending request in `/srirayong/admin/`; after approval the status becomes `ISSUED` and the customer claim page shows the coupon image automatically.
 
 Staff should use `/srirayong/admin/` before allowing redemption. The admin page checks the database status, not only the text printed on the coupon image.

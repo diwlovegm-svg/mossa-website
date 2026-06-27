@@ -1,4 +1,4 @@
-import { checkCoupon, redeemCoupon } from '../shared/apiClient.js';
+import { approveCoupon, checkCoupon, listPendingCoupons, redeemCoupon } from '../shared/apiClient.js';
 import { getStatusPresentation } from '../shared/campaignConfig.js';
 import { mountInstallButton, registerPwa, renderRuntimeStatus } from '../shared/pwa.js';
 
@@ -6,6 +6,9 @@ const form = document.querySelector('#checkForm');
 const codeInput = document.querySelector('#couponCode');
 const checkButton = document.querySelector('#checkButton');
 const notice = document.querySelector('#adminNotice');
+const pendingNotice = document.querySelector('#pendingNotice');
+const pendingList = document.querySelector('#pendingList');
+const refreshPendingButton = document.querySelector('#refreshPending');
 const resultPanel = document.querySelector('#resultPanel');
 const statusBadge = document.querySelector('#statusBadge');
 const statusMessage = document.querySelector('#statusMessage');
@@ -19,6 +22,8 @@ let currentCode = '';
 registerPwa();
 mountInstallButton(installButton);
 renderRuntimeStatus(runtimeStatus);
+loadPendingApprovals();
+window.setInterval(loadPendingApprovals, 7000);
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -30,12 +35,38 @@ redeemButton.addEventListener('click', async () => {
   setButtonLoading(redeemButton, true, 'กำลังยืนยัน...');
   try {
     const response = await redeemCoupon({ couponCode: currentCode });
-    renderResult(response);
-    showNotice(response.message || 'เปลี่ยนสถานะเป็น REDEEMED แล้ว', 'success');
+    const redeemedNow = response.redeemedNow === true || response.message === 'ยืนยันใช้สิทธิ์เรียบร้อยแล้ว';
+    renderResult(response, { redeemedNow });
+    showNotice(
+      redeemedNow ? 'ใช้สิทธิ์แล้วเรียบร้อย' : response.message || 'ไม่สามารถยืนยันใช้สิทธิ์ได้',
+      redeemedNow ? 'success' : 'warning',
+    );
   } catch (error) {
     showNotice(error.message || 'ไม่สามารถยืนยันใช้สิทธิ์ได้', 'error');
   } finally {
     setButtonLoading(redeemButton, false, 'ยืนยันใช้สิทธิ์');
+  }
+});
+
+refreshPendingButton.addEventListener('click', async () => {
+  await loadPendingApprovals();
+});
+
+pendingList.addEventListener('click', async (event) => {
+  const button = event.target.closest('[data-approve-code]');
+  if (!button) return;
+
+  const couponCode = button.dataset.approveCode;
+  setButtonLoading(button, true, 'กำลังอนุมัติ...');
+  showPendingNotice('กำลังอนุมัติคำขอ...', 'info');
+  try {
+    const response = await approveCoupon({ couponCode });
+    showPendingNotice(response.message || 'อนุมัติคูปองแล้ว', 'success');
+    await loadPendingApprovals();
+  } catch (error) {
+    showPendingNotice(error.message || 'อนุมัติคำขอไม่สำเร็จ', 'error');
+  } finally {
+    setButtonLoading(button, false, 'อนุมัติให้รับคูปอง');
   }
 });
 
@@ -62,9 +93,52 @@ async function runCheck() {
   }
 }
 
-function renderResult(response) {
+async function loadPendingApprovals() {
+  setButtonLoading(refreshPendingButton, true, 'กำลังโหลด...');
+  try {
+    const response = await listPendingCoupons();
+    renderPendingApprovals(response.coupons || []);
+    showPendingNotice(response.coupons?.length ? `มีคำขอรออนุมัติ ${response.coupons.length} รายการ` : 'ยังไม่มีคำขอรออนุมัติ', response.coupons?.length ? 'info' : 'success');
+  } catch (error) {
+    renderPendingApprovals([]);
+    showPendingNotice(error.message || 'โหลดคำขอรออนุมัติไม่สำเร็จ', 'error');
+  } finally {
+    setButtonLoading(refreshPendingButton, false, 'รีเฟรช');
+  }
+}
+
+function renderPendingApprovals(coupons) {
+  if (!coupons.length) {
+    pendingList.innerHTML = '<p class="empty-state">ยังไม่มีลูกค้ารออนุมัติ</p>';
+    return;
+  }
+
+  pendingList.innerHTML = coupons.map((coupon) => `
+    <article class="pending-item">
+      <div>
+        <strong>${escapeHtml(coupon.customerName || '-')}</strong>
+        <span>${escapeHtml(coupon.customerPhone || '-')}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>รหัส</dt>
+          <dd>${escapeHtml(coupon.code || '-')}</dd>
+        </div>
+        <div>
+          <dt>ส่งคำขอเมื่อ</dt>
+          <dd>${escapeHtml(formatDateTime(coupon.issuedAt))}</dd>
+        </div>
+      </dl>
+      <button class="primary-button" type="button" data-approve-code="${escapeHtml(coupon.code)}">อนุมัติให้รับคูปอง</button>
+    </article>
+  `).join('');
+}
+
+function renderResult(response, options = {}) {
   const status = response.status || response.coupon?.status || 'NOT_FOUND';
-  const presentation = getStatusPresentation(status);
+  const presentation = options.redeemedNow
+    ? { label: 'ใช้สิทธิ์แล้ว', message: 'ใช้สิทธิ์แล้วเรียบร้อย', type: 'success' }
+    : getStatusPresentation(status);
 
   resultPanel.hidden = false;
   statusBadge.textContent = presentation.label;
@@ -127,6 +201,11 @@ function showNotice(message, type) {
 function clearNotice() {
   notice.textContent = '';
   notice.removeAttribute('data-type');
+}
+
+function showPendingNotice(message, type) {
+  pendingNotice.textContent = message;
+  pendingNotice.dataset.type = type;
 }
 
 function escapeHtml(value) {

@@ -14,11 +14,10 @@
   <body>
     <main class="page-shell admin-shell">
       <header class="app-topbar">
-        <a class="app-home" href="../index.html">MOSSA Coupon</a>
+        <span class="app-home">MOSSA Coupon</span>
         <div class="app-actions">
           <span id="runtimeStatus" class="runtime-chip"></span>
           <button id="installApp" class="install-button" type="button" hidden>ติดตั้งแอพ</button>
-          <a class="text-link" href="../claim/index.html">Claim</a>
         </div>
       </header>
 
@@ -28,7 +27,18 @@
           <p class="eyebrow">MOSSA Counter</p>
           <h1>ตรวจสอบคูปอง</h1>
         </div>
-        <a class="text-link" href="../claim/index.html">ไปหน้ารับคูปอง</a>
+      </section>
+
+      <section class="pending-panel" aria-labelledby="pending-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">คำขอรับคูปอง</p>
+            <h2 id="pending-title">รออนุมัติ</h2>
+          </div>
+          <button id="refreshPending" class="secondary-button" type="button">รีเฟรช</button>
+        </div>
+        <div id="pendingNotice" class="notice" role="status" aria-live="polite"></div>
+        <div id="pendingList" class="pending-list"></div>
       </section>
 
       <section class="form-panel" aria-labelledby="check-title">

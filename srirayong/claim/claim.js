@@ -1,4 +1,4 @@
-import { claimCoupon, fetchCouponSettings } from '../shared/apiClient.js';
+import { claimCoupon, fetchCouponSettings, getClaimStatus } from '../shared/apiClient.js';
 import { downloadCouponImage, renderCoupon } from '../shared/couponRenderer.js';
 import { mountInstallButton, registerPwa, renderRuntimeStatus } from '../shared/pwa.js';
 
@@ -7,6 +7,10 @@ const nameInput = document.querySelector('#customerName');
 const phoneInput = document.querySelector('#customerPhone');
 const claimButton = document.querySelector('#claimButton');
 const notice = document.querySelector('#claimNotice');
+const pendingSection = document.querySelector('#pendingSection');
+const pendingStatus = document.querySelector('#pendingStatus');
+const pendingName = document.querySelector('#pendingName');
+const pendingPhone = document.querySelector('#pendingPhone');
 const couponSection = document.querySelector('#couponSection');
 const couponPreview = document.querySelector('#couponPreview');
 const downloadButton = document.querySelector('#downloadCoupon');
@@ -14,6 +18,8 @@ const installButton = document.querySelector('#installApp');
 const runtimeStatus = document.querySelector('#runtimeStatus');
 
 let currentCoupon = null;
+let currentPhone = '';
+let approvalPollTimer = null;
 
 registerPwa();
 mountInstallButton(installButton);
@@ -25,10 +31,15 @@ form.addEventListener('submit', async (event) => {
   clearNotice();
 
   const customerName = nameInput.value.trim();
-  const customerPhone = phoneInput.value.trim();
+  const customerPhone = normalizePhone(phoneInput.value);
 
   if (!customerName || !customerPhone) {
     showNotice('กรุณากรอกชื่อและเบอร์โทรให้ครบ', 'error');
+    return;
+  }
+  if (!isValidPhone(customerPhone)) {
+    showNotice('กรุณากรอกเบอร์โทรให้ครบ 10 หลัก', 'error');
+    phoneInput.focus();
     return;
   }
 
@@ -36,11 +47,7 @@ form.addEventListener('submit', async (event) => {
   try {
     await fetchCouponSettings();
     const response = await claimCoupon({ customerName, customerPhone });
-    currentCoupon = response.coupon;
-    couponSection.hidden = false;
-    renderCoupon(couponPreview, currentCoupon);
-    showNotice(response.message || 'ออกคูปองเรียบร้อยแล้ว', 'success');
-    couponSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    handleClaimResponse(response, { customerName, customerPhone });
   } catch (error) {
     showNotice(error.message || 'ไม่สามารถออกคูปองได้ กรุณาลองใหม่อีกครั้ง', 'error');
   } finally {
@@ -59,7 +66,7 @@ downloadButton.addEventListener('click', () => {
 
 function setLoading(isLoading) {
   claimButton.disabled = isLoading;
-  claimButton.textContent = isLoading ? 'กำลังออกคูปอง...' : 'รับคูปอง';
+  claimButton.textContent = isLoading ? 'กำลังส่งคำขอ...' : 'ส่งคำขอรับคูปอง';
 }
 
 function showNotice(message, type) {
@@ -78,4 +85,112 @@ async function loadLatestSettings() {
   } catch {
     // Claim still shows the form; submit will surface setup or connection errors.
   }
+}
+
+function handleClaimResponse(response, fallbackCustomer) {
+  const coupon = response.coupon;
+  const status = response.status || coupon?.effectiveStatus || coupon?.status;
+
+  stopApprovalPolling();
+
+  if (status === 'ISSUED') {
+    showApprovedCoupon(coupon, response.message || 'อนุมัติแล้ว บันทึกคูปองไว้ใช้สิทธิ์');
+    return;
+  }
+
+  if (status === 'PENDING') {
+    showPending(coupon || fallbackCustomer, response.message || 'ส่งคำขอรับคูปองแล้ว กรุณารอพนักงานอนุมัติ');
+    currentPhone = normalizePhone(coupon?.customerPhone || fallbackCustomer.customerPhone);
+    startApprovalPolling();
+    return;
+  }
+
+  if (status === 'REDEEMED') {
+    couponSection.hidden = true;
+    pendingSection.hidden = true;
+    showNotice(response.message || 'เบอร์นี้ใช้สิทธิ์ไปแล้ว ไม่สามารถรับคูปองซ้ำได้', 'error');
+    return;
+  }
+
+  if (status === 'EXPIRED' || status === 'VOID') {
+    couponSection.hidden = true;
+    pendingSection.hidden = true;
+    showNotice(response.message || 'เบอร์นี้ไม่สามารถรับคูปองได้', 'error');
+    return;
+  }
+
+  showNotice(response.message || 'ส่งคำขอไม่สำเร็จ กรุณาติดต่อพนักงาน', 'error');
+}
+
+function showPending(coupon, message) {
+  currentCoupon = null;
+  couponSection.hidden = true;
+  pendingSection.hidden = false;
+  pendingName.textContent = coupon.customerName || nameInput.value.trim() || '-';
+  pendingPhone.textContent = normalizePhone(coupon.customerPhone || phoneInput.value) || '-';
+  pendingStatus.textContent = 'ระบบกำลังรอพนักงานอนุมัติ ถ้าอนุมัติแล้วคูปองจะแสดงขึ้นอัตโนมัติ';
+  showNotice(message, 'success');
+  pendingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showApprovedCoupon(coupon, message) {
+  if (!coupon) {
+    showNotice('อนุมัติแล้ว แต่ไม่พบข้อมูลคูปอง กรุณาติดต่อพนักงาน', 'error');
+    return;
+  }
+
+  stopApprovalPolling();
+  currentCoupon = coupon;
+  pendingSection.hidden = true;
+  couponSection.hidden = false;
+  renderCoupon(couponPreview, currentCoupon);
+  showNotice(message, 'success');
+  couponSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function startApprovalPolling() {
+  if (!currentPhone) return;
+  approvalPollTimer = window.setInterval(async () => {
+    try {
+      const response = await getClaimStatus({ customerPhone: currentPhone });
+      const status = response.status || response.coupon?.effectiveStatus || response.coupon?.status;
+      if (status === 'ISSUED') {
+        showApprovedCoupon(response.coupon, response.message || 'อนุมัติแล้ว บันทึกคูปองไว้ใช้สิทธิ์');
+        return;
+      }
+      if (status === 'PENDING') {
+        pendingStatus.textContent = `ยังรอพนักงานอนุมัติ อัปเดตล่าสุด ${formatClock(new Date())}`;
+        return;
+      }
+      handleClaimResponse(response, {
+        customerName: nameInput.value.trim(),
+        customerPhone: currentPhone,
+      });
+    } catch (error) {
+      pendingStatus.textContent = error.message || 'เช็กสถานะไม่สำเร็จ ระบบจะลองใหม่อัตโนมัติ';
+    }
+  }, 5000);
+}
+
+function stopApprovalPolling() {
+  if (!approvalPollTimer) return;
+  window.clearInterval(approvalPollTimer);
+  approvalPollTimer = null;
+}
+
+function normalizePhone(value) {
+  return String(value || '').replace(/\D/g, '');
+}
+
+function isValidPhone(value) {
+  return /^\d{10}$/.test(normalizePhone(value));
+}
+
+function formatClock(date) {
+  return new Intl.DateTimeFormat('th-TH', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    timeZone: 'Asia/Bangkok',
+  }).format(date);
 }
