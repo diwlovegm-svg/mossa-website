@@ -7,9 +7,10 @@ const APPROVAL_FLOW_VERSION = '2026-06-27-a';
 const JSONP_RETRY_ATTEMPTS = 3;
 const FRAME_RETRY_ATTEMPTS = 2;
 const API_TIMEOUT_MS = 12000;
+const SEND_ONLY_TIMEOUT_MS = 10000;
 
 export function claimCoupon(payload) {
-  return request('claim', payload);
+  return request('claim', payload, { allowSendOnlyFallback: true });
 }
 
 export function getClaimStatus(payload) {
@@ -60,7 +61,7 @@ export function getRuntimeMode() {
   return 'setup';
 }
 
-async function request(action, data) {
+async function request(action, data, options = {}) {
   const campaignConfig = getCampaignConfig();
   if (!campaignConfig.apiEndpoint) {
     if (!isDemoModeAllowed()) {
@@ -69,10 +70,10 @@ async function request(action, data) {
     return mockRequest(action, data);
   }
 
-  return remoteRequestWithRetry(action, data);
+  return remoteRequestWithRetry(action, data, options);
 }
 
-async function remoteRequestWithRetry(action, data) {
+async function remoteRequestWithRetry(action, data, options = {}) {
   let lastError;
   const totalAttempts = Math.max(JSONP_RETRY_ATTEMPTS, FRAME_RETRY_ATTEMPTS);
 
@@ -100,6 +101,10 @@ async function remoteRequestWithRetry(action, data) {
     if (attempt < totalAttempts) {
       await wait(700 * attempt);
     }
+  }
+
+  if (options.allowSendOnlyFallback && action === 'claim' && isRetryableApiError(lastError)) {
+    return sendOnlyClaimRequest(data);
   }
 
   throw new Error(lastError?.message || 'เชื่อมต่อระบบหลังบ้านไม่ได้ กรุณาเช็กอินเทอร์เน็ตแล้วลองใหม่');
@@ -212,6 +217,80 @@ function frameRequest(action, data) {
 function isRetryableApiError(error) {
   const message = String(error?.message || '');
   return message.includes('เชื่อมต่อ Apps Script') || message.includes('โหลด Apps Script');
+}
+
+async function sendOnlyClaimRequest(data) {
+  await sendOnlyRequest('claim', data);
+  return {
+    ok: true,
+    approvalRequired: true,
+    approvalFlowVersion: APPROVAL_FLOW_VERSION,
+    status: 'PENDING',
+    message: 'ส่งคำขอรับคูปองผ่านโหมดสำรองแล้ว กรุณารอพนักงานอนุมัติ',
+    coupon: {
+      status: 'PENDING',
+      effectiveStatus: 'PENDING',
+      customerName: String(data.customerName || '').trim(),
+      customerPhone: normalizePhone(data.customerPhone),
+      updatedAt: new Date().toISOString(),
+    },
+    sentWithoutRead: true,
+  };
+}
+
+async function sendOnlyRequest(action, data) {
+  const campaignConfig = getCampaignConfig();
+  const couponTemplate = getCouponTemplate();
+  const payload = {
+    action,
+    campaignId: campaignConfig.campaignId,
+    templateVersion: couponTemplate.version,
+    data,
+  };
+  const url = new URL(campaignConfig.apiEndpoint);
+  url.searchParams.set('payload', JSON.stringify(payload));
+  url.searchParams.set('sendOnly', '1');
+  url.searchParams.set('_', String(Date.now()));
+
+  try {
+    await fetchWithoutReading(url);
+  } catch {
+    await imageBeacon(url);
+  }
+}
+
+async function fetchWithoutReading(url) {
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), SEND_ONLY_TIMEOUT_MS);
+  try {
+    await window.fetch(url.toString(), {
+      cache: 'no-store',
+      credentials: 'omit',
+      mode: 'no-cors',
+      redirect: 'follow',
+      signal: controller.signal,
+    });
+  } finally {
+    window.clearTimeout(timeoutId);
+  }
+}
+
+function imageBeacon(url) {
+  return new Promise((resolve) => {
+    const image = new Image();
+    const timeoutId = window.setTimeout(cleanup, SEND_ONLY_TIMEOUT_MS);
+
+    image.onload = cleanup;
+    image.onerror = cleanup;
+    image.src = url.toString();
+
+    function cleanup() {
+      window.clearTimeout(timeoutId);
+      image.onload = null;
+      image.onerror = null;
+      resolve();
+    }
+  });
 }
 
 function wait(milliseconds) {

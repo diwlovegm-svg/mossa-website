@@ -46,8 +46,11 @@ form.addEventListener('submit', async (event) => {
 
   setLoading(true);
   try {
-    await fetchCouponSettings();
-    await ensureApprovalBackendReady(customerPhone);
+    try {
+      await fetchCouponSettings();
+    } catch {
+      // The claim request below has a send-only fallback, so config refresh must not block signups.
+    }
     const response = await claimCoupon({ customerName, customerPhone });
     assertApprovalBackend(response);
     handleClaimResponse(response, { customerName, customerPhone });
@@ -155,11 +158,6 @@ function startApprovalPolling() {
   if (!currentPhone) return;
   pollApprovalStatus();
   approvalPollTimer = window.setInterval(pollApprovalStatus, 3000);
-}
-
-async function ensureApprovalBackendReady(customerPhone) {
-  const response = await getClaimStatus({ customerPhone });
-  assertApprovalBackend(response);
 }
 
 function assertApprovalBackend(response) {

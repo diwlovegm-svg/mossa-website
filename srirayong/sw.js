@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mossa-coupon-srirayong-v2026-06-27-d';
+const CACHE_NAME = 'mossa-coupon-srirayong-v2026-06-27-e';
 
 const APP_SHELL = [
   './',
