@@ -8,6 +8,7 @@ const JSONP_RETRY_ATTEMPTS = 3;
 const FRAME_RETRY_ATTEMPTS = 2;
 const API_TIMEOUT_MS = 12000;
 const SEND_ONLY_TIMEOUT_MS = 10000;
+const API_RELAY_HASH_KEY = 'mossaApiRelay';
 
 export function claimCoupon(payload) {
   return request('claim', payload, { allowSendOnlyFallback: true });
@@ -47,6 +48,33 @@ export async function saveCouponSettings(config, editorPasscode = '') {
 
 export function validateCouponEditorPasscode(editorPasscode = '') {
   return request('validateEditorPasscode', { editorPasscode });
+}
+
+export function consumeApiRelayResponse(expectedAction = '') {
+  if (typeof window === 'undefined' || !window.location.hash) {
+    return null;
+  }
+
+  const hashParams = new URLSearchParams(window.location.hash.slice(1));
+  const rawRelay = hashParams.get(API_RELAY_HASH_KEY);
+  if (!rawRelay) {
+    return null;
+  }
+
+  let relay;
+  try {
+    relay = JSON.parse(rawRelay);
+  } catch {
+    return null;
+  } finally {
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+  }
+
+  if (expectedAction && relay.action !== expectedAction) {
+    return null;
+  }
+
+  return relay.response || null;
 }
 
 export function getRuntimeMode() {
@@ -255,7 +283,8 @@ async function sendOnlyRequest(action, data) {
   try {
     await fetchWithoutReading(url);
   } catch {
-    await imageBeacon(url);
+    topLevelRelay(url);
+    await new Promise(() => {});
   }
 }
 
@@ -275,22 +304,11 @@ async function fetchWithoutReading(url) {
   }
 }
 
-function imageBeacon(url) {
-  return new Promise((resolve) => {
-    const image = new Image();
-    const timeoutId = window.setTimeout(cleanup, SEND_ONLY_TIMEOUT_MS);
-
-    image.onload = cleanup;
-    image.onerror = cleanup;
-    image.src = url.toString();
-
-    function cleanup() {
-      window.clearTimeout(timeoutId);
-      image.onload = null;
-      image.onerror = null;
-      resolve();
-    }
-  });
+function topLevelRelay(url) {
+  const returnUrl = new URL(window.location.href);
+  returnUrl.hash = '';
+  url.searchParams.set('sendOnlyReturnUrl', returnUrl.toString());
+  window.location.assign(url.toString());
 }
 
 function wait(milliseconds) {

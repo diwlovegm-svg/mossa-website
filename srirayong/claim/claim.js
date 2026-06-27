@@ -1,4 +1,4 @@
-import { claimCoupon, fetchCouponSettings, getClaimStatus } from '../shared/apiClient.js';
+import { claimCoupon, consumeApiRelayResponse, fetchCouponSettings, getClaimStatus } from '../shared/apiClient.js';
 import { downloadCouponImage, renderCoupon } from '../shared/couponRenderer.js';
 import { mountInstallButton, registerPwa, renderRuntimeStatus } from '../shared/pwa.js';
 
@@ -26,6 +26,7 @@ registerPwa();
 mountInstallButton(installButton);
 renderRuntimeStatus(runtimeStatus);
 loadLatestSettings();
+handleRelayedClaimResponse();
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -126,6 +127,26 @@ function handleClaimResponse(response, fallbackCustomer) {
   }
 
   showNotice(response.message || 'ส่งคำขอไม่สำเร็จ กรุณาติดต่อพนักงาน', 'error');
+}
+
+function handleRelayedClaimResponse() {
+  const response = consumeApiRelayResponse('claim');
+  if (!response) return;
+
+  if (response.ok === false) {
+    showNotice(response.message || 'ส่งคำขอไม่สำเร็จ กรุณาลองใหม่อีกครั้ง', 'error');
+    return;
+  }
+
+  try {
+    assertApprovalBackend(response);
+    handleClaimResponse(response, response.coupon || {
+      customerName: nameInput.value.trim(),
+      customerPhone: phoneInput.value,
+    });
+  } catch (error) {
+    showNotice(error.message || 'ส่งคำขอไม่สำเร็จ กรุณาลองใหม่อีกครั้ง', 'error');
+  }
 }
 
 function showPending(coupon, message) {

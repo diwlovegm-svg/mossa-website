@@ -85,10 +85,13 @@ function setupInitialProperties() {
 function doGet(event) {
   const callback = event.parameter.callback;
   const frameRequestId = event.parameter.frameRequestId;
+  const sendOnlyReturnUrl = event.parameter.sendOnlyReturnUrl;
   let response;
+  let action = '';
 
   try {
     const payload = JSON.parse(event.parameter.payload || '{}');
+    action = payload.action || '';
     response = handleRequest_(payload);
   } catch (error) {
     response = {
@@ -99,6 +102,10 @@ function doGet(event) {
 
   if (frameRequestId) {
     return renderFrameResponse_(frameRequestId, response, event.parameter.parentOrigin);
+  }
+
+  if (sendOnlyReturnUrl) {
+    return renderRelayRedirect_(sendOnlyReturnUrl, action, response);
   }
 
   const body = callback
@@ -123,6 +130,29 @@ function renderFrameResponse_(requestId, response, parentOrigin) {
   return HtmlService
     .createHtmlOutput(html)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function renderRelayRedirect_(returnUrl, action, response) {
+  const redirectUrl = buildRelayReturnUrl_(returnUrl, action, response);
+  const redirectJson = JSON.stringify(redirectUrl).replace(/</g, '\\u003c');
+  const html = `<!doctype html><meta charset="utf-8"><script>window.location.replace(${redirectJson});</script>`;
+
+  return HtmlService
+    .createHtmlOutput(html)
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function buildRelayReturnUrl_(returnUrl, action, response) {
+  const fallbackUrl = 'https://diwlovegm-svg.github.io/mossa-website/srirayong/claim/';
+  const safeReturnUrl = String(returnUrl || fallbackUrl);
+  const allowedPrefix = 'https://diwlovegm-svg.github.io/mossa-website/srirayong/';
+  const targetUrl = safeReturnUrl.indexOf(allowedPrefix) === 0 ? safeReturnUrl : fallbackUrl;
+  const relay = encodeURIComponent(JSON.stringify({
+    action,
+    response,
+  }));
+  const baseUrl = targetUrl.split('#')[0];
+  return `${baseUrl}#mossaApiRelay=${relay}`;
 }
 
 function handleRequest_(payload) {
