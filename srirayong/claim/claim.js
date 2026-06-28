@@ -63,7 +63,17 @@ downloadButton.addEventListener('click', () => {
     return;
   }
 
-  downloadCouponImage(currentCoupon);
+  try {
+    const result = downloadCouponImage(currentCoupon);
+    showNotice(
+      result.mode === 'preview'
+        ? 'เปิดรูปคูปองแล้ว หากไฟล์ไม่ดาวน์โหลดให้กดค้างที่รูปเพื่อบันทึก'
+        : 'กำลังดาวน์โหลดรูปคูปอง กรุณาเช็กโฟลเดอร์ Downloads หรือแถบดาวน์โหลด',
+      'success',
+    );
+  } catch (error) {
+    showNotice(error.message || 'ไม่สามารถบันทึกรูปคูปองได้ กรุณาแคปหน้าจอแทน', 'error');
+  }
 });
 
 function setLoading(isLoading) {

@@ -61,6 +61,17 @@
       </section>
     </main>
 
+    <div id="redeemDialog" class="redeem-modal" role="dialog" aria-modal="true" aria-labelledby="redeemDialogTitle" hidden>
+      <div class="redeem-modal-card">
+        <div class="redeem-modal-icon" aria-hidden="true">✓</div>
+        <p class="eyebrow">Redeemed</p>
+        <h2 id="redeemDialogTitle">ใช้สิทธิ์แล้ว</h2>
+        <p>ระบบบันทึกการใช้คูปองเรียบร้อยแล้ว</p>
+        <dl id="redeemDialogDetails" class="details-list single-column"></dl>
+        <button id="closeRedeemDialog" class="primary-button" type="button">ตกลง</button>
+      </div>
+    </div>
+
     <script type="module" src="./admin.js"></script>
   </body>
 </html>

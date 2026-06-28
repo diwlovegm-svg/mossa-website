@@ -696,6 +696,67 @@ h2 {
   width: 100%;
 }
 
+.redeem-modal[hidden] {
+  display: none;
+}
+
+.redeem-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.redeem-modal-card {
+  width: min(440px, 100%);
+  padding: 28px;
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+  text-align: center;
+}
+
+.redeem-modal-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 2.4rem;
+  font-weight: 900;
+}
+
+.redeem-modal-card .eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary);
+}
+
+.redeem-modal-card h2 {
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+.redeem-modal-card p {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.redeem-modal-card .details-list {
+  margin: 18px 0;
+  text-align: left;
+}
+
+.redeem-modal-card .primary-button {
+  width: 100%;
+}
+
 .offline-shell {
   max-width: 720px;
 }

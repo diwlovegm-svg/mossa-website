@@ -14,6 +14,9 @@ const statusBadge = document.querySelector('#statusBadge');
 const statusMessage = document.querySelector('#statusMessage');
 const detailsList = document.querySelector('#couponDetails');
 const redeemButton = document.querySelector('#redeemButton');
+const redeemDialog = document.querySelector('#redeemDialog');
+const redeemDialogDetails = document.querySelector('#redeemDialogDetails');
+const closeRedeemDialogButton = document.querySelector('#closeRedeemDialog');
 const installButton = document.querySelector('#installApp');
 const runtimeStatus = document.querySelector('#runtimeStatus');
 
@@ -41,6 +44,9 @@ redeemButton.addEventListener('click', async () => {
       redeemedNow ? 'ใช้สิทธิ์แล้วเรียบร้อย' : response.message || 'ไม่สามารถยืนยันใช้สิทธิ์ได้',
       redeemedNow ? 'success' : 'warning',
     );
+    if (redeemedNow) {
+      showRedeemedDialog(response.coupon);
+    }
   } catch (error) {
     showNotice(error.message || 'ไม่สามารถยืนยันใช้สิทธิ์ได้', 'error');
   } finally {
@@ -50,6 +56,26 @@ redeemButton.addEventListener('click', async () => {
 
 refreshPendingButton.addEventListener('click', async () => {
   await loadPendingApprovals();
+});
+
+if (closeRedeemDialogButton) {
+  closeRedeemDialogButton.addEventListener('click', () => {
+    hideRedeemedDialog();
+  });
+}
+
+if (redeemDialog) {
+  redeemDialog.addEventListener('click', (event) => {
+    if (event.target === redeemDialog) {
+      hideRedeemedDialog();
+    }
+  });
+}
+
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && redeemDialog && !redeemDialog.hidden) {
+    hideRedeemedDialog();
+  }
 });
 
 pendingList.addEventListener('click', async (event) => {
@@ -183,6 +209,37 @@ function buildDetails(coupon, status) {
     ['หมดอายุ', formatDateTime(coupon.expiresAt)],
     ['ใช้สิทธิ์เมื่อ', formatDateTime(coupon.redeemedAt)],
   ];
+}
+
+function showRedeemedDialog(coupon) {
+  if (!redeemDialog || !redeemDialogDetails || !closeRedeemDialogButton) {
+    return;
+  }
+
+  const details = [
+    ['รหัสคูปอง', coupon?.code || currentCode],
+    ['ชื่อลูกค้า', coupon?.customerName || '-'],
+    ['เบอร์โทร', coupon?.customerPhone || '-'],
+    ['ใช้สิทธิ์เมื่อ', formatDateTime(coupon?.redeemedAt) || formatDateTime(new Date().toISOString())],
+  ];
+
+  redeemDialogDetails.innerHTML = details.map(([label, value]) => `
+    <div>
+      <dt>${escapeHtml(label)}</dt>
+      <dd>${escapeHtml(value || '-')}</dd>
+    </div>
+  `).join('');
+
+  redeemDialog.hidden = false;
+  closeRedeemDialogButton.focus();
+}
+
+function hideRedeemedDialog() {
+  if (redeemDialog) {
+    redeemDialog.hidden = true;
+  }
+  codeInput.focus();
+  codeInput.select();
 }
 
 function formatDateTime(value) {

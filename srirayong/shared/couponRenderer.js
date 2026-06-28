@@ -115,17 +115,25 @@ export function downloadCouponImage(coupon) {
   context.scale(scale, scale);
   drawCouponToCanvas(context, coupon, width, height);
 
-  canvas.toBlob((blob) => {
-    if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${coupon.code}.png`;
-    document.body.append(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-  }, 'image/png');
+  const filename = `${sanitizeFileName(coupon.code || 'mossa-coupon')}.png`;
+  const dataUrl = canvas.toDataURL('image/png');
+  const objectUrl = createObjectUrlFromDataUrl(dataUrl);
+  const downloadUrl = objectUrl || dataUrl;
+
+  try {
+    triggerImageDownload(downloadUrl, filename);
+    return { mode: 'download' };
+  } catch (error) {
+    const preview = window.open(dataUrl, '_blank', 'noopener');
+    if (preview) {
+      return { mode: 'preview' };
+    }
+    throw new Error(error.message || 'ไม่สามารถบันทึกรูปคูปองได้ กรุณาแคปหน้าจอแทน');
+  } finally {
+    if (objectUrl) {
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 30000);
+    }
+  }
 }
 
 export function createBarcodeSvg(code, options = {}) {
@@ -276,6 +284,41 @@ function renderQrMarkup(code) {
       alt="QR Code ${escapeHtml(code)}"
     >
   `;
+}
+
+function triggerImageDownload(url, filename) {
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.rel = 'noopener';
+  link.style.display = 'none';
+  document.body.append(link);
+  link.click();
+  link.remove();
+}
+
+function createObjectUrlFromDataUrl(dataUrl) {
+  try {
+    const [header, content] = dataUrl.split(',');
+    const mimeType = header.match(/^data:([^;]+);/)?.[1] || 'image/png';
+    const binary = atob(content);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) {
+      bytes[index] = binary.charCodeAt(index);
+    }
+    return URL.createObjectURL(new Blob([bytes], { type: mimeType }));
+  } catch {
+    return '';
+  }
+}
+
+function sanitizeFileName(value) {
+  const filename = String(value || 'mossa-coupon')
+    .trim()
+    .replace(/[\\/:*?"<>|]+/g, '-')
+    .replace(/\s+/g, '-')
+    .slice(0, 90);
+  return filename || 'mossa-coupon';
 }
 
 function roundedRect(context, x, y, width, height, radius, fillStyle) {
