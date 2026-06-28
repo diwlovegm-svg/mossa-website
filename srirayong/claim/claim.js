@@ -47,11 +47,6 @@ form.addEventListener('submit', async (event) => {
 
   setLoading(true);
   try {
-    try {
-      await fetchCouponSettings();
-    } catch {
-      // The claim request below has a send-only fallback, so config refresh must not block signups.
-    }
     const response = await claimCoupon({ customerName, customerPhone });
     assertApprovalBackend(response);
     handleClaimResponse(response, { customerName, customerPhone });

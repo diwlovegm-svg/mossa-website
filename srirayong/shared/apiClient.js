@@ -11,6 +11,10 @@ const SEND_ONLY_TIMEOUT_MS = 10000;
 const API_RELAY_HASH_KEY = 'mossaApiRelay';
 
 export function claimCoupon(payload) {
+  if (getCampaignConfig().apiEndpoint) {
+    return topLevelClaimRequest(payload);
+  }
+
   return request('claim', payload, { allowSendOnlyFallback: true });
 }
 
@@ -136,6 +140,13 @@ async function remoteRequestWithRetry(action, data, options = {}) {
   }
 
   throw new Error(lastError?.message || 'เชื่อมต่อระบบหลังบ้านไม่ได้ กรุณาเช็กอินเทอร์เน็ตแล้วลองใหม่');
+}
+
+function topLevelClaimRequest(data) {
+  const url = buildRemoteRequestUrl('claim', data);
+  url.searchParams.set('_', String(Date.now()));
+  topLevelRelay(url);
+  return new Promise(() => {});
 }
 
 function jsonpRequest(action, data) {
@@ -267,16 +278,7 @@ async function sendOnlyClaimRequest(data) {
 }
 
 async function sendOnlyRequest(action, data) {
-  const campaignConfig = getCampaignConfig();
-  const couponTemplate = getCouponTemplate();
-  const payload = {
-    action,
-    campaignId: campaignConfig.campaignId,
-    templateVersion: couponTemplate.version,
-    data,
-  };
-  const url = new URL(campaignConfig.apiEndpoint);
-  url.searchParams.set('payload', JSON.stringify(payload));
+  const url = buildRemoteRequestUrl(action, data);
   url.searchParams.set('sendOnly', '1');
   url.searchParams.set('_', String(Date.now()));
 
@@ -302,6 +304,20 @@ async function fetchWithoutReading(url) {
   } finally {
     window.clearTimeout(timeoutId);
   }
+}
+
+function buildRemoteRequestUrl(action, data) {
+  const campaignConfig = getCampaignConfig();
+  const couponTemplate = getCouponTemplate();
+  const payload = {
+    action,
+    campaignId: campaignConfig.campaignId,
+    templateVersion: couponTemplate.version,
+    data,
+  };
+  const url = new URL(campaignConfig.apiEndpoint);
+  url.searchParams.set('payload', JSON.stringify(payload));
+  return url;
 }
 
 function topLevelRelay(url) {

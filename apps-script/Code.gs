@@ -26,6 +26,8 @@ const HEADERS = [
   'updatedAt',
 ];
 
+const STATUS_VALUES = ['PENDING', 'ISSUED', 'REDEEMED', 'EXPIRED', 'VOID'];
+
 const DEFAULT_COUPON_CONFIG = {
   campaign: {
     campaignId: 'srirayong-free-trial-2026-06',
@@ -621,6 +623,15 @@ function ensureColumnFormats_(sheet) {
   const phoneColumn = HEADERS.indexOf('customerPhone') + 1;
   if (phoneColumn > 0) {
     sheet.getRange(1, phoneColumn, sheet.getMaxRows(), 1).setNumberFormat('@');
+  }
+
+  const statusColumn = HEADERS.indexOf('status') + 1;
+  if (statusColumn > 0 && sheet.getMaxRows() > 1) {
+    const statusRule = SpreadsheetApp.newDataValidation()
+      .requireValueInList(STATUS_VALUES, true)
+      .setAllowInvalid(false)
+      .build();
+    sheet.getRange(2, statusColumn, sheet.getMaxRows() - 1, 1).setDataValidation(statusRule);
   }
 }
 
