@@ -137,19 +137,23 @@ function createPriceCard(item, categoryName) {
   card.append(createEl("h3", "", item.nameTh));
 
   if (item.rows?.length) {
-    const table = createEl("table", "price-table");
-    const thead = document.createElement("thead");
-    const headRow = document.createElement("tr");
-    item.columns.forEach((column) => headRow.append(createEl("th", "", column)));
-    thead.append(headRow);
-    const tbody = document.createElement("tbody");
+    const rows = createEl("div", "price-row-list");
     item.rows.forEach((row) => {
-      const tr = document.createElement("tr");
-      row.forEach((cell) => tr.append(createEl("td", "", cell)));
-      tbody.append(tr);
+      const rowCard = createEl("div", "price-row-card");
+      rowCard.append(createEl("strong", "price-row-title", row[0] || "-"));
+
+      const details = createEl("div", "price-row-details");
+      row.slice(1).forEach((cell, index) => {
+        const pair = createEl("div", "price-row-pair");
+        pair.append(createEl("span", "", item.columns[index + 1] || ""));
+        pair.append(createEl("b", "", cell || "-"));
+        details.append(pair);
+      });
+
+      rowCard.append(details);
+      rows.append(rowCard);
     });
-    table.append(thead, tbody);
-    card.append(table);
+    card.append(rows);
   } else {
     card.append(createEl("div", "price-value", item.priceText));
   }
