@@ -29,6 +29,8 @@ const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
   ".svg": "image/svg+xml",
   ".png": "image/png",
   ".jpg": "image/jpeg",
@@ -319,7 +321,17 @@ function serveStaticFile(requestUrl, response) {
     }
 
     const ext = path.extname(filePath).toLowerCase();
-    response.writeHead(200, { "content-type": mimeTypes[ext] || "application/octet-stream" });
+    const headers = { "content-type": mimeTypes[ext] || "application/octet-stream" };
+    if (ext === ".html") {
+      headers["cache-control"] = "no-cache, no-store, must-revalidate";
+      headers.pragma = "no-cache";
+      headers.expires = "0";
+    }
+    if (path.basename(filePath).toLowerCase() === "admin.html") {
+      headers["x-robots-tag"] = "noindex, nofollow";
+    }
+
+    response.writeHead(200, headers);
     fs.createReadStream(filePath).pipe(response);
   });
 }

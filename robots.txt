@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /api/admin/
+Allow: /
+
+Sitemap: https://mossa-sport-society.onrender.com/sitemap.xml
