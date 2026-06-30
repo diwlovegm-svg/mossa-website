@@ -214,15 +214,24 @@ function renderServiceDetail(service, pricing) {
     contactLink.rel = "noreferrer";
   }
   actionRow.append(priceLink, contactLink);
-  if (service.registrationLabel) {
-    const registrationLink = createEl("a", service.registrationUrl ? "btn btn-secondary" : "btn btn-disabled", service.registrationUrl ? service.registrationLabel : `${service.registrationLabel} (รอลิงก์)`);
-    registrationLink.href = service.registrationUrl || "#contact";
-    if (service.registrationUrl) {
+
+  const registrationLinks = Array.isArray(service.registrationLinks)
+    ? service.registrationLinks
+    : service.registrationLabel
+      ? [{ label: service.registrationLabel, url: service.registrationUrl }]
+      : [];
+
+  registrationLinks.forEach((registration) => {
+    const label = registration.label || "ลงทะเบียน";
+    const url = registration.url || registration.href || "";
+    const registrationLink = createEl("a", url ? "btn btn-secondary" : "btn btn-disabled", url ? label : `${label} (รอลิงก์)`);
+    registrationLink.href = url || "#contact";
+    if (url) {
       registrationLink.target = "_blank";
       registrationLink.rel = "noreferrer";
     }
     actionRow.append(registrationLink);
-  }
+  });
   intro.append(actionRow);
   shell.append(intro);
 
@@ -369,14 +378,20 @@ function renderCorporate(corporates) {
 
   const draw = () => {
     const query = input.value.trim().toLowerCase();
-    const matches = corporates.filter((company) => {
-      const keywords = [company.companyNameTh, company.companyNameEn, ...(company.searchKeywords || [])].join(" ").toLowerCase();
-      return !query || keywords.includes(query);
-    });
     results.innerHTML = "";
 
+    if (!query) {
+      results.append(createEl("div", "empty-state", "พิมพ์ชื่อบริษัทของคุณเพื่อค้นหาสิทธิ์การใช้บริการ"));
+      return;
+    }
+
+    const matches = corporates.filter((company) => {
+      const keywords = [company.companyNameTh, company.companyNameEn, ...(company.searchKeywords || [])].join(" ").toLowerCase();
+      return keywords.includes(query);
+    });
+
     if (!matches.length) {
-      results.append(createEl("div", "empty-state", "ไม่พบบริษัทในตัวอย่าง Prototype กรุณาแอด LINE เพื่อตรวจสอบสิทธิ์"));
+      results.append(createEl("div", "empty-state", "ไม่พบชื่อบริษัทนี้ กรุณาแอด LINE เพื่อตรวจสอบสิทธิ์กับ MOSSA"));
       return;
     }
 

@@ -1,62 +1,725 @@
 [
   {
     "companyNameTh": "PTT GC",
-    "companyNameEn": "PTT Global Chemical",
-    "searchKeywords": ["gc", "ptt", "pttgc"],
+    "companyNameEn": "PTT GC",
+    "searchKeywords": [
+      "ptt",
+      "gc"
+    ],
     "rights": {
-      "employeeFitness": "รอยืนยัน",
-      "employeePool": "รอยืนยัน",
-      "familyFitness": "รอยืนยัน",
-      "familyPool": "รอยืนยัน"
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ใช้ได้"
     },
-    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
   },
   {
     "companyNameTh": "AGC วีนิไทย",
-    "companyNameEn": "AGC Vinythai",
-    "searchKeywords": ["agc", "vinythai", "วีนิไทย"],
+    "companyNameEn": "AGC วีนิไทย",
+    "searchKeywords": [
+      "agc",
+      "วีนิไทย"
+    ],
     "rights": {
-      "employeeFitness": "รอยืนยัน",
-      "employeePool": "รอยืนยัน",
-      "familyFitness": "รอยืนยัน",
-      "familyPool": "รอยืนยัน"
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
     },
-    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
   },
   {
-    "companyNameTh": "IRPC",
-    "companyNameEn": "IRPC",
-    "searchKeywords": ["irpc"],
+    "companyNameTh": "Plumino (พลัมมิโน)",
+    "companyNameEn": "Plumino (พลัมมิโน)",
+    "searchKeywords": [
+      "plumino",
+      "พลัมมิโน"
+    ],
     "rights": {
-      "employeeFitness": "รอยืนยัน",
-      "employeePool": "รอยืนยัน",
-      "familyFitness": "รอยืนยัน",
-      "familyPool": "รอยืนยัน"
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
     },
-    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
   },
   {
-    "companyNameTh": "Dow Chemical",
-    "companyNameEn": "Dow Chemical",
-    "searchKeywords": ["dow", "chemical", "ดาว"],
+    "companyNameTh": "NS-SUS (เอ็นเอส-สยามยูไนเต็ดสทีล)",
+    "companyNameEn": "NS-SUS (เอ็นเอส-สยามยูไนเต็ดสทีล)",
+    "searchKeywords": [
+      "ns",
+      "sus",
+      "เอ็นเอส",
+      "สยามยูไนเต็ดสทีล"
+    ],
     "rights": {
-      "employeeFitness": "รอยืนยัน",
-      "employeePool": "รอยืนยัน",
-      "familyFitness": "รอยืนยัน",
-      "familyPool": "รอยืนยัน"
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
     },
-    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+    "publicConditionTh": "กรณีครอบครัวพนักงานเข้าใช้บริการ บริษัทจะช่วยสนับสนุนค่าบริการ 50% และอีก 50% ที่เหลือจะถูกนำไปหักออกจากเงินเดือนของพนักงาน (ไม่ใช่การให้ส่วนลดหน้าร้าน 50%) ส่วนพนักงานฟรี"
   },
   {
-    "companyNameTh": "SCG Chemicals",
-    "companyNameEn": "SCG Chemicals",
-    "searchKeywords": ["scg", "chemicals"],
+    "companyNameTh": "SYS (เหล็กสยามยามาโตะ)",
+    "companyNameEn": "SYS (เหล็กสยามยามาโตะ)",
+    "searchKeywords": [
+      "sys",
+      "เหล็กสยามยามาโตะ"
+    ],
     "rights": {
-      "employeeFitness": "รอยืนยัน",
-      "employeePool": "รอยืนยัน",
-      "familyFitness": "รอยืนยัน",
-      "familyPool": "รอยืนยัน"
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
     },
-    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "สยามลวดเหล็กอุตสาหกรรม",
+    "companyNameEn": "สยามลวดเหล็กอุตสาหกรรม",
+    "searchKeywords": [
+      "สยามลวดเหล็กอุตสาหกรรม"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "Momentive (โมเมนทีฟ)",
+    "companyNameEn": "Momentive (โมเมนทีฟ)",
+    "searchKeywords": [
+      "momentive",
+      "โมเมนทีฟ"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "NPC Safety (เอ็นพีซี เซฟตี้)",
+    "companyNameEn": "NPC Safety (เอ็นพีซี เซฟตี้)",
+    "searchKeywords": [
+      "npc",
+      "safety",
+      "เอ็นพีซี",
+      "เซฟตี้"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "Covestro (โคเวสโตร)",
+    "companyNameEn": "Covestro (โคเวสโตร)",
+    "searchKeywords": [
+      "covestro",
+      "โคเวสโตร"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "IRPC (ไออาร์พีซี)",
+    "companyNameEn": "IRPC (ไออาร์พีซี)",
+    "searchKeywords": [
+      "irpc",
+      "ไออาร์พีซี"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "TPI Polene (ทีพีไอ โพลีน)",
+    "companyNameEn": "TPI Polene (ทีพีไอ โพลีน)",
+    "searchKeywords": [
+      "tpi",
+      "polene",
+      "ทีพีไอ",
+      "โพลีน"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "FN: พนักงานจ่ายเพิ่ม 80.- / SW: ผู้ใหญ่ 20, เด็ก 10"
+  },
+  {
+    "companyNameTh": "PTT Tank (พีทีที แทงค์)",
+    "companyNameEn": "PTT Tank (พีทีที แทงค์)",
+    "searchKeywords": [
+      "ptt",
+      "tank",
+      "พีทีที",
+      "แทงค์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "SPRC (สตาร์ ปิโตรเลียม)",
+    "companyNameEn": "SPRC (สตาร์ ปิโตรเลียม)",
+    "searchKeywords": [
+      "sprc",
+      "สตาร์",
+      "ปิโตรเลียม"
+    ],
+    "rights": {
+      "employeeFitness": "ไม่ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "Dow Chemical (ดาว เคมิคอล)",
+    "companyNameEn": "Dow Chemical (ดาว เคมิคอล)",
+    "searchKeywords": [
+      "dow",
+      "chemical",
+      "ดาว",
+      "เคมิคอล"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "Thai Polyacetal (ไทย โพอะซิทัล)",
+    "companyNameEn": "Thai Polyacetal (ไทย โพอะซิทัล)",
+    "searchKeywords": [
+      "thai",
+      "polyacetal",
+      "ไทย",
+      "โพอะซิทัล"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "SCG Chemicals (เอสซีจี เคมิคอลส์)",
+    "companyNameEn": "SCG Chemicals (เอสซีจี เคมิคอลส์)",
+    "searchKeywords": [
+      "scg",
+      "chemicals",
+      "เอสซีจี",
+      "เคมิคอลส์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บมจ. ผาแดงอินดัสทรี",
+    "companyNameEn": "บมจ. ผาแดงอินดัสทรี",
+    "searchKeywords": [
+      "บมจ",
+      "ผาแดงอินดัสทรี"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. พีทีที ฟีนอล",
+    "companyNameEn": "บจก. พีทีที ฟีนอล",
+    "searchKeywords": [
+      "บจก",
+      "พีทีที",
+      "ฟีนอล"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. กรุงเทพซินธิติกส์ (BST)",
+    "companyNameEn": "บจก. กรุงเทพซินธิติกส์ (BST)",
+    "searchKeywords": [
+      "บจก",
+      "กรุงเทพซินธิติกส์",
+      "bst"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. วีนิไทย (VNT)",
+    "companyNameEn": "บจก. วีนิไทย (VNT)",
+    "searchKeywords": [
+      "บจก",
+      "วีนิไทย",
+      "vnt"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. ระยองโอเลฟินส์",
+    "companyNameEn": "บจก. ระยองโอเลฟินส์",
+    "searchKeywords": [
+      "บจก",
+      "ระยองโอเลฟินส์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. เอ็นเอสแอล เอสแคส",
+    "companyNameEn": "บจก. เอ็นเอสแอล เอสแคส",
+    "searchKeywords": [
+      "บจก",
+      "เอ็นเอสแอล",
+      "เอสแคส"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. เอ็มซีแอลเอส (ประเทศไทย)",
+    "companyNameEn": "บจก. เอ็มซีแอลเอส (ประเทศไทย)",
+    "searchKeywords": [
+      "บจก",
+      "เอ็มซีแอลเอส",
+      "ประเทศไทย"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. มิตซูบิชิ เคมิคอล",
+    "companyNameEn": "บจก. มิตซูบิชิ เคมิคอล",
+    "searchKeywords": [
+      "บจก",
+      "มิตซูบิชิ",
+      "เคมิคอล"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. ทีอาร์พีซี",
+    "companyNameEn": "บจก. ทีอาร์พีซี",
+    "searchKeywords": [
+      "บจก",
+      "ทีอาร์พีซี"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. ไทยแทงค์เทอร์มินัล",
+    "companyNameEn": "บจก. ไทยแทงค์เทอร์มินัล",
+    "searchKeywords": [
+      "บจก",
+      "ไทยแทงค์เทอร์มินัล"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. เอเชีย ซิลิโคนส์ โมโนเมอร์",
+    "companyNameEn": "บจก. เอเชีย ซิลิโคนส์ โมโนเมอร์",
+    "searchKeywords": [
+      "บจก",
+      "เอเชีย",
+      "ซิลิโคนส์",
+      "โมโนเมอร์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. ไทย อีทอกซีเลท",
+    "companyNameEn": "บจก. ไทย อีทอกซีเลท",
+    "searchKeywords": [
+      "บจก",
+      "ไทย",
+      "อีทอกซีเลท"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. อดิตยา เบอร์ล่า เคมิคัลส์",
+    "companyNameEn": "บจก. อดิตยา เบอร์ล่า เคมิคัลส์",
+    "searchKeywords": [
+      "บจก",
+      "อดิตยา",
+      "เบอร์ล่า",
+      "เคมิคัลส์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. อิเนออส สไตโรลูชั่น",
+    "companyNameEn": "บจก. อิเนออส สไตโรลูชั่น",
+    "searchKeywords": [
+      "บจก",
+      "อิเนออส",
+      "สไตโรลูชั่น"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. ไทยอาซาฮีเคมีภัณฑ์",
+    "companyNameEn": "บจก. ไทยอาซาฮีเคมีภัณฑ์",
+    "searchKeywords": [
+      "บจก",
+      "ไทยอาซาฮีเคมีภัณฑ์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. แอร์ ลิควิด (ประเทศไทย)",
+    "companyNameEn": "บจก. แอร์ ลิควิด (ประเทศไทย)",
+    "searchKeywords": [
+      "บจก",
+      "แอร์",
+      "ลิควิด",
+      "ประเทศไทย"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. เอส แอนด์ แอล สเปเชียลตี้",
+    "companyNameEn": "บจก. เอส แอนด์ แอล สเปเชียลตี้",
+    "searchKeywords": [
+      "บจก",
+      "เอส",
+      "แอนด์",
+      "แอล",
+      "สเปเชียลตี้"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. วี เอ็ม ซี เอส (ประเทศไทย)",
+    "companyNameEn": "บจก. วี เอ็ม ซี เอส (ประเทศไทย)",
+    "searchKeywords": [
+      "บจก",
+      "วี",
+      "เอ็ม",
+      "ซี",
+      "เอส",
+      "ประเทศไทย"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. เอ็นอีโอ ไวนิล",
+    "companyNameEn": "บจก. เอ็นอีโอ ไวนิล",
+    "searchKeywords": [
+      "บจก",
+      "เอ็นอีโอ",
+      "ไวนิล"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. อูเบะ เคมิคอลส์ (ประเทศไทย)",
+    "companyNameEn": "บจก. อูเบะ เคมิคอลส์ (ประเทศไทย)",
+    "searchKeywords": [
+      "บจก",
+      "อูเบะ",
+      "เคมิคอลส์",
+      "ประเทศไทย"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. ไทยโพลิเอทิลีน",
+    "companyNameEn": "บจก. ไทยโพลิเอทิลีน",
+    "searchKeywords": [
+      "บจก",
+      "ไทยโพลิเอทิลีน"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. เอสซีจี เพอร์ฟอร์มานซ์",
+    "companyNameEn": "บจก. เอสซีจี เพอร์ฟอร์มานซ์",
+    "searchKeywords": [
+      "บจก",
+      "เอสซีจี",
+      "เพอร์ฟอร์มานซ์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. ไทยพลาสติกและเคมีภัณฑ์",
+    "companyNameEn": "บจก. ไทยพลาสติกและเคมีภัณฑ์",
+    "searchKeywords": [
+      "บจก",
+      "ไทยพลาสติกและเคมีภัณฑ์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ใช้ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "บจก. พีทีที โกลบอล แมนเนจเมนท์",
+    "companyNameEn": "บจก. พีทีที โกลบอล แมนเนจเมนท์",
+    "searchKeywords": [
+      "บจก",
+      "พีทีที",
+      "โกลบอล",
+      "แมนเนจเมนท์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ใช้ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "GPSC (โกลบอล เพาเวอร์ ซินเนอร์ยี่)",
+    "companyNameEn": "GPSC (โกลบอล เพาเวอร์ ซินเนอร์ยี่)",
+    "searchKeywords": [
+      "gpsc",
+      "โกลบอล",
+      "เพาเวอร์",
+      "ซินเนอร์ยี่"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ไม่ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "พนักงานจ่ายเพิ่ม 250.- ต่อครั้ง"
+  },
+  {
+    "companyNameTh": "Evonik (อิวอนิก ยูไนเต็ด ซิลิกา)",
+    "companyNameEn": "Evonik (อิวอนิก ยูไนเต็ด ซิลิกา)",
+    "searchKeywords": [
+      "evonik",
+      "อิวอนิก",
+      "ยูไนเต็ด",
+      "ซิลิกา"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "WTC Computer",
+    "companyNameEn": "WTC Computer",
+    "searchKeywords": [
+      "wtc",
+      "computer"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "Solvay (โซลเวย์ เพอรอกซิไทย)",
+    "companyNameEn": "Solvay (โซลเวย์ เพอรอกซิไทย)",
+    "searchKeywords": [
+      "solvay",
+      "โซลเวย์",
+      "เพอรอกซิไทย"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
+  },
+  {
+    "companyNameTh": "Siam Stabilizers (สยาม สเตบิไลเซอร์)",
+    "companyNameEn": "Siam Stabilizers (สยาม สเตบิไลเซอร์)",
+    "searchKeywords": [
+      "siam",
+      "stabilizers",
+      "สยาม",
+      "สเตบิไลเซอร์"
+    ],
+    "rights": {
+      "employeeFitness": "ใช้ได้",
+      "employeePool": "ใช้ได้",
+      "familyFitness": "ไม่ได้",
+      "familyPool": "ไม่ได้"
+    },
+    "publicConditionTh": "กรุณาแสดงเอกสารหรือบัตรตามเงื่อนไขบริษัทก่อนใช้บริการ"
   }
 ]
