@@ -1,0 +1,293 @@
+[
+  {
+    "id": "fitness-membership",
+    "categoryId": "fitness_membership",
+    "categoryLabel": "Fitness & Membership",
+    "nameTh": "ฟิตเนส / Membership",
+    "shortDescriptionTh": "ฟิตเนสและแพ็กเกจสมาชิก รายวัน รายเดือน รายปี",
+    "detailTh": "บริการฟิตเนสสำหรับลูกค้าที่ต้องการเข้าใช้แบบรายวัน หรือสมัครสมาชิกเพื่อใช้บริการเป็นประจำ",
+    "detailBullets": [
+      "Day Pass 500 บาท ใช้บริการเหมือน Membership 1 วัน รวมผ้า",
+      "มีแพ็กเกจ 1 เดือน, 3 เดือน, 6 เดือน และ 12 เดือน",
+      "สิทธิ์ Membership ทุกแพ็กเกจรอทีม MOSSA ยืนยันก่อนขึ้น Production"
+    ],
+    "priceItemIds": ["membership-packages"],
+    "imageUrl": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Fitness", "Membership", "Day Pass"],
+    "sortOrder": 1,
+    "status": "active"
+  },
+  {
+    "id": "swimming-pool",
+    "categoryId": "pool_wellness",
+    "categoryLabel": "Pool & Wellness",
+    "nameTh": "สระว่ายน้ำ / ซาวน่า / สตีม",
+    "shortDescriptionTh": "สระว่ายน้ำระบบน้ำเกลือ แยกราคาเด็กและผู้ใหญ่",
+    "detailTh": "บริการสระว่ายน้ำสำหรับลูกค้า Walk-in โดยผู้ใหญ่รวมซาวน่าและสตีมแล้ว",
+    "detailBullets": [
+      "เด็กสูงไม่เกิน 150 ซม. ราคา 100 บาท",
+      "ผู้ใหญ่สูงเกิน 150 ซม. ราคา 150 บาท",
+      "ผู้ใหญ่ 150 บาทรวมซาวน่าและสตีม"
+    ],
+    "priceItemIds": ["pool-walkin"],
+    "imageUrl": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Pool", "Sauna", "Steam"],
+    "sortOrder": 2,
+    "status": "active"
+  },
+  {
+    "id": "group-class",
+    "categoryId": "group_class",
+    "categoryLabel": "Group Class",
+    "nameTh": "คลาสออกกำลังกาย",
+    "shortDescriptionTh": "ดูตารางคลาสรายเดือนเป็นรูป อัปเดตง่ายทุกเดือน",
+    "detailTh": "คลาสออกกำลังกายจะแสดงเป็นรูปตารางรายเดือน เพื่อให้ทีม MOSSA เปลี่ยนตารางรอบใหม่ได้ง่าย",
+    "detailBullets": [
+      "ใช้รูปตารางคลาสรายเดือนเป็นหลัก",
+      "ลูกค้าดูเวลาและชื่อคลาสจากรูปเดียว",
+      "หากไม่แน่ใจรอบคลาส ให้แอด LINE หรือโทรสอบถาม"
+    ],
+    "priceItemIds": [],
+    "imageUrl": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Class", "Schedule", "Monthly"],
+    "sortOrder": 3,
+    "status": "active"
+  },
+  {
+    "id": "badminton-court",
+    "categoryId": "court_field",
+    "categoryLabel": "Court & Field",
+    "nameTh": "สนามแบดมินตัน",
+    "shortDescriptionTh": "สนามแบดมินตัน แยกราคาก่อนและหลัง 17:00 น.",
+    "detailTh": "บริการสนามแบดมินตันสำหรับลูกค้าที่ต้องการจองสนามเป็นรายชั่วโมง",
+    "detailBullets": [
+      "ก่อน 17:00 น. ราคา 120 บาท/ชั่วโมง",
+      "หลัง 17:00 น. ราคา 150 บาท/ชั่วโมง",
+      "จองสนามโทร 094-406-1555"
+    ],
+    "priceItemIds": ["badminton-court"],
+    "imageUrl": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Badminton", "Court", "Booking"],
+    "sortOrder": 4,
+    "status": "active"
+  },
+  {
+    "id": "football-field",
+    "categoryId": "court_field",
+    "categoryLabel": "Court & Field",
+    "nameTh": "สนามฟุตบอล",
+    "shortDescriptionTh": "สนามฟุตบอล Indoor และ Outdoor แยกราคาตามช่วงเวลา",
+    "detailTh": "บริการสนามฟุตบอล 3 สนาม แยกราคาก่อนและหลัง 17:00 น. ลูกค้าควรโทรจองก่อนเข้าใช้บริการ",
+    "detailBullets": [
+      "Indoor สนาม 1 Shock Pad",
+      "Indoor สนาม 2",
+      "Outdoor สนามใหญ่",
+      "จองสนามโทร 094-406-1555"
+    ],
+    "priceItemIds": ["football-field"],
+    "imageUrl": "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Football", "Indoor", "Outdoor"],
+    "sortOrder": 5,
+    "status": "active"
+  },
+  {
+    "id": "personal-training",
+    "categoryId": "training",
+    "categoryLabel": "Training",
+    "nameTh": "PT / Personal Training",
+    "shortDescriptionTh": "เทรนเดี่ยวและเทรนคู่ พร้อมราคาแพ็กเกจหลายจำนวนชั่วโมง",
+    "detailTh": "บริการ Personal Training สำหรับลูกค้าที่ต้องการดูแลแบบเฉพาะบุคคล เลือกได้ทั้งเทรนเดี่ยวและเทรนคู่",
+    "detailBullets": [
+      "แสดงราคาแพ็กเกจรวมเป็นตัวหลัก",
+      "แสดงราคาเฉลี่ยเพื่อให้ทีมขายอธิบายง่าย",
+      "เหมาะสำหรับลูกค้าที่ต้องการเป้าหมายชัดเจน"
+    ],
+    "priceItemIds": ["pt-boxing-packages"],
+    "imageUrl": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=900&q=80",
+    "tags": ["PT", "Solo", "Duo"],
+    "sortOrder": 6,
+    "status": "active"
+  },
+  {
+    "id": "boxing-pt",
+    "categoryId": "training",
+    "categoryLabel": "Training",
+    "nameTh": "Boxing PT",
+    "shortDescriptionTh": "Boxing PT ใช้ราคาเดียวกับ PT & Boxing PT",
+    "detailTh": "บริการ Boxing PT อยู่ในไฟล์ราคาเดียวกับ PT & Boxing PT จึงใช้ชุดราคาเดียวกัน",
+    "detailBullets": [
+      "เหมาะกับลูกค้าที่ต้องการเทรนมวยแบบตัวต่อตัวหรือคู่",
+      "ใช้ราคาแพ็กเกจเดียวกับ PT",
+      "สอบถามรอบเทรนและครูผ่าน LINE หรือโทร"
+    ],
+    "priceItemIds": ["pt-boxing-packages"],
+    "imageUrl": "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Boxing", "PT", "Training"],
+    "sortOrder": 7,
+    "status": "active"
+  },
+  {
+    "id": "first-pt",
+    "categoryId": "training",
+    "categoryLabel": "Training",
+    "nameTh": "First PT",
+    "shortDescriptionTh": "สำหรับสมาชิกใหม่ 3 ชั่วโมง ราคา 1,200 บาท ใช้ได้ครั้งเดียว",
+    "detailTh": "First PT เป็นข้อเสนอสำหรับสมาชิกใหม่ที่ต้องการเริ่มเทรนกับครูแบบมีเป้าหมาย",
+    "detailBullets": [
+      "3 ชั่วโมง ราคา 1,200 บาท",
+      "สำหรับสมาชิกใหม่",
+      "ใช้ได้ครั้งเดียว"
+    ],
+    "priceItemIds": ["first-pt"],
+    "imageUrl": "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=900&q=80",
+    "tags": ["New Member", "3 Hours", "PT"],
+    "sortOrder": 8,
+    "status": "active"
+  },
+  {
+    "id": "sport-massage",
+    "categoryId": "training",
+    "categoryLabel": "Recovery",
+    "nameTh": "Sport Massage",
+    "shortDescriptionTh": "นวดสปอร์ต แยกเป็นบริการเฉพาะ",
+    "detailTh": "Sport Massage เป็นบริการเฉพาะสำหรับการฟื้นฟูและดูแลกล้ามเนื้อ ใช้บริการภายในห้องนวด",
+    "detailBullets": [
+      "มีแพ็กเกจ 1, 5, 10, 25, 50 และ 80 ชั่วโมง",
+      "ใช้บริการเฉพาะภายในห้องนวด",
+      "เหมาะสำหรับลูกค้าที่ต้องการดูแลกล้ามเนื้อหลังออกกำลังกาย"
+    ],
+    "priceItemIds": ["sport-massage"],
+    "imageUrl": "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Massage", "Recovery", "Package"],
+    "sortOrder": 9,
+    "status": "active"
+  },
+  {
+    "id": "aquatic-pt",
+    "categoryId": "training",
+    "categoryLabel": "Training",
+    "nameTh": "Aquatic PT",
+    "shortDescriptionTh": "เทรนส่วนตัวในน้ำ แยก 1 คน / 2 คน / 3-4 คน",
+    "detailTh": "Aquatic PT เป็นบริการเทรนส่วนตัวในน้ำ จัดอยู่ในกลุ่ม Training ไม่ใช่บริการเข้าสระ Walk-in",
+    "detailBullets": [
+      "มีราคา 10 ชั่วโมงสำหรับ 1 คน, 2 คน และ 3-4 คน",
+      "รวมผ้าขนหนู",
+      "ใช้บริการเฉพาะสระว่ายน้ำ ซาวน่า/สตีม และล็อกเกอร์"
+    ],
+    "priceItemIds": ["aquatic-pt"],
+    "imageUrl": "https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Aquatic", "PT", "Water Training"],
+    "sortOrder": 10,
+    "status": "active"
+  },
+  {
+    "id": "sport-training-kid",
+    "categoryId": "kids_lessons",
+    "categoryLabel": "Kids Program",
+    "nameTh": "Sport Training For Kid",
+    "shortDescriptionTh": "เทรนกีฬาเด็ก 10 ชั่วโมง แบบ 1 คนหรือ 2 คน",
+    "detailTh": "คอร์สเทรนกีฬาเด็กแบบส่วนตัวหรือคู่ สำหรับเด็กที่ต้องการพัฒนาทักษะการเคลื่อนไหวและกีฬา",
+    "detailBullets": [
+      "10 ชั่วโมง / 1 คน ราคา 8,000 บาท",
+      "10 ชั่วโมง / 2 คน ราคา 13,000 บาท",
+      "กรณีไม่เป็นสมาชิกต้องอยู่ภายใต้การดูแลของเจ้าหน้าที่ MOSSA"
+    ],
+    "priceItemIds": ["sport-training-kid"],
+    "imageUrl": "https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Kids", "Sport", "Training"],
+    "sortOrder": 11,
+    "status": "active"
+  },
+  {
+    "id": "sport-training-group-kid",
+    "categoryId": "kids_lessons",
+    "categoryLabel": "Kids Program",
+    "nameTh": "Sport Training Group For Kid",
+    "shortDescriptionTh": "คอร์สเทรนกลุ่มเด็ก 4 / 8 ชั่วโมง",
+    "detailTh": "คอร์สกลุ่มสำหรับเด็กที่ต้องการฝึกทักษะกีฬาและการเคลื่อนไหวร่วมกับเพื่อน",
+    "detailBullets": [
+      "4 ชั่วโมง ราคา 3,000 บาท",
+      "8 ชั่วโมง ราคา 5,000 บาท",
+      "จำกัดอายุ 7-14 ปี"
+    ],
+    "priceItemIds": ["sport-training-group-kid"],
+    "imageUrl": "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Group", "Kids", "7-14"],
+    "sortOrder": 12,
+    "status": "active"
+  },
+  {
+    "id": "drum-dance-kids",
+    "categoryId": "kids_lessons",
+    "categoryLabel": "Kids Program",
+    "nameTh": "Drum & Dance For Kids",
+    "shortDescriptionTh": "คอร์สเด็ก 4 / 8 ชั่วโมง อยู่ในหมวด Kids Program",
+    "detailTh": "คอร์ส Drum & Dance สำหรับเด็ก เน้นกิจกรรมกลุ่มและการเคลื่อนไหว",
+    "detailBullets": [
+      "4 ชั่วโมง ราคา 3,000 บาท",
+      "8 ชั่วโมง ราคา 5,000 บาท",
+      "จำกัดอายุ 7-14 ปี"
+    ],
+    "priceItemIds": ["drum-dance-kids"],
+    "imageUrl": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Drum", "Dance", "Kids"],
+    "sortOrder": 13,
+    "status": "active"
+  },
+  {
+    "id": "swimming-course",
+    "categoryId": "kids_lessons",
+    "categoryLabel": "Swimming Course",
+    "nameTh": "คอร์สเรียนว่ายน้ำ",
+    "shortDescriptionTh": "คอร์สสอนว่ายน้ำ แยกหมวด ไม่ใช่ PT โดยตรง",
+    "detailTh": "คอร์สเรียนว่ายน้ำมีทั้งแบบส่วนตัวและแบบกลุ่ม โดยแบบส่วนตัวยังไม่รวมค่าลงสระ",
+    "detailBullets": [
+      "เรียนเดี่ยว 10 ชั่วโมง ราคา 3,500 บาท",
+      "เรียนคู่ 2 ท่าน 10 ชั่วโมง ราคา 5,500 บาท",
+      "เรียนกลุ่ม 2,500 บาท/คน รวมค่าลงสระ ผ้า และอุปกรณ์"
+    ],
+    "priceItemIds": ["swimming-course"],
+    "registrationLabel": "ลงทะเบียนเรียนว่ายน้ำ",
+    "registrationUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Swimming", "Course", "Register"],
+    "sortOrder": 14,
+    "status": "active"
+  },
+  {
+    "id": "badminton-lesson",
+    "categoryId": "kids_lessons",
+    "categoryLabel": "Lessons",
+    "nameTh": "เรียนแบดมินตัน",
+    "shortDescriptionTh": "สอนตั้งแต่อายุ 5 ปีขึ้นไป ยังไม่มีราคาในไฟล์",
+    "detailTh": "บริการเรียนแบดมินตันสำหรับเด็กอายุ 5 ปีขึ้นไปจนถึงบุคคลทั่วไป ตอนนี้ยังไม่มีราคาเต็มสำหรับขึ้นเว็บ",
+    "detailBullets": [
+      "รับตั้งแต่อายุ 5 ปีขึ้นไป",
+      "ผู้ติดต่อ: โค้ชแจ็ค ศรายุทธ แซ่ตั้ง",
+      "เบอร์ 099-0975-111"
+    ],
+    "priceItemIds": ["badminton-lesson"],
+    "imageUrl": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Badminton", "Lesson", "5+"],
+    "sortOrder": 15,
+    "status": "active"
+  },
+  {
+    "id": "taekwondo",
+    "categoryId": "kids_lessons",
+    "categoryLabel": "Kids Program",
+    "nameTh": "MOSSA KP Taekwondo",
+    "shortDescriptionTh": "เทควันโด เริ่มต้น 1,200 บาท พร้อมวันเรียนประจำ",
+    "detailTh": "MOSSA KP Taekwondo เป็นคอร์สเทควันโดสำหรับเด็กและผู้สนใจ มีวันเรียนประจำและราคาเริ่มต้นชัดเจน",
+    "detailBullets": [
+      "ราคาเริ่มต้น 1,200 บาท",
+      "เสาร์-อาทิตย์ 09:00-11:00 น.",
+      "พุธ และ ศุกร์ 17:00-19:00 น."
+    ],
+    "priceItemIds": ["taekwondo"],
+    "imageUrl": "https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=900&q=80",
+    "tags": ["Taekwondo", "Kids", "Course"],
+    "sortOrder": 16,
+    "status": "active"
+  }
+]

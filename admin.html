@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MOSSA Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Kanit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="admin.js" defer></script>
+  </head>
+  <body class="admin-page">
+    <header class="site-header">
+      <a class="brand" href="index.html#home" aria-label="กลับหน้าเว็บ">
+        <span class="brand-mark">M</span>
+        <span>
+          <strong>MOSSA Admin</strong>
+          <small>แก้ข้อมูลเว็บ</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" data-menu-toggle>เมนู</button>
+      <nav class="site-nav" data-site-nav>
+        <a href="index.html#services">หน้าเว็บ</a>
+        <a href="index.html#pricing">ราคา</a>
+        <a href="index.html#promotions">โปรโมชัน</a>
+        <a href="index.html#classes">ตารางคลาส</a>
+      </nav>
+    </header>
+
+    <main class="admin-shell">
+      <section id="admin-login" class="admin-login-panel" aria-labelledby="admin-login-title">
+        <div>
+          <p class="eyebrow">Admin Access</p>
+          <h1 id="admin-login-title">หลังบ้าน MOSSA</h1>
+          <p class="lead-text">เข้าสู่ระบบเพื่อแก้บริการ ราคา โปรโมชัน ตารางคลาส เวลาเปิดบริการ และข้อมูลหน้าเว็บ ระบบนี้จะบันทึกกลับไปที่ไฟล์ JSON จริงในโปรเจกต์นี้</p>
+        </div>
+        <form class="admin-login-form" id="admin-login-form">
+          <label for="admin-passcode">รหัสผ่านแอดมิน</label>
+          <input id="admin-passcode" name="passcode" type="password" inputmode="numeric" autocomplete="current-password" placeholder="ใส่รหัสผ่าน" required>
+          <button class="btn btn-primary" type="submit">เข้าสู่หลังบ้าน</button>
+          <p class="admin-message" id="login-message" role="status"></p>
+        </form>
+      </section>
+
+      <section id="admin-dashboard" class="admin-dashboard is-hidden" aria-labelledby="admin-dashboard-title">
+        <div class="admin-topbar">
+          <div>
+            <p class="eyebrow">Content Manager</p>
+            <h1 id="admin-dashboard-title">จัดการข้อมูลเว็บ MOSSA</h1>
+            <p class="lead-text">เลือกหมวดด้านซ้าย แก้ข้อมูล แล้วกดบันทึก หน้าเว็บจะอ่านข้อมูลใหม่หลังรีเฟรช</p>
+          </div>
+          <div class="admin-topbar-actions">
+            <a class="btn btn-ghost" href="index.html#home">ดูหน้าเว็บ</a>
+            <button class="btn btn-ghost" type="button" id="admin-logout">ออกจากระบบ</button>
+          </div>
+        </div>
+
+        <div class="admin-workspace">
+          <aside class="admin-sidebar" aria-label="หมวดข้อมูล">
+            <div id="admin-file-list" class="admin-file-list"></div>
+          </aside>
+
+          <section class="admin-editor-card" aria-live="polite">
+            <div class="admin-editor-head">
+              <div>
+                <p class="eyebrow" id="editor-filename">เลือกหมวดข้อมูล</p>
+                <h2 id="editor-title">พร้อมแก้ไข</h2>
+                <p id="editor-description" class="lead-text">เลือกข้อมูลที่ต้องการแก้จากเมนูด้านซ้าย</p>
+              </div>
+              <div class="admin-editor-actions">
+                <button class="btn btn-secondary" type="button" id="reload-data" disabled>โหลดใหม่</button>
+                <button class="btn btn-primary" type="button" id="save-data" disabled>บันทึกข้อมูล</button>
+              </div>
+            </div>
+
+            <p class="admin-message" id="admin-status" role="status"></p>
+            <div id="admin-editor-body" class="admin-editor-body">
+              <div class="empty-state">เลือกหมวดข้อมูลก่อนเริ่มแก้ไข</div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

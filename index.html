@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MOSSA Sport Society Rayong ฟิตเนสและสปอร์ตคลับครบวงจรในระยอง พร้อมฟิตเนส คลาส สระว่ายน้ำ สนามกีฬา และบริการเทรนนิ่ง">
+    <title>MOSSA Sport Society Rayong | Fitness & Sport Society in Rayong</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Kanit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#home" aria-label="MOSSA Sport Society home">
+        <span class="brand-mark">M</span>
+        <span>
+          <strong>MOSSA Sport Society</strong>
+          <small>Fitness & Sport Society in Rayong</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">
+        เมนู
+      </button>
+      <nav id="site-nav" class="site-nav" data-site-nav>
+        <a href="#services">บริการ</a>
+        <a href="#pricing">ราคา</a>
+        <a href="#hours">เวลาเปิด</a>
+        <a href="#classes">ตารางคลาส</a>
+        <a href="#promotions">โปรโมชัน</a>
+        <a href="#corporate">บริษัทคู่สัญญา</a>
+        <a href="admin.html">Admin</a>
+        <a href="#contact">ติดต่อ</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Fitness & Sport Society in Rayong</p>
+          <h1>MOSSA Sport Society</h1>
+          <p class="hero-copy">ฟิตเนสและสปอร์ตคลับครบวงจรในระยอง รวมฟิตเนส คลาสออกกำลังกาย สระว่ายน้ำ สนามกีฬา และบริการเทรนนิ่งในที่เดียว</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#services">บริการของ MOSSA</a>
+            <a class="btn btn-secondary" href="#pricing">ดูราคา</a>
+            <a class="btn btn-ghost" href="#hours">เวลาเปิดบริการ</a>
+          </div>
+          <dl class="hero-stats">
+            <div>
+              <dt>6</dt>
+              <dd>กลุ่มบริการหลัก</dd>
+            </div>
+            <div>
+              <dt>ราคา</dt>
+              <dd>ดูได้ในหน้าเดียว</dd>
+            </div>
+            <div>
+              <dt>08:00</dt>
+              <dd>สนามเปิดทุกวัน</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="quick-actions" aria-label="ทางลัด">
+        <a href="#pricing">ดูราคา</a>
+        <a href="#hours">เวลาเปิดบริการ</a>
+        <a href="#promotions">โปรโมชัน</a>
+        <a href="tel:0944061555">โทรจองสนาม</a>
+        <a href="#corporate">ค้นหาสิทธิ์บริษัท</a>
+      </section>
+
+      <section id="services" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Services</p>
+          <h2>บริการหลักของ MOSSA</h2>
+          <p>กดการ์ดบริการเพื่อดูรายละเอียดและราคาในหน้าเดียว ไม่ต้องสลับไปหลายเมนู</p>
+        </div>
+        <div id="service-grid" class="service-grid" aria-live="polite"></div>
+        <div id="service-detail" class="service-detail" aria-live="polite"></div>
+      </section>
+
+      <section id="promotions" class="section section-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Promotions</p>
+          <h2>โปรโมชัน</h2>
+          <p>พื้นที่โปรโมชันที่ลูกค้าควรเห็นชัด เช่น ทดลองฟรี, First PT และข้อเสนอ Membership</p>
+        </div>
+        <div id="promotion-grid" class="promotion-grid"></div>
+      </section>
+
+      <section id="pricing" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Pricing</p>
+          <h2>บริการและราคา</h2>
+          <p>ข้อมูลราคาเริ่มต้นจากชุดเอกสาร MOSSA และแยกตามหมวดบริการ</p>
+        </div>
+        <div class="tab-list" id="pricing-tabs" role="tablist" aria-label="หมวดราคา"></div>
+        <div id="pricing-content" class="pricing-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="trial" class="section trial-section">
+        <div class="trial-card">
+          <div>
+            <p class="eyebrow">Trial</p>
+            <h2 id="trial-title">ทดลองฟรี 3 วัน</h2>
+            <p id="trial-eligibility" class="lead-text"></p>
+          </div>
+          <div class="trial-steps" id="trial-steps"></div>
+          <div class="trial-actions">
+            <a class="btn btn-primary" data-line-link href="#" target="_blank" rel="noreferrer">สอบถามผ่าน LINE</a>
+            <a class="btn btn-secondary" data-main-phone href="#">โทรสอบถาม</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="hours" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Opening Hours</p>
+          <h2>เวลาเปิดบริการ</h2>
+          <p>แยกตามบริการ เพราะแต่ละพื้นที่เปิดไม่เหมือนกัน</p>
+        </div>
+        <div id="hours-grid" class="hours-grid"></div>
+      </section>
+
+      <section id="classes" class="section section-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Class Schedule</p>
+          <h2>ตารางคลาสรายเดือน</h2>
+          <p>ใช้รูปตารางคลาสรายเดือนเป็นหลัก เพื่อให้ทีม MOSSA เปลี่ยนไฟล์รอบใหม่ได้ง่าย</p>
+        </div>
+        <div id="class-list" class="class-image-panel"></div>
+      </section>
+
+      <section id="corporate" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Corporate</p>
+          <h2>ค้นหาสิทธิ์บริษัทคู่สัญญา</h2>
+          <p>พิมพ์ชื่อบริษัทเพื่อดูข้อมูลสิทธิ์เบื้องต้น รายละเอียดจริงให้ยืนยันกับ MOSSA อีกครั้ง</p>
+        </div>
+        <div class="corporate-search">
+          <label for="corporate-query">ค้นหาบริษัทของคุณ</label>
+          <input id="corporate-query" type="search" placeholder="เช่น PTT GC, IRPC, SCG">
+        </div>
+        <div id="corporate-results" class="corporate-results" aria-live="polite"></div>
+      </section>
+
+      <section id="gallery" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Gallery</p>
+          <h2>ภาพบรรยากาศ</h2>
+          <p>ตอนนี้ใช้ภาพบรรยากาศตัวอย่างก่อน รอแทนที่ด้วยรูปจริงของ MOSSA</p>
+        </div>
+        <div id="gallery-grid" class="gallery-grid"></div>
+      </section>
+
+      <section id="contact" class="section contact-section">
+        <div class="contact-card">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>ติดต่อ MOSSA Sport Society</h2>
+            <p id="contact-address" class="lead-text"></p>
+            <p id="map-status" class="map-status"></p>
+          </div>
+          <div id="contact-actions" class="contact-actions"></div>
+        </div>
+      </section>
+
+      <section id="faq" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2>คำถามที่พบบ่อย</h2>
+        </div>
+        <div id="faq-list" class="faq-list"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>MOSSA Sport Society</p>
+      <p>Prototype: ข้อมูลบางส่วนยังรอรูปจริง, Google Maps และการยืนยันสิทธิ์ Membership</p>
+    </footer>
+
+    <div class="sticky-cta" aria-label="ติดต่อด่วน">
+      <a href="#services">บริการ</a>
+      <a href="#pricing">ราคา</a>
+      <a data-main-phone href="#">โทร</a>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

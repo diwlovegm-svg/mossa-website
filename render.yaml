@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mossa-sport-society
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: CONTENT_STORE
+        value: supabase
+      - key: MOSSA_ADMIN_PASSCODE
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

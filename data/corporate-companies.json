@@ -1,0 +1,62 @@
+[
+  {
+    "companyNameTh": "PTT GC",
+    "companyNameEn": "PTT Global Chemical",
+    "searchKeywords": ["gc", "ptt", "pttgc"],
+    "rights": {
+      "employeeFitness": "รอยืนยัน",
+      "employeePool": "รอยืนยัน",
+      "familyFitness": "รอยืนยัน",
+      "familyPool": "รอยืนยัน"
+    },
+    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+  },
+  {
+    "companyNameTh": "AGC วีนิไทย",
+    "companyNameEn": "AGC Vinythai",
+    "searchKeywords": ["agc", "vinythai", "วีนิไทย"],
+    "rights": {
+      "employeeFitness": "รอยืนยัน",
+      "employeePool": "รอยืนยัน",
+      "familyFitness": "รอยืนยัน",
+      "familyPool": "รอยืนยัน"
+    },
+    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+  },
+  {
+    "companyNameTh": "IRPC",
+    "companyNameEn": "IRPC",
+    "searchKeywords": ["irpc"],
+    "rights": {
+      "employeeFitness": "รอยืนยัน",
+      "employeePool": "รอยืนยัน",
+      "familyFitness": "รอยืนยัน",
+      "familyPool": "รอยืนยัน"
+    },
+    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+  },
+  {
+    "companyNameTh": "Dow Chemical",
+    "companyNameEn": "Dow Chemical",
+    "searchKeywords": ["dow", "chemical", "ดาว"],
+    "rights": {
+      "employeeFitness": "รอยืนยัน",
+      "employeePool": "รอยืนยัน",
+      "familyFitness": "รอยืนยัน",
+      "familyPool": "รอยืนยัน"
+    },
+    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+  },
+  {
+    "companyNameTh": "SCG Chemicals",
+    "companyNameEn": "SCG Chemicals",
+    "searchKeywords": ["scg", "chemicals"],
+    "rights": {
+      "employeeFitness": "รอยืนยัน",
+      "employeePool": "รอยืนยัน",
+      "familyFitness": "รอยืนยัน",
+      "familyPool": "รอยืนยัน"
+    },
+    "publicConditionTh": "ข้อมูลตัวอย่างสำหรับ Prototype กรุณาให้ MOSSA ใส่สิทธิ์จริงก่อนเผยแพร่"
+  }
+]

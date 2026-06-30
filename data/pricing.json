@@ -1,0 +1,226 @@
+{
+  "categories": [
+    {
+      "id": "membership",
+      "nameTh": "Membership",
+      "notice": "สิทธิ์ Membership ทุกแพ็กเกจอยู่ระหว่างรอทีม MOSSA ยืนยันอีกครั้งก่อนขึ้น Production"
+    },
+    {
+      "id": "pool",
+      "nameTh": "สระ / ซาวน่า"
+    },
+    {
+      "id": "court",
+      "nameTh": "สนามกีฬา"
+    },
+    {
+      "id": "training",
+      "nameTh": "PT / Training"
+    },
+    {
+      "id": "massage",
+      "nameTh": "Sport Massage"
+    },
+    {
+      "id": "kids_program",
+      "nameTh": "Kids Program"
+    },
+    {
+      "id": "swimming_course",
+      "nameTh": "คอร์สว่ายน้ำ"
+    },
+    {
+      "id": "lessons",
+      "nameTh": "Lessons"
+    }
+  ],
+  "items": [
+    {
+      "id": "membership-packages",
+      "categoryId": "membership",
+      "nameTh": "Fitness + Pool Membership",
+      "groupLabel": "Membership",
+      "columns": ["แพ็กเกจ", "1 ท่าน", "2 ท่าน"],
+      "rows": [
+        ["รายวัน", "500 บาท", "-"],
+        ["คูปอง 10 ครั้ง", "3,500 บาท", "-"],
+        ["1 เดือน", "5,000 บาท", "8,500 บาท"],
+        ["3 เดือน", "9,900 บาท", "16,830 บาท"],
+        ["6 เดือน", "17,500 บาท", "29,750 บาท"],
+        ["12 เดือน", "22,500 บาท", "38,250 บาท"]
+      ],
+      "noteTh": "Day Pass 500 บาท สื่อสารว่าใช้บริการเหมือน Membership 1 วัน รวมผ้า"
+    },
+    {
+      "id": "pool-walkin",
+      "categoryId": "pool",
+      "nameTh": "สระว่ายน้ำ Walk-in",
+      "groupLabel": "Swimming Pool",
+      "columns": ["ประเภท", "เงื่อนไข", "ราคา"],
+      "rows": [
+        ["เด็ก", "สูงไม่เกิน 150 ซม.", "100 บาท"],
+        ["ผู้ใหญ่", "สูงเกิน 150 ซม.", "150 บาท"]
+      ],
+      "noteTh": "ผู้ใหญ่ 150 บาท รวมซาวน่าและสตีม"
+    },
+    {
+      "id": "badminton-court",
+      "categoryId": "court",
+      "nameTh": "สนามแบดมินตัน",
+      "groupLabel": "Badminton Court",
+      "columns": ["ช่วงเวลา", "ราคา"],
+      "rows": [
+        ["ก่อน 17:00 น.", "120 บาท/ชั่วโมง"],
+        ["หลัง 17:00 น.", "150 บาท/ชั่วโมง"]
+      ],
+      "noteTh": "จองสนามโทร 094-406-1555"
+    },
+    {
+      "id": "football-field",
+      "categoryId": "court",
+      "nameTh": "สนามฟุตบอล",
+      "groupLabel": "Football Field",
+      "columns": ["สนาม", "ก่อน 17:00", "หลัง 17:00"],
+      "rows": [
+        ["Indoor สนาม 1 Shock Pad", "1,000 บาท/ชม.", "1,500 บาท/ชม."],
+        ["Indoor สนาม 2", "800 บาท/ชม.", "1,200 บาท/ชม."],
+        ["Outdoor สนามใหญ่", "1,000 บาท/ชม.", "1,400 บาท/ชม."]
+      ],
+      "noteTh": "รับน้ำฟรี 12 ขวด/ชม. และเสื้อกั๊กไม่เกิน 9 ตัว/ชม."
+    },
+    {
+      "id": "pt-boxing-packages",
+      "categoryId": "training",
+      "nameTh": "PT / Personal Training / Boxing PT",
+      "groupLabel": "PT & Boxing PT",
+      "columns": ["ชั่วโมง", "เดี่ยว", "เฉลี่ย", "คู่", "เฉลี่ย/คน"],
+      "rows": [
+        ["1 ชม.", "950 บาท", "950", "1,500 บาท", "750"],
+        ["10 ชม.", "7,500 บาท", "750", "13,000 บาท", "6,500"],
+        ["25 ชม.", "17,500 บาท", "700", "30,000 บาท", "15,000"],
+        ["50 ชม.", "33,750 บาท", "675", "55,000 บาท", "27,500"],
+        ["80 ชม.", "52,000 บาท", "650", "80,000 บาท", "40,000"]
+      ],
+      "noteTh": "Boxing PT ใช้ราคาเดียวกับ PT & Boxing PT"
+    },
+    {
+      "id": "first-pt",
+      "categoryId": "training",
+      "nameTh": "First PT",
+      "groupLabel": "New Member",
+      "columns": ["แพ็กเกจ", "ราคา", "เงื่อนไข"],
+      "rows": [
+        ["First PT", "1,200 บาท", "3 ชั่วโมง สำหรับสมาชิกใหม่ ใช้ได้ครั้งเดียว"]
+      ],
+      "noteTh": "เหมาะสำหรับลูกค้าใหม่ที่ต้องการเริ่มต้นกับเทรนเนอร์"
+    },
+    {
+      "id": "aquatic-pt",
+      "categoryId": "training",
+      "nameTh": "Aquatic PT",
+      "groupLabel": "Water Training",
+      "columns": ["รูปแบบ", "ราคา 10 ชม.", "เฉลี่ย"],
+      "rows": [
+        ["1 คน", "7,500 บาท", "750 บาท/ชม."],
+        ["2 คน", "11,250 บาท", "5,625 บาท/คน"],
+        ["3-4 คน", "13,125 บาท", "3,280-4,375 บาท/คน"]
+      ],
+      "noteTh": "รวมผ้าขนหนู ใช้บริการเฉพาะสระ ซาวน่า/สตีม และล็อกเกอร์"
+    },
+    {
+      "id": "sport-massage",
+      "categoryId": "massage",
+      "nameTh": "Sport Massage",
+      "groupLabel": "Recovery",
+      "columns": ["ชั่วโมง", "ราคา", "เฉลี่ย/ชม."],
+      "rows": [
+        ["1 ชม.", "950 บาท", "950"],
+        ["5 ชม.", "4,250 บาท", "800"],
+        ["10 ชม.", "7,500 บาท", "750"],
+        ["25 ชม.", "17,500 บาท", "700"],
+        ["50 ชม.", "33,750 บาท", "675"],
+        ["80 ชม.", "52,000 บาท", "650"]
+      ],
+      "noteTh": "แพ็กเกจนวดสปอร์ตใช้บริการเฉพาะภายในห้องนวด"
+    },
+    {
+      "id": "sport-training-kid",
+      "categoryId": "kids_program",
+      "nameTh": "Sport Training For Kid",
+      "groupLabel": "Kids Program",
+      "columns": ["คอร์ส", "รายละเอียด", "ราคา"],
+      "rows": [
+        ["Sport Training For Kid", "10 ชม. / 1 คน", "8,000 บาท"],
+        ["Sport Training For Kid", "10 ชม. / 2 คน", "13,000 บาท"]
+      ],
+      "noteTh": "คอร์สสำหรับเด็กที่ต้องการเทรนกีฬาแบบเฉพาะ"
+    },
+    {
+      "id": "sport-training-group-kid",
+      "categoryId": "kids_program",
+      "nameTh": "Sport Training Group For Kid",
+      "groupLabel": "Kids Program",
+      "columns": ["คอร์ส", "รายละเอียด", "ราคา"],
+      "rows": [
+        ["Sport Training Group For Kid", "4 ชม.", "3,000 บาท"],
+        ["Sport Training Group For Kid", "8 ชม.", "5,000 บาท"]
+      ],
+      "noteTh": "จำกัดอายุ 7-14 ปี"
+    },
+    {
+      "id": "drum-dance-kids",
+      "categoryId": "kids_program",
+      "nameTh": "Drum & Dance For Kids",
+      "groupLabel": "Kids Program",
+      "columns": ["คอร์ส", "รายละเอียด", "ราคา"],
+      "rows": [
+        ["Drum & Dance For Kids", "4 ชม.", "3,000 บาท"],
+        ["Drum & Dance For Kids", "8 ชม.", "5,000 บาท"]
+      ],
+      "noteTh": "จำกัดอายุ 7-14 ปี"
+    },
+    {
+      "id": "swimming-course",
+      "categoryId": "swimming_course",
+      "nameTh": "คอร์สเรียนว่ายน้ำ",
+      "groupLabel": "Swimming Course",
+      "columns": ["รูปแบบ", "รายละเอียด", "ราคา"],
+      "rows": [
+        ["เรียนเดี่ยว", "10 ชม. อายุ 4 ปีขึ้นไป", "3,500 บาท"],
+        ["เรียนคู่ 2 ท่าน", "10 ชม. อายุ 4 ปีขึ้นไป", "5,500 บาท"],
+        ["เรียนกลุ่ม", "10 วัน อายุ 8 ขวบขึ้นไป", "2,500 บาท/คน"]
+      ],
+      "noteTh": "เรียนส่วนตัวยังไม่รวมค่าลงสระ ครั้งละ 50 บาท"
+    },
+    {
+      "id": "badminton-lesson",
+      "categoryId": "lessons",
+      "nameTh": "เรียนแบดมินตัน",
+      "groupLabel": "Badminton Lesson",
+      "columns": ["รายการ", "รายละเอียด"],
+      "rows": [
+        ["อายุ", "ตั้งแต่ 5 ปีขึ้นไป"],
+        ["กลุ่มผู้เรียน", "เด็กจนถึงบุคคลทั่วไป"],
+        ["ผู้ติดต่อ", "โค้ชแจ็ค ศรายุทธ แซ่ตั้ง"],
+        ["เบอร์", "099-0975-111"],
+        ["ราคา", "สอบถามรายละเอียด"]
+      ],
+      "noteTh": "ยังไม่มีราคาเรียนแบดมินตันในไฟล์ ให้แสดงเป็นสอบถามรายละเอียด"
+    },
+    {
+      "id": "taekwondo",
+      "categoryId": "lessons",
+      "nameTh": "MOSSA KP Taekwondo",
+      "groupLabel": "Taekwondo",
+      "columns": ["รายการ", "รายละเอียด"],
+      "rows": [
+        ["ราคา", "เริ่มต้น 1,200 บาท"],
+        ["เสาร์-อาทิตย์", "09:00-11:00 น."],
+        ["พุธ และ ศุกร์", "17:00-19:00 น."],
+        ["ผู้ติดต่อ", "ครูปอนด์"],
+        ["เบอร์", "099-3594593, 092-5416924"]
+      ],
+      "noteTh": "Facebook: KP สมาร์ทเทควันโด"
+    }
+  ]
+}

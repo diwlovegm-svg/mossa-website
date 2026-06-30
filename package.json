@@ -1,0 +1,15 @@
+{
+  "name": "mossa-sport-society-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MOSSA Sport Society website with editable admin content",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --preserve-symlinks-main scripts/check.js",
+    "seed:supabase": "node scripts/seed-supabase.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
