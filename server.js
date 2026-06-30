@@ -9,6 +9,8 @@ const adminPasscode = process.env.MOSSA_ADMIN_PASSCODE || "";
 const contentStore = process.env.CONTENT_STORE || (process.env.SUPABASE_URL ? "supabase" : "files");
 const supabaseUrl = (process.env.SUPABASE_URL || "").replace(/\/$/, "");
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const buildCommit = process.env.RENDER_GIT_COMMIT || process.env.RENDER_GIT_COMMIT_SHA || process.env.GIT_COMMIT || "local";
+const buildLabel = buildCommit === "local" ? "local" : buildCommit.slice(0, 7);
 
 const editableFiles = {
   services: { filename: "services.json", label: "บริการ", description: "ชื่อบริการ รายละเอียด รูป และการผูกตารางราคา" },
@@ -187,7 +189,7 @@ function listEditableFiles() {
 
 async function handleApi(request, response, requestUrl) {
   if (requestUrl.pathname === "/api/health" && request.method === "GET") {
-    sendJson(response, 200, { ok: true, contentStore });
+    sendJson(response, 200, { ok: true, contentStore, buildCommit });
     return true;
   }
 
@@ -326,9 +328,24 @@ function serveStaticFile(requestUrl, response) {
       headers["cache-control"] = "no-cache, no-store, must-revalidate";
       headers.pragma = "no-cache";
       headers.expires = "0";
+      headers["x-mossa-build"] = buildLabel;
     }
     if (path.basename(filePath).toLowerCase() === "admin.html") {
       headers["x-robots-tag"] = "noindex, nofollow";
+    }
+
+    if (ext === ".html") {
+      fs.promises
+        .readFile(filePath, "utf8")
+        .then((content) => {
+          response.writeHead(200, headers);
+          response.end(content.replaceAll("__MOSSA_BUILD_COMMIT__", buildCommit));
+        })
+        .catch(() => {
+          response.writeHead(500, { "content-type": "text/plain; charset=utf-8" });
+          response.end("Server error");
+        });
+      return;
     }
 
     response.writeHead(200, headers);
