@@ -287,7 +287,10 @@ function renderPromotionsEditor() {
             <div class="admin-form-grid">
               ${renderTextField({ label: "ป้ายหมวด", value: promotion.label, selector: `data-promotion-index="${index}" data-prop="label"` })}
               ${renderTextField({ label: "ป้ายสถานะ", value: promotion.statusText, selector: `data-promotion-index="${index}" data-prop="statusText"` })}
+              ${renderTextField({ label: "สถานะระบบ active/hidden", value: promotion.status || "active", selector: `data-promotion-index="${index}" data-prop="status"` })}
+              ${renderTextField({ label: "วันหมดอายุ YYYY-MM-DD", value: promotion.expiresAt || "", selector: `data-promotion-index="${index}" data-prop="expiresAt"` })}
               ${renderTextField({ label: "หัวข้อ", value: promotion.titleTh, selector: `data-promotion-index="${index}" data-prop="titleTh"` })}
+              ${renderTextField({ label: "ข้อความวันหมดอายุ", value: promotion.expiresLabel || "", selector: `data-promotion-index="${index}" data-prop="expiresLabel"` })}
               ${renderTextArea({ label: "รายละเอียด", value: promotion.descriptionTh, selector: `data-promotion-index="${index}" data-prop="descriptionTh"`, rows: 3 })}
             </div>
           </article>
@@ -817,7 +820,7 @@ function attachPromotionHandlers(body) {
   });
 
   body.querySelector("[data-action='add-promotion']")?.addEventListener("click", () => {
-    adminState.currentData.push({ label: "Promotion", titleTh: "โปรโมชันใหม่", descriptionTh: "", statusText: "แสดงบนเว็บ" });
+    adminState.currentData.push({ label: "Promotion", titleTh: "โปรโมชันใหม่", descriptionTh: "", statusText: "แสดงบนเว็บ", status: "active", expiresAt: "", expiresLabel: "" });
     renderEditor();
     markChanged();
   });

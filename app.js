@@ -406,12 +406,31 @@ function renderPromotions(promotions) {
   const grid = qs("#promotion-grid");
   grid.innerHTML = "";
 
-  promotions.forEach((promotion) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const activePromotions = promotions.filter((promotion) => {
+    if (promotion.status === "hidden") return false;
+    if (!promotion.expiresAt) return true;
+
+    const expiry = new Date(`${promotion.expiresAt}T23:59:59+07:00`);
+    return Number.isNaN(expiry.getTime()) || expiry >= today;
+  });
+
+  if (!activePromotions.length) {
+    grid.append(createEl("div", "empty-state", "ยังไม่มีโปรโมชันที่เปิดแสดงในตอนนี้"));
+    return;
+  }
+
+  activePromotions.forEach((promotion) => {
     const card = createEl("article", "promotion-card");
     card.append(createEl("p", "eyebrow", promotion.label));
     card.append(createEl("h3", "", promotion.titleTh));
     card.append(createEl("p", "", promotion.descriptionTh));
     card.append(createEl("span", "status-pill", promotion.statusText));
+    if (promotion.expiresLabel) {
+      card.append(createEl("p", "", promotion.expiresLabel));
+    }
     grid.append(card);
   });
 }
@@ -440,12 +459,17 @@ function renderContact(contact) {
 
   const actions = qs("#contact-actions");
   actions.innerHTML = "";
+  const instagramHandle = String(contact.instagram || "").replace(/^@/, "");
+  const tiktokHandle = String(contact.tiktok || "").startsWith("@") ? contact.tiktok : `@${contact.tiktok}`;
 
   const buttons = [
     ["แอด LINE", contact.lineUrl, "btn btn-primary", true],
-    ["โทรหลัก", `tel:${contact.mainPhones[0].replace(/-/g, "")}`, "btn btn-secondary", false],
+    [`โทร ${contact.mainPhones[0]}`, `tel:${contact.mainPhones[0].replace(/-/g, "")}`, "btn btn-secondary", false],
+    [`โทร ${contact.mainPhones[1]}`, `tel:${contact.mainPhones[1].replace(/-/g, "")}`, "btn btn-secondary", false],
     ["โทรจองสนาม", `tel:${contact.fieldBookingPhone.replace(/-/g, "")}`, "btn btn-ghost", false],
-    ["Inbox Facebook", contact.facebookInboxUrl, "btn btn-ghost", true]
+    ["Inbox Facebook", contact.facebookInboxUrl, "btn btn-ghost", true],
+    ["Instagram", contact.instagramUrl || `https://www.instagram.com/${instagramHandle}/`, "btn btn-ghost", true],
+    ["TikTok", contact.tiktokUrl || `https://www.tiktok.com/${tiktokHandle}`, "btn btn-ghost", true]
   ];
 
   if (contact.googleMapsUrl) {

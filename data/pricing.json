@@ -36,6 +36,17 @@
   ],
   "items": [
     {
+      "id": "fitness-day-pass",
+      "categoryId": "membership",
+      "nameTh": "Fitness Day Pass",
+      "groupLabel": "Fitness",
+      "columns": ["ประเภท", "ราคา", "สิทธิ์ที่ได้"],
+      "rows": [
+        ["Fitness รายครั้ง / Day Pass", "500 บาท", "ใช้บริการเหมือน Membership 1 วัน รวมผ้า"]
+      ],
+      "noteTh": "เหมาะสำหรับลูกค้าที่ต้องการเข้าใช้บริการรายวันก่อนสมัครสมาชิก"
+    },
+    {
       "id": "membership-packages",
       "categoryId": "membership",
       "nameTh": "Fitness + Pool Membership",
@@ -62,6 +73,17 @@
         ["ผู้ใหญ่", "สูงเกิน 150 ซม.", "150 บาท"]
       ],
       "noteTh": "ผู้ใหญ่ 150 บาท รวมซาวน่าและสตีม"
+    },
+    {
+      "id": "sauna-steam",
+      "categoryId": "pool",
+      "nameTh": "ซาวน่า / สตีม",
+      "groupLabel": "Sauna / Steam",
+      "columns": ["บริการ", "ราคา", "หมายเหตุ"],
+      "rows": [
+        ["ซาวน่า / สตีม", "รวมในค่าเข้าสระผู้ใหญ่ 150 บาท", "ใช้ตามเงื่อนไขการเข้าใช้บริการของ MOSSA"]
+      ],
+      "noteTh": "ลูกค้า Day Pass และ Membership ใช้บริการตามสิทธิ์ที่ MOSSA กำหนด"
     },
     {
       "id": "badminton-court",

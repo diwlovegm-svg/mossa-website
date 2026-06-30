@@ -1,18 +1,13 @@
 [
   {
-    "titleTh": "ภาพรวม MOSSA",
-    "noteTh": "รอแทนที่ด้วยรูปหน้าอาคารหรือภาพรวมสถานที่จริง",
+    "titleTh": "หน้าอาคาร / ภาพรวม MOSSA",
+    "noteTh": "รอแทนที่ด้วยรูปหน้าอาคารหรือภาพรวมสถานที่จริงของ MOSSA",
     "imageUrl": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=900&q=80"
   },
   {
     "titleTh": "โซนฟิตเนส",
-    "noteTh": "รอแทนที่ด้วยรูปโซนเครื่องเล่นจริง",
+    "noteTh": "รอแทนที่ด้วยรูปโซนเครื่องเล่น Cardio และ Weight จริง",
     "imageUrl": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    "titleTh": "คลาสออกกำลังกาย",
-    "noteTh": "รอแทนที่ด้วยรูปคลาสจริง",
-    "imageUrl": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80"
   },
   {
     "titleTh": "สระว่ายน้ำ",
@@ -20,13 +15,28 @@
     "imageUrl": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=900&q=80"
   },
   {
-    "titleTh": "สนามกีฬา",
-    "noteTh": "รอแทนที่ด้วยรูปสนามฟุตบอลและสนามแบดจริง",
+    "titleTh": "คลาสออกกำลังกาย",
+    "noteTh": "รอแทนที่ด้วยรูปคลาสออกกำลังกายจริง",
+    "imageUrl": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "titleTh": "สนามฟุตบอล",
+    "noteTh": "รอแทนที่ด้วยรูปสนามฟุตบอล Indoor / Outdoor จริง",
     "imageUrl": "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=900&q=80"
   },
   {
-    "titleTh": "Personal Training",
-    "noteTh": "รอแทนที่ด้วยรูปเทรนเนอร์และลูกค้าจริง",
+    "titleTh": "สนามแบดมินตัน",
+    "noteTh": "รอแทนที่ด้วยรูปสนามแบดมินตันจริง",
+    "imageUrl": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "titleTh": "เทรนเนอร์ / PT",
+    "noteTh": "รอแทนที่ด้วยรูปเทรนเนอร์กำลังเทรนลูกค้าจริง",
     "imageUrl": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "titleTh": "บรรยากาศลูกค้าใช้บริการ",
+    "noteTh": "รอแทนที่ด้วยรูปบรรยากาศลูกค้าใช้บริการจริง",
+    "imageUrl": "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=900&q=80"
   }
 ]

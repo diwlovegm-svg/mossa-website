@@ -3,5 +3,5 @@
   "monthLabel": "ตารางคลาสรายเดือน",
   "imageUrl": "assets/class-schedule-placeholder.svg",
   "downloadUrl": "assets/class-schedule-placeholder.svg",
-  "noteTh": "Prototype ใช้รูปตารางคลาสเพื่อให้ทีม MOSSA เปลี่ยนไฟล์รายเดือนได้ง่าย"
+  "noteTh": "Prototype ใช้รูปตารางคลาสเพื่อให้ทีม MOSSA เปลี่ยนไฟล์รายเดือนได้ง่าย เวอร์ชันจริงควรเพิ่มตารางข้อมูลในเว็บสำหรับค้นหาและกรองวัน"
 }
