@@ -15,6 +15,8 @@
   --danger: #ff6b6b;
   --max: 1180px;
   --radius: 8px;
+  --shadow-deep: 0 28px 80px rgba(0, 0, 0, 0.42);
+  --shadow-card: 0 18px 44px rgba(0, 0, 0, 0.28);
 }
 
 * {
@@ -28,10 +30,17 @@ html {
 body {
   margin: 0;
   color: var(--text);
-  background: linear-gradient(180deg, #08080c 0%, #121019 50%, #09090d 100%);
+  background:
+    linear-gradient(115deg, rgba(124, 60, 255, 0.15) 0%, transparent 34%),
+    linear-gradient(245deg, rgba(255, 138, 31, 0.12) 0%, transparent 30%),
+    linear-gradient(180deg, #08080c 0%, #121019 50%, #09090d 100%);
   font-family: "Kanit", "Noto Sans Thai", "Segoe UI", Tahoma, sans-serif;
   line-height: 1.65;
   letter-spacing: 0;
+}
+
+body.service-modal-open {
+  overflow: hidden;
 }
 
 body::selection {
@@ -365,6 +374,12 @@ h3 {
   gap: 16px;
 }
 
+.service-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  perspective: 1200px;
+  align-items: stretch;
+}
+
 .service-card,
 .price-card,
 .hour-card,
@@ -379,21 +394,47 @@ h3 {
 }
 
 .service-card {
-  display: block;
+  display: grid;
+  grid-template-rows: 190px minmax(0, 1fr);
+  position: relative;
   width: 100%;
+  min-height: 374px;
   padding: 0;
   color: inherit;
   text-align: left;
   cursor: pointer;
   font: inherit;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: calc(var(--radius) - 1px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(124, 60, 255, 0.12), rgba(255, 138, 31, 0.04));
+  opacity: 0;
+  transition: opacity 180ms ease;
 }
 
 .service-card:hover,
 .service-card:focus-visible,
 .service-card.is-selected {
   border-color: rgba(255, 138, 31, 0.72);
-  box-shadow: 0 0 0 1px rgba(255, 138, 31, 0.14), 0 18px 48px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 0 0 1px rgba(255, 138, 31, 0.16), var(--shadow-card);
+  transform: translateY(-7px) rotateX(2deg);
   outline: none;
+}
+
+.service-card:hover::before,
+.service-card:focus-visible::before,
+.service-card.is-selected::before {
+  opacity: 1;
 }
 
 .service-card.is-selected .detail-link {
@@ -407,6 +448,11 @@ h3 {
   background: var(--surface-3) center / cover;
 }
 
+.service-image {
+  min-height: 190px;
+  transform: translateZ(18px);
+}
+
 .service-card-body,
 .price-card,
 .hour-card,
@@ -414,6 +460,20 @@ h3 {
 .corporate-card,
 .faq-item {
   padding: 18px;
+}
+
+.service-card-body {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 19, 26, 0.82), rgba(9, 9, 13, 0.92)),
+    var(--surface);
+}
+
+.service-card-body h3 {
+  font-size: 1.3rem;
 }
 
 .service-card p,
@@ -448,48 +508,124 @@ h3 {
 }
 
 .service-detail {
-  margin-top: 18px;
+  display: none;
+}
+
+.service-detail.is-open {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 2vw, 26px);
+}
+
+.service-detail-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background:
+    linear-gradient(135deg, rgba(124, 60, 255, 0.16), rgba(255, 138, 31, 0.08)),
+    rgba(4, 4, 7, 0.78);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
 }
 
 .service-detail-card {
   display: grid;
-  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
-  gap: 18px;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(320px, 0.88fr) minmax(360px, 1.1fr);
+  gap: 0;
   position: relative;
-  padding: clamp(18px, 3vw, 24px);
-  border: 1px solid rgba(255, 138, 31, 0.4);
+  width: min(1180px, 100%);
+  max-height: calc(100dvh - 36px);
+  overflow: auto;
+  border: 1px solid rgba(255, 138, 31, 0.42);
   border-radius: var(--radius);
   background:
-    linear-gradient(135deg, rgba(124, 60, 255, 0.22), rgba(255, 138, 31, 0.08)),
-    rgba(20, 19, 26, 0.96);
-}
-
-.service-back-button {
-  grid-column: 1 / -1;
-  justify-self: start;
-  min-height: 40px;
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 8px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.07);
-  cursor: pointer;
-  font-weight: 800;
-}
-
-.service-back-button:hover,
-.service-back-button:focus-visible {
-  border-color: rgba(255, 138, 31, 0.72);
-  background: rgba(255, 138, 31, 0.15);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(28, 26, 36, 0.98), rgba(9, 9, 13, 0.98));
+  box-shadow: var(--shadow-deep);
+  animation: servicePanelIn 180ms ease both;
   outline: none;
 }
 
+@keyframes servicePanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.service-close-button {
+  position: sticky;
+  top: 14px;
+  right: 14px;
+  grid-column: 1 / -1;
+  justify-self: end;
+  z-index: 4;
+  min-height: 40px;
+  padding: 8px 13px;
+  margin: 14px 14px -54px 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(9, 9, 13, 0.72);
+  cursor: pointer;
+  font-weight: 900;
+  backdrop-filter: blur(12px);
+}
+
+.service-close-button:hover,
+.service-close-button:focus-visible {
+  border-color: rgba(255, 138, 31, 0.8);
+  background: rgba(255, 138, 31, 0.22);
+  outline: none;
+}
+
+.service-detail-media {
+  position: relative;
+  min-height: 100%;
+  padding: 24px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--surface-3) center / cover;
+}
+
+.service-detail-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.16), transparent 30%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 12px);
+  opacity: 0.36;
+}
+
+.service-detail-media-text {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+.service-detail-media-text strong {
+  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  line-height: 1;
+}
+
 .service-detail-card h3 {
-  font-size: 1.65rem;
+  font-size: 1.95rem;
 }
 
 .service-detail-intro {
   min-width: 0;
+  padding: clamp(22px, 3vw, 34px);
+  border-right: 1px solid var(--line);
 }
 
 .detail-list {
@@ -511,11 +647,31 @@ h3 {
   margin-top: 20px;
 }
 
+.service-detail-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 138, 31, 0.34);
+  border-radius: 8px;
+  color: var(--orange-2);
+  background: rgba(255, 138, 31, 0.1);
+  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-weight: 900;
+}
+
 .service-detail-prices {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
   min-width: 0;
+  align-content: start;
+  padding: clamp(22px, 3vw, 34px);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.service-detail-prices .price-card {
+  background: rgba(9, 9, 13, 0.48);
 }
 
 .tag,
@@ -1202,6 +1358,19 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .service-detail-card {
+    width: min(720px, 100%);
+  }
+
+  .service-detail-media {
+    min-height: 220px;
+  }
+
+  .service-detail-intro {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
   .admin-login-panel,
   .admin-workspace {
     grid-template-columns: 1fr;
@@ -1249,7 +1418,8 @@ h3 {
 
   .hero-actions,
   .trial-actions,
-  .contact-actions {
+  .contact-actions,
+  .service-detail-actions {
     flex-direction: column;
   }
 
@@ -1310,5 +1480,36 @@ h3 {
   .section {
     padding-top: 56px;
     padding-bottom: 56px;
+  }
+
+  .service-card {
+    grid-template-rows: 165px minmax(0, 1fr);
+    min-height: 330px;
+  }
+
+  .service-image {
+    min-height: 165px;
+  }
+
+  .service-detail.is-open {
+    align-items: end;
+    padding: 8px;
+  }
+
+  .service-detail-card {
+    max-height: calc(100dvh - 16px);
+  }
+
+  .service-detail-media {
+    min-height: 160px;
+  }
+
+  .service-detail-intro,
+  .service-detail-prices {
+    padding: 18px;
+  }
+
+  .service-close-button {
+    margin-right: 10px;
   }
 }

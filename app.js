@@ -85,6 +85,14 @@ function initContactLinks(contact) {
   });
 }
 
+function initServiceModalEvents() {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && qs("#service-detail")?.classList.contains("is-open")) {
+      closeServiceDetail();
+    }
+  });
+}
+
 function renderServices(services, pricing) {
   const grid = qs("#service-grid");
   grid.innerHTML = "";
@@ -111,24 +119,30 @@ function renderServices(services, pricing) {
         meta.append(createEl("span", `tag ${index % 2 ? "orange" : ""}`, tag));
       });
       body.append(meta);
-      body.append(createEl("span", "detail-link", "ดูรายละเอียดและราคา"));
+      body.append(createEl("span", "detail-link", "เปิดรายละเอียด / ราคา"));
       card.append(image, body);
       card.addEventListener("click", () => {
         state.selectedServiceId = service.id;
-        renderServices(services, pricing);
         renderServiceDetail(service, pricing);
-        qs("#service-detail")?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
       grid.append(card);
     });
+}
 
-  const selected = activeServices.find((service) => service.id === state.selectedServiceId);
-  if (selected) {
-    renderServiceDetail(selected, pricing);
-  } else {
-    const detail = qs("#service-detail");
-    if (detail) detail.innerHTML = "";
-  }
+function closeServiceDetail() {
+  const detail = qs("#service-detail");
+  state.selectedServiceId = "";
+  document.body.classList.remove("service-modal-open");
+  qsa(".service-card").forEach((card) => {
+    card.classList.remove("is-selected");
+    card.setAttribute("aria-pressed", "false");
+  });
+  if (!detail) return;
+  detail.classList.remove("is-open");
+  detail.removeAttribute("role");
+  detail.removeAttribute("aria-modal");
+  detail.removeAttribute("aria-label");
+  detail.innerHTML = "";
 }
 
 function createPriceCard(item, categoryName) {
@@ -171,16 +185,37 @@ function renderServiceDetail(service, pricing) {
   const detail = qs("#service-detail");
   if (!detail) return;
   detail.innerHTML = "";
+  detail.classList.add("is-open");
+  detail.setAttribute("role", "dialog");
+  detail.setAttribute("aria-modal", "true");
+  detail.setAttribute("aria-label", `รายละเอียด ${service.nameTh}`);
+  document.body.classList.add("service-modal-open");
+
+  qsa(".service-card").forEach((card) => {
+    const selected = card.dataset.serviceId === service.id;
+    card.classList.toggle("is-selected", selected);
+    card.setAttribute("aria-pressed", String(selected));
+  });
+
+  const backdrop = createEl("button", "service-detail-backdrop");
+  backdrop.type = "button";
+  backdrop.setAttribute("aria-label", "ปิดรายละเอียดบริการ");
+  backdrop.addEventListener("click", closeServiceDetail);
 
   const shell = createEl("article", "service-detail-card");
-  const backButton = createEl("button", "service-back-button", "← ย้อนกลับไปเลือกบริการ");
-  backButton.type = "button";
-  backButton.addEventListener("click", () => {
-    state.selectedServiceId = "";
-    renderServices(state.data.services, state.data.pricing);
-    qs("#services")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-  shell.append(backButton);
+  shell.tabIndex = -1;
+  const closeButton = createEl("button", "service-close-button", "ปิด");
+  closeButton.type = "button";
+  closeButton.addEventListener("click", closeServiceDetail);
+  shell.append(closeButton);
+
+  const media = createEl("div", "service-detail-media");
+  media.style.backgroundImage = `linear-gradient(180deg, rgba(9, 9, 13, 0.08), rgba(9, 9, 13, 0.82)), url("${service.imageUrl}")`;
+  const mediaText = createEl("div", "service-detail-media-text");
+  mediaText.append(createEl("p", "eyebrow", service.categoryLabel));
+  mediaText.append(createEl("strong", "", service.nameTh));
+  media.append(mediaText);
+  shell.append(media);
 
   const intro = createEl("div", "service-detail-intro");
   intro.append(createEl("p", "eyebrow", service.categoryLabel));
@@ -194,17 +229,7 @@ function renderServiceDetail(service, pricing) {
   }
 
   const actionRow = createEl("div", "service-detail-actions");
-  const priceLink = createEl("a", "btn btn-primary", "ดูราคาเต็ม");
-  priceLink.href = "#pricing";
-  priceLink.addEventListener("click", () => {
-    const firstItemId = service.priceItemIds?.[0];
-    const firstItem = pricing.items.find((item) => item.id === firstItemId);
-    if (firstItem) {
-      state.pricingCategory = firstItem.categoryId;
-      renderPricingTabs(pricing);
-      renderPricing(pricing);
-    }
-  });
+  const priceBadge = createEl("span", "service-detail-badge", "ราคาอยู่ในหน้านี้");
   const contactLink = createEl("a", "btn btn-ghost", service.id === "court-field" ? "โทรจองสนาม" : "สอบถามเพิ่มเติม");
   const isFieldBooking = service.id === "badminton-court" || service.id === "football-field";
   contactLink.textContent = isFieldBooking ? "โทรจองสนาม" : "สอบถามเพิ่มเติม";
@@ -213,7 +238,7 @@ function renderServiceDetail(service, pricing) {
     contactLink.target = "_blank";
     contactLink.rel = "noreferrer";
   }
-  actionRow.append(priceLink, contactLink);
+  actionRow.append(priceBadge, contactLink);
 
   const registrationLinks = Array.isArray(service.registrationLinks)
     ? service.registrationLinks
@@ -263,7 +288,8 @@ function renderServiceDetail(service, pricing) {
   }
 
   shell.append(priceWrap);
-  detail.append(shell);
+  detail.append(backdrop, shell);
+  requestAnimationFrame(() => shell.focus({ preventScroll: true }));
 }
 
 function renderPricingTabs(pricing) {
@@ -520,6 +546,7 @@ function renderFaq(faq) {
 
 async function init() {
   initMenu();
+  initServiceModalEvents();
   try {
     state.data = await loadData();
     initContactLinks(state.data.contact);
