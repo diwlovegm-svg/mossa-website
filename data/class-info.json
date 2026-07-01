@@ -1,0 +1,221 @@
+{
+  "noteTh": "คำอธิบายคลาสจากข้อมูล Class Breakdown ของ MOSSA ใช้ช่วยอ่านตารางคลาสรายเดือน",
+  "classDefinitions": [
+    {
+      "name": "Body Combat",
+      "descriptionTh": "คลาสออกกำลังกายที่ผสมผสานศิลปะการต่อสู้ เช่น มวย คาราเต้ เพื่อเพิ่มความแข็งแรงและเผาผลาญไขมัน",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "แขน, ขา, แกนกลาง",
+      "resultsTh": "ความแข็งแรง, ความอดทน, ความยืดหยุ่น, การควบคุมร่างกาย"
+    },
+    {
+      "name": "Body Pump",
+      "descriptionTh": "คลาสออกกำลังกายในรูปแบบของเวทเทรนนิ่ง เพื่อเพิ่มความแข็งแรงและมวลกล้ามเนื้อ",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "กล้ามเนื้อทั่วร่างกาย",
+      "resultsTh": "ความแข็งแรง, ความอดทน"
+    },
+    {
+      "name": "Body Jam",
+      "descriptionTh": "คลาสเต้นสนุกๆ ที่ช่วยเสริมสร้างความแข็งแรงคาร์ดิโอ และความยืดหยุ่นแก่ร่างกาย",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "แขน, ขา, แกนกลาง",
+      "resultsTh": "ความคล่องตัว, ความยืดหยุ่น"
+    },
+    {
+      "name": "Zumba",
+      "descriptionTh": "คลาสเต้นสไตล์ละติน ฮิปฮอป เร็กเก้ เพื่อเผาผลาญไขมันและเพิ่มคาร์ดิโอ",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "แขน, ขา, แกนกลาง",
+      "resultsTh": "คาร์ดิโอฟิตเนส, ความยืดหยุ่น, ความคล่องตัว"
+    },
+    {
+      "name": "Yoga",
+      "descriptionTh": "คลาสที่โฟกัสที่การเพิ่มความยืดหยุ่น ความแข็งแรง การผ่อนคลาย และสมดุลของร่างกาย",
+      "typeTh": "Flexibility",
+      "color": "yellow",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "กล้ามเนื้อทั่วร่างกาย",
+      "resultsTh": "การผ่อนคลาย, ลดความเครียด, ความยืดหยุ่น, ความแข็งแรง"
+    },
+    {
+      "name": "Stretching",
+      "descriptionTh": "คลาสที่โฟกัสที่การเพิ่มความยืดหยุ่นและลดความตึงของกล้ามเนื้อ",
+      "typeTh": "Flexibility",
+      "color": "yellow",
+      "durationTh": "30-45 นาที",
+      "musclesTh": "กล้ามเนื้อทั่วร่างกาย",
+      "resultsTh": "ฟื้นฟูกล้ามเนื้อ, ความยืดหยุ่น, สมดุลร่างกาย"
+    },
+    {
+      "name": "Office Syndrome",
+      "descriptionTh": "คลาสที่ช่วยลดอาการปวดจากการนั่งทำงานนานๆ เช่น คอ บ่า ไหล่",
+      "typeTh": "Flexibility",
+      "color": "yellow",
+      "durationTh": "30-45 นาที",
+      "musclesTh": "คอ, ไหล่, หลัง",
+      "resultsTh": "กระตุ้นการไหลเวียนเลือด, ความยืดหยุ่น, บุคลิกภาพที่ดี"
+    },
+    {
+      "name": "Pound",
+      "descriptionTh": "คลาสออกกำลังกายแบบมีจังหวะโดยใช้ Ripstix หรือไม้กลอง",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45 นาที",
+      "musclesTh": "แขน, ขา, แกนกลาง",
+      "resultsTh": "ความแข็งแรง, ความอดทน, ความคล่องตัว"
+    },
+    {
+      "name": "Urbanize",
+      "descriptionTh": "คลาสเต้นสไตล์สตรีทแดนซ์ที่มีทั้งความสนุกและการเบิร์นไขมัน",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "ขา, แขน, แกนกลาง",
+      "resultsTh": "การเผาผลาญไขมัน, ความคล่องตัว"
+    },
+    {
+      "name": "Fatburn Extreme",
+      "descriptionTh": "คลาสออกกำลังกายที่มีความเข้มข้นสูง ช่วยเผาผลาญไขมันได้อย่างรวดเร็ว",
+      "typeTh": "HIIT",
+      "color": "blue",
+      "durationTh": "30 นาที",
+      "musclesTh": "ขา, แขน, แกนกลาง",
+      "resultsTh": "การเผาผลาญไขมัน, ความทนทาน"
+    },
+    {
+      "name": "Tabata",
+      "descriptionTh": "คลาสออกกำลังกายแบบ HIIT ที่เน้นช่วงเวลาสั้นๆ แต่เข้มข้น",
+      "typeTh": "HIIT",
+      "color": "blue",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "ขา, แขน, แกนกลาง",
+      "resultsTh": "ความแข็งแรง, ความอดทน, การเผาผลาญไขมัน"
+    },
+    {
+      "name": "Bike / RPM",
+      "descriptionTh": "คลาสปั่นจักรยานในร่มที่สามารถปรับความเข้มข้นได้",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "ขา, หัวใจและหลอดเลือด",
+      "resultsTh": "การเผาผลาญไขมัน, ความทนทาน"
+    },
+    {
+      "name": "Thai Boxing",
+      "descriptionTh": "คลาสสู้มวยไทยเพื่อเพิ่มความแข็งแรงและความทนทานของร่างกาย",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "แขน, ขา, แกนกลาง",
+      "resultsTh": "ความแข็งแรง, ความอดทน, ความคล่องตัว, ความยืดหยุ่น"
+    },
+    {
+      "name": "Circuit Training",
+      "descriptionTh": "คลาสออกกำลังกายแบบฐานที่รวมทั้งคาร์ดิโอ เวทเทรนนิ่ง และความยืดหยุ่น",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "ขา, แขน, แกนกลาง",
+      "resultsTh": "การเผาผลาญไขมัน, ความอดทน"
+    },
+    {
+      "name": "Abs",
+      "descriptionTh": "คลาสออกกำลังกายที่โฟกัสการเสริมสร้างและกระชับกล้ามเนื้อหน้าท้อง",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "กล้ามเนื้อแกนกลาง",
+      "resultsTh": "กระชับสัดส่วน, ความแข็งแรง"
+    },
+    {
+      "name": "Pilates",
+      "descriptionTh": "คลาสออกกำลังกายที่ช่วยเสริมสร้างกล้ามเนื้อแกนกลาง และการควบคุมร่างกาย",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "แกนกลาง, สมดุล, การประสานงาน",
+      "resultsTh": "ความแข็งแรง, ความยืดหยุ่น"
+    },
+    {
+      "name": "Butt & Leg",
+      "descriptionTh": "คลาสออกกำลังกายที่เน้นการสร้างความแข็งแรง และกระชับกล้ามเนื้อต้นขาและสะโพก",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "30-45 นาที",
+      "musclesTh": "ก้น, ต้นขา, น่อง",
+      "resultsTh": "ความแข็งแรง, ความยืดหยุ่น"
+    },
+    {
+      "name": "Fitball",
+      "descriptionTh": "คลาสออกกำลังกายที่ใช้ลูกบอลออกกำลังกาย เพื่อเสริมสมดุลและความแข็งแรงของร่างกาย",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "แกนกลาง, สมดุล, บุคลิกภาพ",
+      "resultsTh": "ความแข็งแรง, ความยืดหยุ่น"
+    },
+    {
+      "name": "Step",
+      "descriptionTh": "คลาสออกกำลังกายในรูปแบบคาร์ดิโอโดยใช้สเต็ป เพิ่มความแข็งแรงและเผาผลาญไขมัน",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45 นาที",
+      "musclesTh": "ขา, สะโพก, น่อง",
+      "resultsTh": "การเผาผลาญไขมัน, ความอดทน"
+    },
+    {
+      "name": "Fitcore",
+      "descriptionTh": "คลาสออกกำลังกายที่ช่วยเสริมสร้างกล้ามเนื้อแกนกลางด้วยน้ำหนักตัว",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "30-45 นาที",
+      "musclesTh": "แกนกลาง, สมดุล",
+      "resultsTh": "ความแข็งแรง, ความยืดหยุ่น"
+    },
+    {
+      "name": "K-Pop X",
+      "descriptionTh": "คลาสเต้นออกกำลังกายสไตล์ K-Pop ที่มีทั้งความสนุกและการเผาผลาญไขมัน",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "ขา, แขน, แกนกลาง",
+      "resultsTh": "ความแข็งแรง, ความยืดหยุ่น, ความคล่องตัว"
+    },
+    {
+      "name": "Agility Training",
+      "descriptionTh": "คลาสออกกำลังกายที่เน้นการพัฒนาความเร็วและความคล่องตัว",
+      "typeTh": "Cardio",
+      "color": "green",
+      "durationTh": "30-60 นาที",
+      "musclesTh": "ขา, แขน, แกนกลาง",
+      "resultsTh": "ความคล่องตัว, การประสานงาน"
+    },
+    {
+      "name": "Fitwork",
+      "descriptionTh": "คลาสออกกำลังกายด้วยน้ำหนักตัวเพื่อสร้างความแข็งแรงทั่วร่างกาย",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "45-60 นาที",
+      "musclesTh": "แขน, ขา, แกนกลาง",
+      "resultsTh": "ความแข็งแรง, ความอดทน"
+    },
+    {
+      "name": "CX Ball",
+      "descriptionTh": "คลาสออกกำลังกายเพื่อฝึกแกนกลางและกล้ามเนื้อ โดยใช้ลูกบอลเสริมสมดุล",
+      "typeTh": "Strength",
+      "color": "red",
+      "durationTh": "30-45 นาที",
+      "musclesTh": "แกนกลาง, สมดุล, การควบคุมร่างกาย",
+      "resultsTh": "ความแข็งแรง, ความยืดหยุ่น"
+    }
+  ]
+}

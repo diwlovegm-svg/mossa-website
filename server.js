@@ -18,6 +18,7 @@ const editableFiles = {
   promotions: { filename: "promotions.json", label: "โปรโมชัน", description: "โปรโมชันที่แสดงบนหน้าเว็บ" },
   hours: { filename: "hours.json", label: "เวลาเปิดบริการ", description: "เวลาเปิดปิดแยกตามบริการ" },
   schedule: { filename: "class-schedule.json", label: "ตารางคลาส", description: "รูปตารางคลาสรายเดือนและหมายเหตุ" },
+  classinfo: { filename: "class-info.json", label: "ความหมายคลาส", description: "คำอธิบายประเภทคลาสและผลลัพธ์ที่คาดหวัง" },
   corporates: { filename: "corporate-companies.json", label: "บริษัทคู่สัญญา", description: "รายชื่อบริษัท คำค้นหา และสิทธิ์ใช้งาน" },
   contact: { filename: "contact.json", label: "ข้อมูลติดต่อ", description: "LINE เบอร์โทร โซเชียล ที่อยู่ และ Google Maps" },
   gallery: { filename: "gallery.json", label: "รูปภาพ", description: "แกลเลอรีและรูปตัวแทนบนเว็บ" },

@@ -674,6 +674,133 @@ h3 {
   background: rgba(9, 9, 13, 0.48);
 }
 
+.service-detail-extra {
+  grid-column: 2 / -1;
+  display: grid;
+  gap: 28px;
+  padding: clamp(22px, 3vw, 34px);
+  border-top: 1px solid var(--line);
+  background: rgba(9, 9, 13, 0.38);
+}
+
+.info-section {
+  display: grid;
+  gap: 16px;
+}
+
+.class-definition-grid,
+.trainer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.class-definition-card,
+.trainer-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.class-definition-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.class-definition-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--purple-2);
+}
+
+.class-definition-card.is-green::before {
+  background: var(--ok);
+}
+
+.class-definition-card.is-red::before {
+  background: var(--danger);
+}
+
+.class-definition-card.is-yellow::before {
+  background: var(--warn);
+}
+
+.class-definition-card.is-blue::before {
+  background: #4cc9f0;
+}
+
+.class-definition-card h4,
+.trainer-card h4 {
+  margin: 0;
+  color: #fff;
+  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.22;
+}
+
+.class-definition-card p,
+.trainer-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.class-definition-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.info-meta-item {
+  min-width: 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(9, 9, 13, 0.46);
+}
+
+.info-meta-item span,
+.info-meta-item b {
+  display: block;
+}
+
+.info-meta-item span {
+  color: var(--orange-2);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.info-meta-item b {
+  margin-top: 3px;
+  color: #fff;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.trainer-subtitle {
+  color: var(--orange-2) !important;
+  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-weight: 900;
+}
+
+.trainer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.trainer-tags .tag {
+  min-height: 24px;
+  font-size: 0.74rem;
+}
+
+.trainer-cert {
+  font-size: 0.86rem;
+}
+
 .tag,
 .status-pill {
   display: inline-flex;
@@ -1371,6 +1498,10 @@ h3 {
     border-bottom: 1px solid var(--line);
   }
 
+  .service-detail-extra {
+    grid-column: 1 / -1;
+  }
+
   .admin-login-panel,
   .admin-workspace {
     grid-template-columns: 1fr;
@@ -1507,6 +1638,16 @@ h3 {
   .service-detail-intro,
   .service-detail-prices {
     padding: 18px;
+  }
+
+  .service-detail-extra {
+    padding: 18px;
+  }
+
+  .class-definition-grid,
+  .trainer-grid,
+  .class-definition-meta {
+    grid-template-columns: 1fr;
   }
 
   .service-close-button {

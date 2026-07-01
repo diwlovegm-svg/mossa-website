@@ -10,6 +10,7 @@ const files = {
   promotions: "promotions.json",
   hours: "hours.json",
   schedule: "class-schedule.json",
+  classinfo: "class-info.json",
   corporates: "corporate-companies.json",
   contact: "contact.json",
   gallery: "gallery.json",

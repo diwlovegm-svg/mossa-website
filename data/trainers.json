@@ -1,7 +1,163 @@
 [
   {
-    "nameTh": "Trainer Profile",
-    "specialtyTh": "รอรูปและข้อมูลเทรนเนอร์จริง",
-    "status": "placeholder"
+    "id": "t-best",
+    "nameTh": "T.BEST",
+    "fullNameEn": "WORASIT METHAKAWINTHORNKUI",
+    "educationTh": "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์การกีฬาและการออกกำลังกาย มหาวิทยาลัยบูรพา",
+    "certifications": [
+      "PERSONAL TRAINER CERTIFICATION (PESA)",
+      "FUNCTIONAL FUSION TRAINING",
+      "WEIGHT LOSS SPECIALIST",
+      "TRAINING CLIENTS WITH LOWER BACK PAIN",
+      "YOUTH EXERCISE ESSENTIALS",
+      "LIFE SAVING AND WATER RESCUE / LIFEGUARD TRAINING"
+    ],
+    "classes": [
+      "BODY COMBAT",
+      "BODY PUMP",
+      "FATBURN EXTREME",
+      "THAI BOXING",
+      "TABATA",
+      "BIKE",
+      "STRETCHING"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "t-gig",
+    "nameTh": "T.GIG",
+    "fullNameEn": "KANOKPORN THAMMASIRI",
+    "educationTh": "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์การกีฬา มหาวิทยาลัยมหิดล",
+    "certifications": [
+      "PERSONAL TRAINER (FIT THAILAND)",
+      "TRAINING CLIENTS WITH LOWER BACK PAIN",
+      "YOUTH EXERCISE ESSENTIALS"
+    ],
+    "classes": [
+      "BODY COMBAT",
+      "BODYPUMP",
+      "FATBURN EXTREME",
+      "PILOXING"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "t-plam",
+    "nameTh": "T.PLAM",
+    "fullNameEn": "KITTASIN NAKCHINWONG",
+    "educationTh": "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์การกีฬาและการออกกำลังกาย มหาวิทยาลัยเกษตรศาสตร์",
+    "certifications": [
+      "ADVANCED MUSCLE STRENGTH",
+      "PREHAB & REHAB SPECIALIST",
+      "OLYMPIC WEIGHTLIFTING",
+      "NUTRITION SPECIALIST",
+      "YOUTH EXERCISE ESSENTIALS",
+      "THAI MASSAGE",
+      "SPORTS MASSAGE",
+      "MYOFASCIAL RELEASE",
+      "AROMA THERAPY MASSAGE",
+      "MYOFASCIAL CUPPING THERAPY"
+    ],
+    "classes": [
+      "BODY COMBAT",
+      "BODY PUMP",
+      "FATBURN EXTREME",
+      "POUND",
+      "PILOXING"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "t-ploy",
+    "nameTh": "T.PLOY",
+    "fullNameEn": "SAVITEE JATTRAKOOL",
+    "educationTh": "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์การกีฬาและการออกกำลังกาย สถาบันการพลศึกษา วิทยาเขตชลบุรี",
+    "certifications": [
+      "การปฐมพยาบาลเบื้องต้นและการช่วยชีวิตขั้นพื้นฐาน (CPR)",
+      "PREHAB & REHAB SPECIALIST"
+    ],
+    "classes": [
+      "BODYPUMP",
+      "BODY JAM",
+      "URBANIZE",
+      "ZUMBA",
+      "BIKE"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "t-smart",
+    "nameTh": "T.SMART",
+    "fullNameEn": "TEERAPONG JANTHAHARN",
+    "educationTh": "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์การกีฬา มหาวิทยาลัยบูรพา",
+    "certifications": [
+      "EXERCISE INSTRUCTIONAL PROGRAM",
+      "NUTRITION MASTERCOURSE",
+      "YOUTH EXERCISE ESSENTIALS",
+      "RUNNER (R2) TRAINING WITH SPORTS SCIENCE (S2) 5DAY",
+      "SPORTS MASSAGE",
+      "GROUP EXERCISE FITNESS MANAGEMENT"
+    ],
+    "classes": [
+      "BODYPUMP",
+      "BODYCOMBAT",
+      "FATBURN EXTREME"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "t-giew",
+    "nameTh": "T.GIEW",
+    "fullNameEn": "SAVITEE JATTRAKOOL",
+    "educationTh": "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์การกีฬาและการออกกำลังกาย มหาวิทยาลัยเกษตรศาสตร์",
+    "certifications": [
+      "NUTRITION MASTERCLASS",
+      "อบรมหลักสูตรผู้ฝึกกีฬาว่ายน้ำ LEVEL 1"
+    ],
+    "classes": [
+      "URBANIZE",
+      "BODY JAM",
+      "POUND PRO",
+      "STEP AEROBIC",
+      "KPOP FITNESS",
+      "BODY COMBAT",
+      "AEROBIC DANCE",
+      "ZUMBA BASIC STEP1"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "t-tagor",
+    "nameTh": "T.TAGOR",
+    "fullNameEn": "APIRUK WONGSRI",
+    "educationTh": "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์การกีฬาและการออกกำลังกาย สถาบันการพลศึกษา วิทยาเขตชลบุรี",
+    "certifications": [
+      "SPORTS MASSAGE COURSE",
+      "THERAPEUTIC MASSAGE",
+      "APPLY TRADITIONAL THAI MASSAGE",
+      "YOUTH EXERCISE ESSENTIALS"
+    ],
+    "classes": [
+      "BODY COMBAT",
+      "BOXING",
+      "CIRCUIT TRAINING",
+      "TABATA",
+      "CXBALL"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "t-ai",
+    "nameTh": "T.AI",
+    "fullNameEn": "ALONGKORN KAEWMAT",
+    "educationTh": "ปริญญาตรี สาขาวิทยาศาสตร์การกีฬาและการออกกำลังกาย มหาวิทยาลัยราชภัฏอุดรธานี",
+    "certifications": [],
+    "classes": [
+      "FITWORK",
+      "TABATA",
+      "CORE ABS",
+      "BUTT & LEG"
+    ],
+    "status": "active"
   }
 ]

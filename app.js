@@ -4,6 +4,8 @@ const DATA_FILES = {
   pricing: "data/pricing.json",
   hours: "data/hours.json",
   schedule: "data/class-schedule.json",
+  classinfo: "data/class-info.json",
+  trainers: "data/trainers.json",
   corporates: "data/corporate-companies.json",
   promotions: "data/promotions.json",
   gallery: "data/gallery.json",
@@ -181,6 +183,79 @@ function createPriceCard(item, categoryName) {
   return card;
 }
 
+function createInfoMeta(label, value) {
+  const item = createEl("div", "info-meta-item");
+  item.append(createEl("span", "", label));
+  item.append(createEl("b", "", value || "-"));
+  return item;
+}
+
+function createGroupClassExtras() {
+  const classDefinitions = state.data.classinfo?.classDefinitions || [];
+  const trainers = (state.data.trainers || []).filter((trainer) => trainer.status === "active");
+
+  if (!classDefinitions.length && !trainers.length) return null;
+
+  const wrapper = createEl("div", "service-detail-extra");
+
+  if (classDefinitions.length) {
+    const section = createEl("section", "info-section");
+    section.append(createEl("p", "eyebrow", "Class Meaning"));
+    section.append(createEl("h3", "", "ความหมายของคลาส"));
+    section.append(createEl("p", "lead-text", state.data.classinfo?.noteTh || "คำอธิบายประเภทคลาสที่ใช้ในตารางคลาส MOSSA"));
+
+    const grid = createEl("div", "class-definition-grid");
+    classDefinitions.forEach((item) => {
+      const card = createEl("article", `class-definition-card ${item.color ? `is-${item.color}` : ""}`);
+      card.append(createEl("h4", "", item.name));
+      card.append(createEl("p", "", item.descriptionTh));
+
+      const meta = createEl("div", "class-definition-meta");
+      meta.append(createInfoMeta("ประเภท", item.typeTh));
+      meta.append(createInfoMeta("เวลา", item.durationTh));
+      meta.append(createInfoMeta("กล้ามเนื้อ", item.musclesTh));
+      meta.append(createInfoMeta("ผลลัพธ์", item.resultsTh));
+      card.append(meta);
+      grid.append(card);
+    });
+
+    section.append(grid);
+    wrapper.append(section);
+  }
+
+  if (trainers.length) {
+    const section = createEl("section", "info-section");
+    section.append(createEl("p", "eyebrow", "Trainers"));
+    section.append(createEl("h3", "", "ทีมเทรนเนอร์ Group Class"));
+    section.append(createEl("p", "lead-text", "ข้อมูลจากไฟล์ MOSSA ที่มีรายละเอียดชื่อ วุฒิ และคลาสที่สอน"));
+
+    const grid = createEl("div", "trainer-grid");
+    trainers.forEach((trainer) => {
+      const card = createEl("article", "trainer-card");
+      card.append(createEl("h4", "", trainer.nameTh));
+      if (trainer.fullNameEn) card.append(createEl("p", "trainer-subtitle", trainer.fullNameEn));
+      if (trainer.educationTh) card.append(createEl("p", "", trainer.educationTh));
+
+      if (trainer.classes?.length) {
+        const tags = createEl("div", "trainer-tags");
+        trainer.classes.forEach((className) => tags.append(createEl("span", "tag", className)));
+        card.append(tags);
+      }
+
+      if (trainer.certifications?.length) {
+        const cert = createEl("p", "trainer-cert", `ใบรับรอง: ${trainer.certifications.slice(0, 3).join(", ")}`);
+        card.append(cert);
+      }
+      grid.append(card);
+    });
+
+    section.append(grid);
+    wrapper.append(section);
+  }
+
+  return wrapper;
+}
+
 function renderServiceDetail(service, pricing) {
   const detail = qs("#service-detail");
   if (!detail) return;
@@ -284,10 +359,14 @@ function renderServiceDetail(service, pricing) {
       priceWrap.append(createPriceCard(item, category?.nameTh || service.categoryLabel));
     });
   } else {
-    priceWrap.append(createEl("div", "empty-state", "บริการนี้ดูรายละเอียดหลักจากตารางคลาสและช่องทางติดต่อ MOSSA"));
+    priceWrap.append(createEl("div", "empty-state", service.id === "group-class" ? "Group Class รวมอยู่ในสิทธิ์ Membership / Day Pass ตามเงื่อนไข MOSSA และดูรอบเรียนจากตารางคลาสรายเดือน" : "บริการนี้ดูรายละเอียดหลักจากตารางคลาสและช่องทางติดต่อ MOSSA"));
   }
 
   shell.append(priceWrap);
+  if (service.id === "group-class") {
+    const extras = createGroupClassExtras();
+    if (extras) shell.append(extras);
+  }
   detail.append(backdrop, shell);
   requestAnimationFrame(() => shell.focus({ preventScroll: true }));
 }
