@@ -17,6 +17,8 @@
   --radius: 8px;
   --shadow-deep: 0 28px 80px rgba(0, 0, 0, 0.42);
   --shadow-card: 0 18px 44px rgba(0, 0, 0, 0.28);
+  --font-body: "Bai Jamjuree", "Noto Sans Thai", "Segoe UI", Tahoma, sans-serif;
+  --font-display: "Rajdhani", "Bai Jamjuree", "Noto Sans Thai", sans-serif;
 }
 
 * {
@@ -34,7 +36,7 @@ body {
     linear-gradient(115deg, rgba(124, 60, 255, 0.15) 0%, transparent 34%),
     linear-gradient(245deg, rgba(255, 138, 31, 0.12) 0%, transparent 30%),
     linear-gradient(180deg, #08080c 0%, #121019 50%, #09090d 100%);
-  font-family: "Kanit", "Noto Sans Thai", "Segoe UI", Tahoma, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.65;
   letter-spacing: 0;
 }
@@ -70,7 +72,7 @@ h3,
 .status-pill,
 .detail-link,
 .sticky-cta {
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
 }
 
 .site-header {
@@ -596,7 +598,7 @@ h3 {
 .value-letter {
   display: block;
   color: var(--orange-2);
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
   font-weight: 900;
 }
 
@@ -748,7 +750,7 @@ h3 {
 }
 
 .service-detail-media-text strong {
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 3.2rem);
   line-height: 1;
 }
@@ -791,7 +793,7 @@ h3 {
   border-radius: 8px;
   color: var(--orange-2);
   background: rgba(255, 138, 31, 0.1);
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
   font-weight: 900;
 }
 
@@ -886,7 +888,7 @@ h3 {
 .trainer-card h4 {
   margin: 0;
   color: #fff;
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.08rem;
   line-height: 1.22;
 }
@@ -931,7 +933,7 @@ h3 {
 
 .trainer-subtitle {
   color: var(--orange-2) !important;
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
   font-weight: 900;
 }
 
@@ -1510,7 +1512,7 @@ h3 {
 
 .admin-repeat-head strong {
   overflow-wrap: anywhere;
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.08rem;
 }
 
@@ -1522,7 +1524,7 @@ h3 {
 .admin-json-panel summary {
   cursor: pointer;
   color: var(--orange-2);
-  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-family: var(--font-display);
   font-weight: 900;
 }
 

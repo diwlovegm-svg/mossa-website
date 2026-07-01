@@ -210,10 +210,9 @@ function createTrainerCard(trainer) {
   }
 
   const body = createEl("div", "trainer-card-body");
-  body.append(createEl("h4", "", trainer.displayNameTh || trainer.nameTh));
+  body.append(createEl("h4", "", trainer.nameTh || trainer.displayNameTh));
 
-  const subtitle = [trainer.nameTh, trainer.fullNameEn].filter(Boolean).join(" • ");
-  if (subtitle) body.append(createEl("p", "trainer-subtitle", subtitle));
+  if (trainer.fullNameEn) body.append(createEl("p", "trainer-subtitle", trainer.fullNameEn));
   if (trainer.educationTh) body.append(createEl("p", "", trainer.educationTh));
 
   if (trainer.classes?.length) {
