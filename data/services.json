@@ -4,27 +4,38 @@
     "categoryId": "fitness",
     "categoryLabel": "Fitness",
     "nameTh": "Fitness",
-    "shortDescriptionTh": "ฟิตเนสรายครั้งและพื้นที่ออกกำลังกายสำหรับลูกค้า MOSSA",
-    "detailTh": "บริการฟิตเนสสำหรับลูกค้าที่ต้องการเข้าใช้แบบรายวัน หรือใช้ร่วมกับสิทธิ์สมาชิก MOSSA",
+    "shortDescriptionTh": "ฟิตเนส, Membership, Day Pass, Group Class และ PT / Training",
+    "detailTh": "โซนฟิตเนสของ MOSSA รวมการเข้าใช้แบบรายวัน ระบบสมาชิก คลาสออกกำลังกาย และบริการเทรนนิ่งไว้ในหน้าเดียว เพื่อให้ลูกค้าเทียบราคาและเลือกบริการได้ง่าย",
     "detailBullets": [
       "Day Pass 500 บาท ใช้บริการเหมือน Membership 1 วัน รวมผ้า",
-      "ใช้ฟิตเนส สระว่ายน้ำ คลาสออกกำลังกาย ซาวน่า และสตีมได้ตามสิทธิ์ Day Pass",
-      "ลูกค้า Walk-in สระว่ายน้ำแยกต่างหากจะไม่ได้ผ้าเช็ดตัวฟรี"
+      "Membership มีแพ็กเกจรายวัน 10 ครั้ง รายเดือน ราย 3 เดือน 6 เดือน และ 12 เดือน",
+      "รวม Group Class และบริการ PT / Training เช่น PT, Boxing PT, First PT, Sport Massage, Aquatic PT และ Kids Training"
     ],
     "priceItemIds": [
-      "fitness-day-pass"
+      "fitness-day-pass",
+      "membership-packages",
+      "pt-boxing-packages",
+      "first-pt",
+      "sport-massage",
+      "aquatic-pt",
+      "sport-training-kid",
+      "sport-training-group-kid",
+      "drum-dance-kids",
+      "taekwondo"
     ],
     "imageUrl": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80",
     "tags": [
       "Fitness",
-      "Day Pass",
-      "Gym"
+      "Membership",
+      "PT",
+      "Class"
     ],
     "sortOrder": 1,
     "status": "active"
   },
   {
     "id": "membership",
+    "parentServiceId": "fitness",
     "categoryId": "membership",
     "categoryLabel": "Membership",
     "nameTh": "Membership",
@@ -49,6 +60,7 @@
   },
   {
     "id": "group-class",
+    "parentServiceId": "fitness",
     "categoryId": "group_class",
     "categoryLabel": "Group Class",
     "nameTh": "Group Class",
@@ -74,8 +86,8 @@
     "categoryId": "pool",
     "categoryLabel": "Swimming Pool",
     "nameTh": "Swimming Pool",
-    "shortDescriptionTh": "สระว่ายน้ำระบบน้ำเกลือ แยกราคาเด็กและผู้ใหญ่",
-    "detailTh": "บริการสระว่ายน้ำสำหรับลูกค้า Walk-in โดยแยกเงื่อนไขเด็กและผู้ใหญ่ชัดเจน",
+    "shortDescriptionTh": "สระน้ำเกลือ Walk-in, Membership, Sauna / Steam และคอร์สว่ายน้ำ",
+    "detailTh": "โซนสระว่ายน้ำแสดงราคา Walk-in และราคา Membership ให้เปรียบเทียบกันในหน้าเดียว พร้อมข้อมูลซาวน่า/สตีมและคอร์สเรียนว่ายน้ำ",
     "detailBullets": [
       "เด็กสูงไม่เกิน 150 ซม. ราคา 100 บาท",
       "ผู้ใหญ่สูงเกิน 150 ซม. ราคา 150 บาท ไม่จำกัดเวลา และรวมซาวน่า/สตีม",
@@ -83,19 +95,24 @@
       "MOSSA ไม่มีแว่นตา หมวก หรือชุดว่ายน้ำ ให้เช่าหรือขาย"
     ],
     "priceItemIds": [
-      "pool-walkin"
+      "pool-walkin",
+      "sauna-steam",
+      "membership-packages",
+      "swimming-course"
     ],
     "imageUrl": "https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?auto=format&fit=crop&w=900&q=80",
     "tags": [
       "Pool",
       "Saltwater",
-      "Walk-in"
+      "Walk-in",
+      "Membership"
     ],
     "sortOrder": 4,
     "status": "active"
   },
   {
     "id": "sauna-steam",
+    "parentServiceId": "swimming-pool",
     "categoryId": "pool",
     "categoryLabel": "Sauna / Steam",
     "nameTh": "Sauna / Steam",
@@ -132,7 +149,8 @@
       "จองสนามโทร 094-406-1555"
     ],
     "priceItemIds": [
-      "badminton-court"
+      "badminton-court",
+      "badminton-lesson"
     ],
     "imageUrl": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80",
     "tags": [
@@ -170,6 +188,7 @@
   },
   {
     "id": "personal-training",
+    "parentServiceId": "fitness",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "PT / Personal Training",
@@ -202,7 +221,7 @@
   },
   {
     "id": "boxing-pt",
-    "parentServiceId": "personal-training",
+    "parentServiceId": "fitness",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "Boxing PT",
@@ -227,7 +246,7 @@
   },
   {
     "id": "first-pt",
-    "parentServiceId": "personal-training",
+    "parentServiceId": "fitness",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "First PT",
@@ -252,7 +271,7 @@
   },
   {
     "id": "sport-massage",
-    "parentServiceId": "personal-training",
+    "parentServiceId": "fitness",
     "categoryId": "recovery",
     "categoryLabel": "Recovery",
     "nameTh": "Sport Massage",
@@ -277,7 +296,7 @@
   },
   {
     "id": "aquatic-pt",
-    "parentServiceId": "personal-training",
+    "parentServiceId": "fitness",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "Aquatic PT",
@@ -302,7 +321,7 @@
   },
   {
     "id": "kids-training",
-    "parentServiceId": "personal-training",
+    "parentServiceId": "fitness",
     "categoryId": "kids_program",
     "categoryLabel": "Kids Program",
     "nameTh": "Kids Training",
@@ -329,6 +348,7 @@
   },
   {
     "id": "swimming-course",
+    "parentServiceId": "swimming-pool",
     "categoryId": "swimming_course",
     "categoryLabel": "Swimming Course",
     "nameTh": "Swimming Course",
@@ -366,6 +386,7 @@
   },
   {
     "id": "badminton-lesson",
+    "parentServiceId": "badminton-court",
     "categoryId": "lessons",
     "categoryLabel": "Lessons",
     "nameTh": "Badminton Lesson",
@@ -390,6 +411,7 @@
   },
   {
     "id": "taekwondo",
+    "parentServiceId": "fitness",
     "categoryId": "lessons",
     "categoryLabel": "Lessons",
     "nameTh": "Taekwondo",

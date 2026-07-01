@@ -398,7 +398,7 @@ function renderServiceDetail(service, pricing) {
   const itemIds = service.priceItemIds || [];
   const categoryIds = service.priceCategoryIds || [];
   const servicePriceItems = itemIds.length
-    ? pricing.items.filter((item) => itemIds.includes(item.id))
+    ? itemIds.map((id) => pricing.items.find((item) => item.id === id)).filter(Boolean)
     : pricing.items.filter((item) => categoryIds.includes(item.categoryId));
 
   if (servicePriceItems.length) {
