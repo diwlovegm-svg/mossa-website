@@ -5,6 +5,9 @@ const supabaseUrl = (process.env.SUPABASE_URL || "").replace(/\/$/, "");
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const files = {
+  about: "about.json",
+  facilities: "facilities.json",
+  experts: "experts.json",
   services: "services.json",
   pricing: "pricing.json",
   promotions: "promotions.json",

@@ -13,6 +13,9 @@ const buildCommit = process.env.RENDER_GIT_COMMIT || process.env.RENDER_GIT_COMM
 const buildLabel = buildCommit === "local" ? "local" : buildCommit.slice(0, 7);
 
 const editableFiles = {
+  about: { filename: "about.json", label: "รู้จัก MOSSA", description: "ประวัติองค์กร วิสัยทัศน์ และความหมายของ MOSSA" },
+  facilities: { filename: "facilities.json", label: "Facilities", description: "สิ่งอำนวยความสะดวก อุปกรณ์ และโซนให้บริการ" },
+  experts: { filename: "experts.json", label: "ผู้เชี่ยวชาญ", description: "ทีมเทรนเนอร์ โค้ชเฉพาะทาง และความเชี่ยวชาญ" },
   services: { filename: "services.json", label: "บริการ", description: "ชื่อบริการ รายละเอียด รูป และการผูกตารางราคา" },
   pricing: { filename: "pricing.json", label: "ราคา", description: "แพ็กเกจ ราคา ตารางราคา และหมายเหตุ" },
   promotions: { filename: "promotions.json", label: "โปรโมชัน", description: "โปรโมชันที่แสดงบนหน้าเว็บ" },

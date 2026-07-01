@@ -1,0 +1,59 @@
+{
+  "eyebrow": "About MOSSA",
+  "titleTh": "รู้จัก MOSSA Sport Society",
+  "introTh": "MOSSA Sport Society คือสปอร์ตคลับครบวงจรในระยอง บนพื้นที่ขนาดใหญ่ พร้อมฟิตเนส สระว่ายน้ำระบบน้ำเกลือ สนามกีฬา คลาสออกกำลังกาย และบริการเทรนนิ่งสำหรับลูกค้าหลายกลุ่ม",
+  "facts": [
+    {
+      "label": "ชื่อบริษัท",
+      "value": "บริษัท มอซซ่า จำกัด (Mossa Sport Society)"
+    },
+    {
+      "label": "ก่อตั้ง",
+      "value": "27 พฤษภาคม 2557"
+    },
+    {
+      "label": "ผู้ก่อตั้ง",
+      "value": "ดร.วรเทพ ภูมิภักดีพรรณ"
+    },
+    {
+      "label": "พื้นที่",
+      "value": "25 ไร่"
+    },
+    {
+      "label": "มูลค่าการลงทุน",
+      "value": "158,000,000 บาท"
+    },
+    {
+      "label": "ทุนจดทะเบียน",
+      "value": "10,000,000 บาท"
+    }
+  ],
+  "visionTh": "ผู้นำด้านให้บริการด้านการออกกำลังกาย มุ่งเน้นสุขภาพที่ดี ภายใต้คำว่า MOSSA",
+  "values": [
+    {
+      "letter": "M",
+      "title": "Morals",
+      "descriptionTh": "คุณธรรม"
+    },
+    {
+      "letter": "O",
+      "title": "On Members",
+      "descriptionTh": "มุ่งเน้นสมาชิก"
+    },
+    {
+      "letter": "S",
+      "title": "Service Mind",
+      "descriptionTh": "จิตบริการ"
+    },
+    {
+      "letter": "S",
+      "title": "Systematic",
+      "descriptionTh": "งานเป็นระบบ"
+    },
+    {
+      "letter": "A",
+      "title": "Professional",
+      "descriptionTh": "ความเป็นมืออาชีพ"
+    }
+  ]
+}

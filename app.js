@@ -1,5 +1,8 @@
 const DATA_FILES = {
   contact: "data/contact.json",
+  about: "data/about.json",
+  facilities: "data/facilities.json",
+  experts: "data/experts.json",
   services: "data/services.json",
   pricing: "data/pricing.json",
   hours: "data/hours.json",
@@ -526,6 +529,99 @@ function renderCorporate(corporates) {
   draw();
 }
 
+function renderAbout(about) {
+  const root = qs("#about-content");
+  if (!root || !about) return;
+  root.innerHTML = "";
+
+  const intro = createEl("div", "about-intro");
+  intro.append(createEl("p", "eyebrow", about.eyebrow || "About MOSSA"));
+  intro.append(createEl("h2", "", about.titleTh || "รู้จัก MOSSA Sport Society"));
+  intro.append(createEl("p", "lead-text", about.introTh || ""));
+
+  const factGrid = createEl("div", "fact-grid");
+  (about.facts || []).forEach((fact) => {
+    const card = createEl("article", "fact-card");
+    card.append(createEl("span", "", fact.label));
+    card.append(createEl("strong", "", fact.value));
+    factGrid.append(card);
+  });
+
+  const vision = createEl("div", "vision-panel");
+  vision.append(createEl("p", "eyebrow", "Vision"));
+  vision.append(createEl("h3", "", "วิสัยทัศน์"));
+  vision.append(createEl("p", "", about.visionTh || ""));
+
+  const values = createEl("div", "value-grid");
+  (about.values || []).forEach((value) => {
+    const item = createEl("article", "value-card");
+    item.append(createEl("span", "value-letter", value.letter));
+    item.append(createEl("strong", "", value.title));
+    item.append(createEl("p", "", value.descriptionTh));
+    values.append(item);
+  });
+
+  vision.append(values);
+  root.append(intro, factGrid, vision);
+}
+
+function renderFacilities(facilities) {
+  const root = qs("#facilities-content");
+  if (!root || !facilities) return;
+  root.innerHTML = "";
+
+  (facilities.sections || []).forEach((section) => {
+    const card = createEl("article", "facility-card");
+    card.append(createEl("p", "eyebrow", facilities.eyebrow || "Facilities"));
+    card.append(createEl("h3", "", section.titleTh));
+    card.append(createEl("p", "", section.summaryTh));
+
+    const list = createEl("div", "facility-list");
+    (section.items || []).forEach((item) => {
+      const row = createEl("div", "facility-item");
+      row.append(createEl("strong", "", item.titleTh));
+      row.append(createEl("p", "", item.descriptionTh));
+      list.append(row);
+    });
+
+    card.append(list);
+    root.append(card);
+  });
+}
+
+function renderExperts(experts) {
+  const root = qs("#experts-content");
+  if (!root || !experts) return;
+  root.innerHTML = "";
+
+  const summary = createEl("article", "expert-summary");
+  summary.append(createEl("p", "eyebrow", experts.eyebrow || "Our Experts"));
+  summary.append(createEl("h3", "", experts.trainerSummary?.headlineTh || "ทีมเทรนเนอร์"));
+  summary.append(createEl("p", "", experts.trainerSummary?.descriptionTh || experts.introTh || ""));
+  root.append(summary);
+
+  const coachGrid = createEl("div", "expert-grid");
+  (experts.specialCoaches || []).forEach((coach) => {
+    const card = createEl("article", "expert-card");
+    card.append(createEl("span", "status-pill", coach.areaTh));
+    card.append(createEl("h3", "", coach.nameTh));
+    card.append(createEl("p", "", coach.descriptionTh));
+    coachGrid.append(card);
+  });
+  root.append(coachGrid);
+
+  const specialtyGrid = createEl("div", "specialty-grid");
+  (experts.specialties || []).forEach((group) => {
+    const card = createEl("article", "specialty-card");
+    card.append(createEl("h3", "", group.titleTh));
+    const list = createEl("ul", "");
+    (group.items || []).forEach((item) => list.append(createEl("li", "", item)));
+    card.append(list);
+    specialtyGrid.append(card);
+  });
+  root.append(specialtyGrid);
+}
+
 function renderPromotions(promotions) {
   const grid = qs("#promotion-grid");
   grid.innerHTML = "";
@@ -629,7 +725,10 @@ async function init() {
   try {
     state.data = await loadData();
     initContactLinks(state.data.contact);
+    renderAbout(state.data.about);
     renderServices(state.data.services, state.data.pricing);
+    renderFacilities(state.data.facilities);
+    renderExperts(state.data.experts);
     renderPricingTabs(state.data.pricing);
     renderPricing(state.data.pricing);
     renderTrial(state.data.trial);

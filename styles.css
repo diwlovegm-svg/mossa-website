@@ -364,6 +364,86 @@ h3 {
   font-size: 1rem;
 }
 
+.about-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.about-intro {
+  display: grid;
+  gap: 12px;
+}
+
+.about-intro h2 {
+  max-width: 720px;
+}
+
+.fact-grid,
+.value-grid,
+.facilities-content,
+.expert-grid,
+.specialty-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.fact-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.vision-panel {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(124, 60, 255, 0.16), rgba(255, 138, 31, 0.08)),
+    rgba(20, 19, 26, 0.68);
+}
+
+.value-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.facilities-content {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.facility-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.facility-item {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.experts-content {
+  display: grid;
+  gap: 18px;
+}
+
+.expert-grid,
+.specialty-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.specialty-card ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.specialty-card li + li {
+  margin-top: 8px;
+}
+
 .service-grid,
 .pricing-grid,
 .hours-grid,
@@ -386,7 +466,13 @@ h3 {
 .promotion-card,
 .gallery-card,
 .corporate-card,
-.faq-item {
+.faq-item,
+.fact-card,
+.value-card,
+.facility-card,
+.expert-summary,
+.expert-card,
+.specialty-card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
@@ -458,7 +544,13 @@ h3 {
 .hour-card,
 .promotion-card,
 .corporate-card,
-.faq-item {
+.faq-item,
+.fact-card,
+.value-card,
+.facility-card,
+.expert-summary,
+.expert-card,
+.specialty-card {
   padding: 18px;
 }
 
@@ -480,9 +572,42 @@ h3 {
 .price-card p,
 .hour-card p,
 .promotion-card p,
-.corporate-card p {
+.corporate-card p,
+.facility-card p,
+.expert-summary p,
+.expert-card p,
+.specialty-card p,
+.value-card p {
   color: var(--muted);
   margin: 10px 0 0;
+}
+
+.fact-card span,
+.value-letter {
+  display: block;
+  color: var(--orange-2);
+  font-family: "Chakra Petch", "Kanit", "Noto Sans Thai", sans-serif;
+  font-weight: 900;
+}
+
+.fact-card strong,
+.value-card strong,
+.facility-item strong,
+.expert-card h3,
+.specialty-card h3 {
+  color: #fff;
+}
+
+.fact-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.value-letter {
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .service-meta,
@@ -1468,6 +1593,11 @@ h3 {
   }
 
   .quick-actions,
+  .about-content,
+  .value-grid,
+  .facilities-content,
+  .expert-grid,
+  .specialty-grid,
   .service-grid,
   .pricing-grid,
   .hours-grid,
@@ -1560,6 +1690,12 @@ h3 {
 
   .hero-stats,
   .quick-actions,
+  .about-content,
+  .fact-grid,
+  .value-grid,
+  .facilities-content,
+  .expert-grid,
+  .specialty-grid,
   .service-grid,
   .pricing-grid,
   .hours-grid,

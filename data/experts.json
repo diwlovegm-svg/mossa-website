@@ -1,0 +1,51 @@
+{
+  "eyebrow": "Our Experts",
+  "titleTh": "บุคลากรและผู้เชี่ยวชาญ",
+  "introTh": "MOSSA มีทีมเทรนเนอร์และโค้ชเฉพาะทางสำหรับฟิตเนส คลาส กีฬา และคอร์สเรียนต่าง ๆ",
+  "trainerSummary": {
+    "headlineTh": "ทีมเทรนเนอร์ 9 ท่าน",
+    "descriptionTh": "ในไฟล์ MOSSA ระบุว่าทีมเทรนเนอร์จำนวน 9 ท่าน ทุกท่านจบปริญญาตรีด้านวิทยาศาสตร์การกีฬาโดยตรง แต่รายละเอียดโปรไฟล์ที่มีครบในไฟล์ตอนนี้มี 8 ท่าน"
+  },
+  "specialCoaches": [
+    {
+      "areaTh": "ฟุตบอล",
+      "nameTh": "โค้ชโอ่ง - ดุสิต เฉลิมแสน และโค้ชปรือ - วสันต์ พุ่มไม้",
+      "descriptionTh": "ที่ปรึกษาฟุตบอล โดยโค้ชโอ่งเป็นอดีตทีมชาติไทย และโค้ชปรือมีระดับ AFC B-License"
+    },
+    {
+      "areaTh": "แบดมินตัน",
+      "nameTh": "โค้ชแจ็ค - ศรายุทธ แซ่ตั้ง",
+      "descriptionTh": "อดีตผู้ฝึกสอนจากบ้านทองหยอด โรงเรียนเดียวกับน้องเมย์ รัชนก"
+    },
+    {
+      "areaTh": "ว่ายน้ำ",
+      "nameTh": "ครูบุ๊ม",
+      "descriptionTh": "ผู้ฝึกสอนผ่านการอบรมจากสมาคมกีฬาว่ายน้ำแห่งประเทศไทย"
+    }
+  ],
+  "specialties": [
+    {
+      "titleTh": "ผู้เชี่ยวชาญด้านการนวด",
+      "items": [
+        "T.PLAM: Thai/Sports/Aroma Massage, Myofascial Cupping",
+        "T.SMART: Sports Massage",
+        "T.TAGOR: Sports/Therapeutic/Traditional Thai Massage"
+      ]
+    },
+    {
+      "titleTh": "ผู้เชี่ยวชาญด้านโภชนาการ",
+      "items": [
+        "T.PLAM: Nutrition Specialist",
+        "T.SMART: Nutrition Mastercourse",
+        "T.GIEW: Nutrition Masterclass"
+      ]
+    },
+    {
+      "titleTh": "ผู้เชี่ยวชาญด้านการฟื้นฟู",
+      "items": [
+        "T.PLAM: Prehab & Rehab Specialist",
+        "T.PLOY: Prehab & Rehab Specialist"
+      ]
+    }
+  ]
+}

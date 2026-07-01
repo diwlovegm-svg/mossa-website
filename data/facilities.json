@@ -1,0 +1,53 @@
+{
+  "eyebrow": "Facilities",
+  "titleTh": "สิ่งอำนวยความสะดวกและอุปกรณ์",
+  "introTh": "ข้อมูลนี้ช่วยให้ลูกค้าเห็นภาพว่า MOSSA มีพื้นที่และอุปกรณ์อะไรบ้างก่อนตัดสินใจเข้ามาใช้บริการ",
+  "sections": [
+    {
+      "id": "fitness-studio",
+      "titleTh": "โซนฟิตเนส",
+      "summaryTh": "ใช้อุปกรณ์ Life Fitness และแบรนด์ชั้นนำอื่น ๆ ครอบคลุม Cardio, Strength, Free Weight และบริการวิเคราะห์ร่างกาย",
+      "items": [
+        {
+          "titleTh": "Cardio Zone",
+          "descriptionTh": "ลู่วิ่ง Discover SE 95T จอทัชสกรีน 19 นิ้ว, เครื่องเดินวงรี, จักรยานนั่งปั่น/เอนปั่น และเครื่อง Octane Pro"
+        },
+        {
+          "titleTh": "Strength Machines",
+          "descriptionTh": "Chest Press, Shoulder Press, Lateral Raise, Row, Pulldown, Biceps/Triceps Extension, Pec Fly, Leg Curl/Press/Extension, Glute, Ab, Torso Rotation และ Back Extension"
+        },
+        {
+          "titleTh": "Free Weight",
+          "descriptionTh": "Dumbbell 2-40 kg, Kettlebell, Barbell, Power Rack, Smith Machine และ Cable Dual Pulley"
+        },
+        {
+          "titleTh": "InBody",
+          "descriptionTh": "เครื่องวิเคราะห์องค์ประกอบร่างกายมูลค่า 4 แสนบาท ใช้วิเคราะห์ร่างกายอย่างละเอียด ฟรีสำหรับสมาชิกตามเงื่อนไข MOSSA"
+        }
+      ]
+    },
+    {
+      "id": "sports-zone",
+      "titleTh": "โซนสปอร์ต",
+      "summaryTh": "พื้นที่กีฬาและการพักผ่อนสำหรับลูกค้าหลากหลายกลุ่ม ทั้งครอบครัว นักกีฬา และพนักงานบริษัทคู่สัญญา",
+      "items": [
+        {
+          "titleTh": "สระว่ายน้ำระบบน้ำเกลือ",
+          "descriptionTh": "เหมาะกับผู้ที่แพ้คลอรีนหรือหอบหืด มีสระเด็ก 60 ซม., สระกลาง 120 ซม. และสระใหญ่ Olympic Size 50 ม. ลึก 120-180 ซม."
+        },
+        {
+          "titleTh": "สนามฟุตบอลหญ้าเทียม",
+          "descriptionTh": "สนามหญ้าเทียม FIFA Quality มีสนามในร่ม 2 สนาม และสนามกลางแจ้ง 1 สนาม ลดแรงกระแทกและเด้งเหมือนหญ้าจริง"
+        },
+        {
+          "titleTh": "สนามแบดมินตัน",
+          "descriptionTh": "มี 10 คอร์ท พื้นยางมาตรฐานสมาคมแบดมินตันแห่งประเทศไทย"
+        },
+        {
+          "titleTh": "โซนผ่อนคลาย",
+          "descriptionTh": "มีห้องซาวน่าและห้องสตีมแยกชาย-หญิง พร้อมบริการผ้าเช็ดตัวและล็อกเกอร์ตามสิทธิ์หรือแพ็กเกจที่ใช้งาน"
+        }
+      ]
+    }
+  ]
+}
