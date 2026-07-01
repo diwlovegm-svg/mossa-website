@@ -826,14 +826,16 @@ h3 {
 }
 
 .class-definition-grid,
-.trainer-grid {
+.trainer-grid,
+.service-related-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
 .class-definition-card,
-.trainer-card {
+.trainer-card,
+.service-related-card {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -885,7 +887,8 @@ h3 {
 }
 
 .class-definition-card h4,
-.trainer-card h4 {
+.trainer-card h4,
+.service-related-card h4 {
   margin: 0;
   color: #fff;
   font-family: var(--font-display);
@@ -894,7 +897,8 @@ h3 {
 }
 
 .class-definition-card p,
-.trainer-card p {
+.trainer-card p,
+.service-related-card p {
   margin: 8px 0 0;
   color: var(--muted);
 }
@@ -1810,6 +1814,7 @@ h3 {
   }
 
   .class-definition-grid,
+  .service-related-grid,
   .trainer-grid,
   .class-definition-meta {
     grid-template-columns: 1fr;

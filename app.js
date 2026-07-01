@@ -103,7 +103,7 @@ function renderServices(services, pricing) {
   grid.innerHTML = "";
 
   const activeServices = services
-    .filter((service) => service.status === "active")
+    .filter((service) => service.status === "active" && !service.parentServiceId)
     .sort((a, b) => a.sortOrder - b.sortOrder);
 
   activeServices.forEach((service) => {
@@ -191,6 +191,40 @@ function createInfoMeta(label, value) {
   item.append(createEl("span", "", label));
   item.append(createEl("b", "", value || "-"));
   return item;
+}
+
+function createRelatedServiceExtras(parentService) {
+  const relatedServices = (state.data.services || [])
+    .filter((service) => service.status === "active" && service.parentServiceId === parentService.id)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+
+  if (!relatedServices.length) return null;
+
+  const wrapper = createEl("div", "service-detail-extra");
+  const section = createEl("section", "info-section");
+  section.append(createEl("p", "eyebrow", "Included Services"));
+  section.append(createEl("h3", "", "บริการในหมวดเดียวกัน"));
+  section.append(createEl("p", "lead-text", `กด ${parentService.nameTh} เพียงครั้งเดียวเพื่อดูบริการย่อยและราคาในหมวดนี้`));
+
+  const grid = createEl("div", "service-related-grid");
+  relatedServices.forEach((service) => {
+    const card = createEl("article", "service-related-card");
+    card.append(createEl("p", "eyebrow", service.categoryLabel));
+    card.append(createEl("h4", "", service.nameTh));
+    card.append(createEl("p", "", service.shortDescriptionTh));
+
+    if (service.detailBullets?.length) {
+      const list = createEl("ul", "detail-list");
+      service.detailBullets.slice(0, 3).forEach((item) => list.append(createEl("li", "", item)));
+      card.append(list);
+    }
+
+    grid.append(card);
+  });
+
+  section.append(grid);
+  wrapper.append(section);
+  return wrapper;
 }
 
 function getActiveTrainers() {
@@ -388,6 +422,8 @@ function renderServiceDetail(service, pricing) {
   }
 
   shell.append(priceWrap);
+  const relatedExtras = createRelatedServiceExtras(service);
+  if (relatedExtras) shell.append(relatedExtras);
   if (service.id === "group-class") {
     const extras = createGroupClassExtras();
     if (extras) shell.append(extras);

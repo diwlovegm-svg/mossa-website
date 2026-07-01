@@ -173,27 +173,36 @@
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "PT / Personal Training",
-    "shortDescriptionTh": "เทรนเดี่ยวและเทรนคู่ พร้อมราคาแพ็กเกจหลายจำนวนชั่วโมง",
-    "detailTh": "บริการ Personal Training สำหรับลูกค้าที่ต้องการดูแลแบบเฉพาะบุคคล เลือกได้ทั้งเทรนเดี่ยวและเทรนคู่",
+    "shortDescriptionTh": "รวม PT, Boxing PT, First PT, Sport Massage, Aquatic PT และ Kids Training",
+    "detailTh": "หมวด PT / Training รวมบริการเทรนส่วนตัวและบริการดูแลร่างกายที่เกี่ยวข้องไว้ในหน้าเดียว เพื่อให้ลูกค้าดูรายละเอียดและราคาครบโดยไม่ต้องกดหลายบริการ",
     "detailBullets": [
-      "แสดงราคาแพ็กเกจรวมเป็นตัวหลัก",
-      "แสดงราคาเฉลี่ยเพื่อให้ทีมขายอธิบายง่าย",
-      "เหมาะสำหรับลูกค้าที่ต้องการเป้าหมายชัดเจน"
+      "PT / Personal Training มีเทรนเดี่ยวและเทรนคู่",
+      "Boxing PT ใช้ราคาเดียวกับ PT & Boxing PT",
+      "First PT สำหรับสมาชิกใหม่ 3 ชั่วโมง ราคา 1,200 บาท ใช้ได้ครั้งเดียว",
+      "รวม Aquatic PT, Sport Massage และ Kids Training ในหมวดเดียวกัน"
     ],
     "priceItemIds": [
-      "pt-boxing-packages"
+      "pt-boxing-packages",
+      "first-pt",
+      "aquatic-pt",
+      "sport-massage",
+      "sport-training-kid",
+      "sport-training-group-kid",
+      "drum-dance-kids"
     ],
     "imageUrl": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=900&q=80",
     "tags": [
       "PT",
-      "Solo",
-      "Duo"
+      "Boxing",
+      "Aquatic",
+      "Kids"
     ],
     "sortOrder": 8,
     "status": "active"
   },
   {
     "id": "boxing-pt",
+    "parentServiceId": "personal-training",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "Boxing PT",
@@ -218,6 +227,7 @@
   },
   {
     "id": "first-pt",
+    "parentServiceId": "personal-training",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "First PT",
@@ -242,6 +252,7 @@
   },
   {
     "id": "sport-massage",
+    "parentServiceId": "personal-training",
     "categoryId": "recovery",
     "categoryLabel": "Recovery",
     "nameTh": "Sport Massage",
@@ -266,6 +277,7 @@
   },
   {
     "id": "aquatic-pt",
+    "parentServiceId": "personal-training",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "Aquatic PT",
@@ -290,6 +302,7 @@
   },
   {
     "id": "kids-training",
+    "parentServiceId": "personal-training",
     "categoryId": "kids_program",
     "categoryLabel": "Kids Program",
     "nameTh": "Kids Training",

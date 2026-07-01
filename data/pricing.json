@@ -18,14 +18,6 @@
       "nameTh": "PT / Training"
     },
     {
-      "id": "massage",
-      "nameTh": "Sport Massage"
-    },
-    {
-      "id": "kids_program",
-      "nameTh": "Kids Program"
-    },
-    {
       "id": "swimming_course",
       "nameTh": "คอร์สว่ายน้ำ"
     },
@@ -292,7 +284,7 @@
     },
     {
       "id": "sport-massage",
-      "categoryId": "massage",
+      "categoryId": "training",
       "nameTh": "Sport Massage",
       "groupLabel": "Recovery",
       "columns": [
@@ -336,7 +328,7 @@
     },
     {
       "id": "sport-training-kid",
-      "categoryId": "kids_program",
+      "categoryId": "training",
       "nameTh": "Sport Training For Kid",
       "groupLabel": "Kids Program",
       "columns": [
@@ -360,7 +352,7 @@
     },
     {
       "id": "sport-training-group-kid",
-      "categoryId": "kids_program",
+      "categoryId": "training",
       "nameTh": "Sport Training Group For Kid",
       "groupLabel": "Kids Program",
       "columns": [
@@ -384,7 +376,7 @@
     },
     {
       "id": "drum-dance-kids",
-      "categoryId": "kids_program",
+      "categoryId": "training",
       "nameTh": "Drum & Dance For Kids",
       "groupLabel": "Kids Program",
       "columns": [
