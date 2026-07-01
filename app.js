@@ -205,7 +205,7 @@ function createTrainerCard(trainer) {
   if (trainer.imageUrl) {
     const photo = createEl("div", "trainer-photo");
     photo.style.backgroundImage = `linear-gradient(180deg, rgba(9, 9, 13, 0.02), rgba(9, 9, 13, 0.42)), url("${trainer.imageUrl}")`;
-    photo.setAttribute("aria-label", trainer.displayNameTh || trainer.nameTh);
+    photo.setAttribute("aria-label", trainer.nameTh || trainer.displayNameTh);
     card.append(photo);
   }
 
