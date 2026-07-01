@@ -193,9 +193,47 @@ function createInfoMeta(label, value) {
   return item;
 }
 
+function getActiveTrainers() {
+  return (state.data.trainers || [])
+    .filter((trainer) => trainer.status === "active")
+    .sort((a, b) => (a.sortOrder || 999) - (b.sortOrder || 999));
+}
+
+function createTrainerCard(trainer) {
+  const card = createEl("article", `trainer-card ${trainer.imageUrl ? "has-photo" : ""}`);
+
+  if (trainer.imageUrl) {
+    const photo = createEl("div", "trainer-photo");
+    photo.style.backgroundImage = `linear-gradient(180deg, rgba(9, 9, 13, 0.02), rgba(9, 9, 13, 0.42)), url("${trainer.imageUrl}")`;
+    photo.setAttribute("aria-label", trainer.displayNameTh || trainer.nameTh);
+    card.append(photo);
+  }
+
+  const body = createEl("div", "trainer-card-body");
+  body.append(createEl("h4", "", trainer.displayNameTh || trainer.nameTh));
+
+  const subtitle = [trainer.nameTh, trainer.fullNameEn].filter(Boolean).join(" • ");
+  if (subtitle) body.append(createEl("p", "trainer-subtitle", subtitle));
+  if (trainer.educationTh) body.append(createEl("p", "", trainer.educationTh));
+
+  if (trainer.classes?.length) {
+    const tags = createEl("div", "trainer-tags");
+    trainer.classes.forEach((className) => tags.append(createEl("span", "tag", className)));
+    body.append(tags);
+  }
+
+  if (trainer.certifications?.length) {
+    const cert = createEl("p", "trainer-cert", `ใบรับรอง: ${trainer.certifications.slice(0, 3).join(", ")}`);
+    body.append(cert);
+  }
+
+  card.append(body);
+  return card;
+}
+
 function createGroupClassExtras() {
   const classDefinitions = state.data.classinfo?.classDefinitions || [];
-  const trainers = (state.data.trainers || []).filter((trainer) => trainer.status === "active");
+  const trainers = getActiveTrainers();
 
   if (!classDefinitions.length && !trainers.length) return null;
 
@@ -234,22 +272,7 @@ function createGroupClassExtras() {
 
     const grid = createEl("div", "trainer-grid");
     trainers.forEach((trainer) => {
-      const card = createEl("article", "trainer-card");
-      card.append(createEl("h4", "", trainer.nameTh));
-      if (trainer.fullNameEn) card.append(createEl("p", "trainer-subtitle", trainer.fullNameEn));
-      if (trainer.educationTh) card.append(createEl("p", "", trainer.educationTh));
-
-      if (trainer.classes?.length) {
-        const tags = createEl("div", "trainer-tags");
-        trainer.classes.forEach((className) => tags.append(createEl("span", "tag", className)));
-        card.append(tags);
-      }
-
-      if (trainer.certifications?.length) {
-        const cert = createEl("p", "trainer-cert", `ใบรับรอง: ${trainer.certifications.slice(0, 3).join(", ")}`);
-        card.append(cert);
-      }
-      grid.append(card);
+      grid.append(createTrainerCard(trainer));
     });
 
     section.append(grid);
@@ -589,7 +612,7 @@ function renderFacilities(facilities) {
   });
 }
 
-function renderExperts(experts) {
+function renderExperts(experts, trainers = []) {
   const root = qs("#experts-content");
   if (!root || !experts) return;
   root.innerHTML = "";
@@ -599,6 +622,21 @@ function renderExperts(experts) {
   summary.append(createEl("h3", "", experts.trainerSummary?.headlineTh || "ทีมเทรนเนอร์"));
   summary.append(createEl("p", "", experts.trainerSummary?.descriptionTh || experts.introTh || ""));
   root.append(summary);
+
+  const activeTrainers = [...trainers]
+    .filter((trainer) => trainer.status === "active")
+    .sort((a, b) => (a.sortOrder || 999) - (b.sortOrder || 999));
+
+  if (activeTrainers.length) {
+    const trainerSection = createEl("section", "trainer-profile-section");
+    trainerSection.append(createEl("h3", "", "ทีมเทรนเนอร์ MOSSA"));
+    trainerSection.append(createEl("p", "lead-text", "รูปและข้อมูลเทรนเนอร์จากชุดข้อมูล MOSSA ที่ใช้แสดงบนเว็บ"));
+
+    const trainerGrid = createEl("div", "trainer-profile-grid");
+    activeTrainers.forEach((trainer) => trainerGrid.append(createTrainerCard(trainer)));
+    trainerSection.append(trainerGrid);
+    root.append(trainerSection);
+  }
 
   const coachGrid = createEl("div", "expert-grid");
   (experts.specialCoaches || []).forEach((coach) => {
@@ -728,7 +766,7 @@ async function init() {
     renderAbout(state.data.about);
     renderServices(state.data.services, state.data.pricing);
     renderFacilities(state.data.facilities);
-    renderExperts(state.data.experts);
+    renderExperts(state.data.experts, state.data.trainers);
     renderPricingTabs(state.data.pricing);
     renderPricing(state.data.pricing);
     renderTrial(state.data.trial);

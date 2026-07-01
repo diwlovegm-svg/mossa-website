@@ -384,7 +384,8 @@ h3 {
 .value-grid,
 .facilities-content,
 .expert-grid,
-.specialty-grid {
+.specialty-grid,
+.trainer-profile-grid {
   display: grid;
   gap: 12px;
 }
@@ -432,6 +433,15 @@ h3 {
 .expert-grid,
 .specialty-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.trainer-profile-section {
+  display: grid;
+  gap: 12px;
+}
+
+.trainer-profile-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .specialty-card ul {
@@ -826,6 +836,21 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.045);
+}
+
+.trainer-card.has-photo {
+  padding: 0;
+  overflow: hidden;
+}
+
+.trainer-photo {
+  min-height: 240px;
+  aspect-ratio: 4 / 5;
+  background: var(--surface-3) center top / cover no-repeat;
+}
+
+.trainer-card-body {
+  padding: 14px;
 }
 
 .class-definition-card {
@@ -1598,6 +1623,7 @@ h3 {
   .facilities-content,
   .expert-grid,
   .specialty-grid,
+  .trainer-profile-grid,
   .service-grid,
   .pricing-grid,
   .hours-grid,
@@ -1696,6 +1722,7 @@ h3 {
   .facilities-content,
   .expert-grid,
   .specialty-grid,
+  .trainer-profile-grid,
   .service-grid,
   .pricing-grid,
   .hours-grid,

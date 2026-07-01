@@ -727,7 +727,10 @@ function renderTrainersEditor() {
       ${renderSelect({ label: "เลือกเทรนเนอร์", value: adminState.trainerIndex, selector: `id="trainer-select"`, options })}
       <div class="admin-form-grid">
         ${renderTextField({ label: "ชื่อ", value: trainer.nameTh, selector: `data-trainer-prop="nameTh"` })}
+        ${renderTextField({ label: "ชื่อที่แสดงบนเว็บ", value: trainer.displayNameTh, selector: `data-trainer-prop="displayNameTh"` })}
+        ${renderTextField({ label: "ชื่ออังกฤษ", value: trainer.fullNameEn, selector: `data-trainer-prop="fullNameEn"` })}
         ${renderTextField({ label: "ความเชี่ยวชาญ", value: trainer.specialtyTh, selector: `data-trainer-prop="specialtyTh"` })}
+        ${renderTextField({ label: "ลำดับแสดงผล", value: trainer.sortOrder, type: "number", selector: `data-trainer-prop="sortOrder"` })}
         ${renderTextField({ label: "สถานะ", value: trainer.status, selector: `data-trainer-prop="status"` })}
         ${renderTextField({ label: "ลิงก์รูป", value: trainer.imageUrl, selector: `data-trainer-prop="imageUrl"` })}
       </div>
@@ -1120,7 +1123,7 @@ function attachTrainerHandlers(body) {
   });
 
   body.querySelector("[data-action='add-trainer']")?.addEventListener("click", () => {
-    adminState.currentData.push({ nameTh: "Trainer", specialtyTh: "", status: "active", imageUrl: "" });
+    adminState.currentData.push({ nameTh: "Trainer", displayNameTh: "เทรนเนอร์", fullNameEn: "", specialtyTh: "", sortOrder: adminState.currentData.length + 1, status: "active", imageUrl: "" });
     adminState.trainerIndex = adminState.currentData.length - 1;
     renderEditor();
     markChanged();
