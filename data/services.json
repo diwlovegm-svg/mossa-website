@@ -3,31 +3,22 @@
     "id": "fitness",
     "categoryId": "fitness",
     "categoryLabel": "Fitness",
-    "nameTh": "Fitness",
-    "shortDescriptionTh": "ฟิตเนส, Membership, Day Pass, Group Class และ PT / Training",
-    "detailTh": "โซนฟิตเนสของ MOSSA รวมการเข้าใช้แบบรายวัน ระบบสมาชิก คลาสออกกำลังกาย และบริการเทรนนิ่งไว้ในหน้าเดียว เพื่อให้ลูกค้าเทียบราคาและเลือกบริการได้ง่าย",
+    "nameTh": "Fitness & Membership",
+    "shortDescriptionTh": "ฟิตเนสรายวัน, Membership และ Group Class",
+    "detailTh": "โซนฟิตเนสสำหรับลูกค้าที่ต้องการใช้เครื่องออกกำลังกาย สมัครสมาชิก หรือเข้าคลาสออกกำลังกาย ดูราคา Day Pass และ Membership เปรียบเทียบกันได้ในหน้าเดียว",
     "detailBullets": [
       "Day Pass 500 บาท ใช้บริการเหมือน Membership 1 วัน รวมผ้า",
       "Membership มีแพ็กเกจรายวัน 10 ครั้ง รายเดือน ราย 3 เดือน 6 เดือน และ 12 เดือน",
-      "รวม Group Class และบริการ PT / Training เช่น PT, Boxing PT, First PT, Sport Massage, Aquatic PT และ Kids Training"
+      "Group Class รวมอยู่ในสิทธิ์ Membership / Day Pass ตามเงื่อนไข MOSSA"
     ],
     "priceItemIds": [
       "fitness-day-pass",
-      "membership-packages",
-      "pt-boxing-packages",
-      "first-pt",
-      "sport-massage",
-      "aquatic-pt",
-      "sport-training-kid",
-      "sport-training-group-kid",
-      "drum-dance-kids",
-      "taekwondo"
+      "membership-packages"
     ],
     "imageUrl": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80",
     "tags": [
       "Fitness",
       "Membership",
-      "PT",
       "Class"
     ],
     "sortOrder": 1,
@@ -107,7 +98,7 @@
       "Walk-in",
       "Membership"
     ],
-    "sortOrder": 4,
+    "sortOrder": 2,
     "status": "active"
   },
   {
@@ -158,7 +149,7 @@
       "Court",
       "Booking"
     ],
-    "sortOrder": 6,
+    "sortOrder": 3,
     "status": "active"
   },
   {
@@ -183,16 +174,15 @@
       "Indoor",
       "Outdoor"
     ],
-    "sortOrder": 7,
+    "sortOrder": 4,
     "status": "active"
   },
   {
     "id": "personal-training",
-    "parentServiceId": "fitness",
     "categoryId": "training",
-    "categoryLabel": "Training",
-    "nameTh": "PT / Personal Training",
-    "shortDescriptionTh": "รวม PT, Boxing PT, First PT, Sport Massage, Aquatic PT และ Kids Training",
+    "categoryLabel": "PT & Training",
+    "nameTh": "PT & Training",
+    "shortDescriptionTh": "PT, Boxing PT, First PT, Sport Massage, Aquatic PT และ Kids Training",
     "detailTh": "หมวด PT / Training รวมบริการเทรนส่วนตัวและบริการดูแลร่างกายที่เกี่ยวข้องไว้ในหน้าเดียว เพื่อให้ลูกค้าดูรายละเอียดและราคาครบโดยไม่ต้องกดหลายบริการ",
     "detailBullets": [
       "PT / Personal Training มีเทรนเดี่ยวและเทรนคู่",
@@ -216,12 +206,12 @@
       "Aquatic",
       "Kids"
     ],
-    "sortOrder": 8,
+    "sortOrder": 5,
     "status": "active"
   },
   {
     "id": "boxing-pt",
-    "parentServiceId": "fitness",
+    "parentServiceId": "personal-training",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "Boxing PT",
@@ -246,7 +236,7 @@
   },
   {
     "id": "first-pt",
-    "parentServiceId": "fitness",
+    "parentServiceId": "personal-training",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "First PT",
@@ -271,7 +261,7 @@
   },
   {
     "id": "sport-massage",
-    "parentServiceId": "fitness",
+    "parentServiceId": "personal-training",
     "categoryId": "recovery",
     "categoryLabel": "Recovery",
     "nameTh": "Sport Massage",
@@ -296,7 +286,7 @@
   },
   {
     "id": "aquatic-pt",
-    "parentServiceId": "fitness",
+    "parentServiceId": "personal-training",
     "categoryId": "training",
     "categoryLabel": "Training",
     "nameTh": "Aquatic PT",
@@ -321,7 +311,7 @@
   },
   {
     "id": "kids-training",
-    "parentServiceId": "fitness",
+    "parentServiceId": "personal-training",
     "categoryId": "kids_program",
     "categoryLabel": "Kids Program",
     "nameTh": "Kids Training",
@@ -411,7 +401,7 @@
   },
   {
     "id": "taekwondo",
-    "parentServiceId": "fitness",
+    "parentServiceId": "personal-training",
     "categoryId": "lessons",
     "categoryLabel": "Lessons",
     "nameTh": "Taekwondo",

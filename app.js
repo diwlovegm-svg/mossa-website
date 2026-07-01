@@ -98,6 +98,24 @@ function initServiceModalEvents() {
   });
 }
 
+function openServiceById(serviceId, pricing) {
+  const service = (state.data.services || []).find((item) => item.id === serviceId);
+  if (!service) return;
+
+  state.selectedServiceId = service.id;
+  renderServiceDetail(service, pricing);
+  qs("#services")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function initServiceShortcuts(pricing) {
+  qsa("[data-service-open]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openServiceById(link.dataset.serviceOpen, pricing);
+    });
+  });
+}
+
 function renderServices(services, pricing) {
   const grid = qs("#service-grid");
   grid.innerHTML = "";
@@ -127,8 +145,7 @@ function renderServices(services, pricing) {
       body.append(createEl("span", "detail-link", "เปิดรายละเอียด / ราคา"));
       card.append(image, body);
       card.addEventListener("click", () => {
-        state.selectedServiceId = service.id;
-        renderServiceDetail(service, pricing);
+        openServiceById(service.id, pricing);
       });
       grid.append(card);
     });
@@ -798,6 +815,7 @@ async function init() {
   try {
     state.data = await loadData();
     initContactLinks(state.data.contact);
+    initServiceShortcuts(state.data.pricing);
     renderAbout(state.data.about);
     renderServices(state.data.services, state.data.pricing);
     renderFacilities(state.data.facilities);
