@@ -82,6 +82,10 @@ const LANDING_FAQ = [
     answerTh: "สมาชิกฟิตเนสสามารถเข้าคลาสออกกำลังกายได้ตามเงื่อนไขของแพ็กเกจและตารางคลาสประจำเดือน"
   },
   {
+    questionTh: "สิทธิ์ทดลองใช้บริการต้องทำอย่างไร?",
+    answerTh: "ลูกค้าใหม่ที่ยังไม่เคยใช้บริการ MOSSA สามารถนำบัตรประชาชน 1 ใบมายื่นที่เคาน์เตอร์เพื่อสอบถามและใช้สิทธิ์ตามเงื่อนไขปัจจุบัน"
+  },
+  {
     questionTh: "สระว่ายน้ำเปิดกี่โมง?",
     answerTh: "สระว่ายน้ำเปิดจันทร์-ศุกร์ 08:00-21:30 น. และเสาร์-อาทิตย์/วันหยุดนักขัตฤกษ์ 08:00-20:30 น."
   },
@@ -504,7 +508,7 @@ function renderServiceDetail(service, pricing) {
   registrationLinks.forEach((registration) => {
     const label = registration.label || "ลงทะเบียน";
     const url = registration.url || registration.href || "";
-    const registrationLink = createEl("a", url ? "btn btn-secondary" : "btn btn-disabled", url ? label : `${label} (รอลิงก์)`);
+    const registrationLink = createEl("a", url ? "btn btn-secondary" : "btn btn-disabled", url ? label : "สอบถามการลงทะเบียน");
     registrationLink.href = url || "#lead";
     if (url) {
       registrationLink.target = "_blank";
@@ -657,11 +661,11 @@ function renderTrial(trial) {
   const steps = qs("#trial-steps");
   if (!title || !eligibility || !steps) return;
 
-  title.textContent = trial.titleTh;
-  eligibility.textContent = trial.eligibilityTh;
+  title.textContent = trial.titleTh || "สอบถามสิทธิ์ทดลองใช้บริการ";
+  eligibility.textContent = trial.eligibilityTh || "สอบถามสิทธิ์ทดลองใช้บริการได้ที่เคาน์เตอร์ MOSSA หรือผ่าน LINE";
 
   steps.innerHTML = "";
-  trial.items.forEach((item) => {
+  (trial.items || []).forEach((item) => {
     const step = createEl("div", "trial-step");
     step.append(createEl("strong", "", item.title));
     step.append(createEl("span", "", item.body));
@@ -947,17 +951,17 @@ function renderContact(contact) {
 
   address.textContent = contact.addressTh;
   mapStatus.textContent = contact.googleMapsUrl
-    ? "เปิดปุ่มนำทางด้วย Google Maps แล้ว"
-    : "รอลิงก์ Google Maps ที่ยืนยันแล้ว จึงยังไม่แสดงปุ่มนำทางจริง";
+    ? "กดปุ่มนำทางเพื่อเปิดแผนที่และวางเส้นทางมาที่ MOSSA"
+    : "สอบถามเส้นทางและรายละเอียดการเดินทางได้ผ่าน LINE หรือโทรหา MOSSA";
 
   actions.innerHTML = "";
   const instagramHandle = String(contact.instagram || "").replace(/^@/, "");
   const tiktokHandle = String(contact.tiktok || "").startsWith("@") ? contact.tiktok : `@${contact.tiktok}`;
 
   const buttons = [
-    ["แอด LINE", contact.lineUrl, "btn btn-primary", true],
-    [`โทร ${contact.mainPhones[0]}`, `tel:${contact.mainPhones[0].replace(/-/g, "")}`, "btn btn-secondary", false],
-    [`โทร ${contact.mainPhones[1]}`, `tel:${contact.mainPhones[1].replace(/-/g, "")}`, "btn btn-secondary", false],
+    ["ติดต่อผ่าน LINE", contact.lineUrl, "btn btn-primary", true],
+    [`โทรหา MOSSA ${contact.mainPhones[0]}`, `tel:${contact.mainPhones[0].replace(/-/g, "")}`, "btn btn-secondary", false],
+    [`โทรหา MOSSA ${contact.mainPhones[1]}`, `tel:${contact.mainPhones[1].replace(/-/g, "")}`, "btn btn-secondary", false],
     ["โทรจองสนาม", `tel:${contact.fieldBookingPhone.replace(/-/g, "")}`, "btn btn-ghost", false],
     ["Inbox Facebook", contact.facebookInboxUrl, "btn btn-ghost", true],
     ["Instagram", contact.instagramUrl || `https://www.instagram.com/${instagramHandle}/`, "btn btn-ghost", true],
@@ -1005,15 +1009,22 @@ function initLeadForm(contact) {
       name: String(data.get("name") || "").trim(),
       phone: String(data.get("phone") || "").trim(),
       service: String(data.get("service") || "").trim(),
-      note: String(data.get("note") || "").trim(),
-      createdAt: new Date().toISOString()
+      note: String(data.get("note") || "").trim()
     };
 
-    const savedLeads = JSON.parse(localStorage.getItem("mossa-leads") || "[]");
-    savedLeads.push(lead);
-    localStorage.setItem("mossa-leads", JSON.stringify(savedLeads.slice(-20)));
+    const leadText = [
+      "สวัสดีครับ/ค่ะ สนใจสอบถามบริการ MOSSA",
+      lead.name ? `ชื่อ: ${lead.name}` : "",
+      lead.phone ? `เบอร์โทร: ${lead.phone}` : "",
+      lead.service ? `บริการที่สนใจ: ${lead.service}` : "",
+      lead.note ? `ข้อความเพิ่มเติม: ${lead.note}` : ""
+    ].filter(Boolean).join("\n");
 
-    message.textContent = "บันทึกข้อมูลตัวอย่างแล้ว กรุณากดแอด LINE หรือโทรหา MOSSA เพื่อให้ทีมงานรับเรื่องทันที";
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(leadText).catch(() => {});
+    }
+
+    message.textContent = "ระบบเปิด LINE ให้แล้ว หาก LINE ไม่เปิด กรุณากดปุ่มติดต่อผ่าน LINE หรือโทรหา MOSSA";
     message.classList.add("is-success");
 
     const lineUrl = contact?.lineUrl || "";
