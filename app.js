@@ -106,6 +106,17 @@ const LANDING_FAQ = [
 const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 
+const EYEBROW_LABELS_TH = {
+  "About MOSSA": "รู้จัก MOSSA",
+  "Facilities": "สิ่งอำนวยความสะดวก",
+  "Our Experts": "ทีมผู้เชี่ยวชาญ",
+  "Vision": "วิสัยทัศน์"
+};
+
+function thaiEyebrow(label, fallback = "") {
+  return EYEBROW_LABELS_TH[label] || label || fallback;
+}
+
 const CONVERSION_EVENTS = new Set([
   "click_line",
   "click_call",
@@ -378,7 +389,7 @@ function createRelatedServiceExtras(parentService) {
 
   const wrapper = createEl("div", "service-detail-extra");
   const section = createEl("section", "info-section");
-  section.append(createEl("p", "eyebrow", "Included Services"));
+  section.append(createEl("p", "eyebrow", "บริการที่เกี่ยวข้อง"));
   section.append(createEl("h3", "", "บริการในหมวดเดียวกัน"));
   section.append(createEl("p", "lead-text", `กด ${parentService.nameTh} เพียงครั้งเดียวเพื่อดูบริการย่อยและราคาในหมวดนี้`));
 
@@ -450,7 +461,7 @@ function createGroupClassExtras() {
 
   if (classDefinitions.length) {
     const section = createEl("section", "info-section");
-    section.append(createEl("p", "eyebrow", "Class Meaning"));
+    section.append(createEl("p", "eyebrow", "ความหมายของคลาส"));
     section.append(createEl("h3", "", "ความหมายของคลาส"));
     section.append(createEl("p", "lead-text", state.data.classinfo?.noteTh || "คำอธิบายประเภทคลาสที่ใช้ในตารางคลาส MOSSA"));
 
@@ -475,7 +486,7 @@ function createGroupClassExtras() {
 
   if (trainers.length) {
     const section = createEl("section", "info-section");
-    section.append(createEl("p", "eyebrow", "Trainers"));
+    section.append(createEl("p", "eyebrow", "เทรนเนอร์"));
     section.append(createEl("h3", "", "ทีมเทรนเนอร์ Group Class"));
     section.append(createEl("p", "lead-text", "ข้อมูลจากไฟล์ MOSSA ที่มีรายละเอียดชื่อ วุฒิ และคลาสที่สอน"));
 
@@ -845,7 +856,7 @@ function renderAbout(about) {
   root.innerHTML = "";
 
   const intro = createEl("div", "about-intro");
-  intro.append(createEl("p", "eyebrow", about.eyebrow || "About MOSSA"));
+  intro.append(createEl("p", "eyebrow", thaiEyebrow(about.eyebrow, "รู้จัก MOSSA")));
   intro.append(document.createTextNode(" "));
   intro.append(createEl("h2", "", about.titleTh || "รู้จัก MOSSA Sport Society"));
   intro.append(document.createTextNode(" "));
@@ -862,7 +873,7 @@ function renderAbout(about) {
   });
 
   const vision = createEl("div", "vision-panel");
-  vision.append(createEl("p", "eyebrow", "Vision"));
+  vision.append(createEl("p", "eyebrow", "วิสัยทัศน์"));
   vision.append(document.createTextNode(" "));
   vision.append(createEl("h3", "", "แนวคิด MOSSA"));
   vision.append(document.createTextNode(" "));
@@ -892,7 +903,7 @@ function renderFacilities(facilities) {
 
   (facilities.sections || []).forEach((section) => {
     const card = createEl("article", "facility-card");
-    card.append(createEl("p", "eyebrow", facilities.eyebrow || "Facilities"));
+    card.append(createEl("p", "eyebrow", thaiEyebrow(facilities.eyebrow, "สิ่งอำนวยความสะดวก")));
     card.append(createEl("h3", "", section.titleTh));
     card.append(createEl("p", "", section.summaryTh));
 
@@ -915,7 +926,7 @@ function renderExperts(experts, trainers = []) {
   root.innerHTML = "";
 
   const summary = createEl("article", "expert-summary");
-  summary.append(createEl("p", "eyebrow", experts.eyebrow || "Our Experts"));
+  summary.append(createEl("p", "eyebrow", thaiEyebrow(experts.eyebrow, "ทีมผู้เชี่ยวชาญ")));
   summary.append(createEl("h3", "", experts.trainerSummary?.headlineTh || "ทีมเทรนเนอร์"));
   summary.append(createEl("p", "", experts.trainerSummary?.descriptionTh || experts.introTh || ""));
   root.append(summary);
