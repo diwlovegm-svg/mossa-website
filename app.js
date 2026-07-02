@@ -25,6 +25,80 @@ const state = {
   data: {}
 };
 
+const LANDING_SERVICE_CARDS = [
+  {
+    id: "fitness",
+    title: "Fitness",
+    summary: "โซนฟิตเนสสำหรับคาร์ดิโอ เวทเทรนนิ่ง และการออกกำลังกายประจำวัน"
+  },
+  {
+    id: "group-class",
+    title: "Group Class",
+    summary: "คลาสออกกำลังกายหลากหลาย ทั้ง Les Mills, Yoga, Zumba, Tabata และคลาสยอดนิยม"
+  },
+  {
+    id: "swimming-pool",
+    title: "Swimming Pool",
+    summary: "สระว่ายน้ำระบบน้ำเกลือ เหมาะทั้งว่ายออกกำลังกายและพักผ่อน"
+  },
+  {
+    id: "sauna-steam",
+    title: "Sauna / Steam",
+    summary: "ซาวน่าและสตีมสำหรับผ่อนคลายหลังออกกำลังกาย ตามเงื่อนไขการใช้บริการ"
+  },
+  {
+    id: "badminton-court",
+    title: "Badminton Court",
+    summary: "สนามแบดมินตันในร่ม จองเล่นเป็นรายชั่วโมง พร้อมเบอร์จองสนามโดยตรง"
+  },
+  {
+    id: "football-field",
+    title: "Football Field",
+    summary: "สนามฟุตบอล Indoor และ Outdoor สำหรับทีมที่ต้องการจองสนามในระยอง"
+  }
+];
+
+const MEMBERSHIP_PLAN_ROWS = [
+  { label: "Day Pass", lookup: "รายวัน", helper: "ทดลองใช้บริการแบบรายวัน" },
+  { label: "1 เดือน", lookup: "1 เดือน", helper: "เหมาะกับเริ่มต้นจริงจัง" },
+  { label: "3 เดือน", lookup: "3 เดือน", helper: "คุ้มขึ้นสำหรับออกกำลังกายต่อเนื่อง" },
+  { label: "6 เดือน", lookup: "6 เดือน", helper: "เหมาะกับคนที่วางเป้าหมายระยะกลาง" },
+  { label: "12 เดือน", lookup: "12 เดือน", helper: "แพ็กเกจคุ้มสุดสำหรับสมาชิกประจำ" }
+];
+
+const CLASS_HIGHLIGHTS = ["BODY PUMP", "BODY COMBAT", "BODY JAM", "YOGA", "ZUMBA", "ABS", "TABATA", "STRETCH"];
+
+const LANDING_FAQ = [
+  {
+    questionTh: "สมัครสมาชิกราคาเท่าไหร่?",
+    answerTh: "แพ็กเกจสมาชิกเริ่มที่ Day Pass 500 บาท, 1 เดือน 5,000 บาท, 3 เดือน 9,900 บาท, 6 เดือน 17,500 บาท และ 12 เดือน 22,500 บาท สำหรับ 1 ท่าน"
+  },
+  {
+    questionTh: "Day Pass ใช้อะไรได้บ้าง?",
+    answerTh: "Day Pass 500 บาท ใช้บริการเหมือน Membership 1 วัน รวมผ้า และใช้ฟิตเนส สระว่ายน้ำ คลาสออกกำลังกาย ซาวน่า/สตีมได้ตามเงื่อนไข MOSSA"
+  },
+  {
+    questionTh: "สมาชิกฟิตเนสเข้าคลาสได้ไหม?",
+    answerTh: "สมาชิกฟิตเนสสามารถเข้าคลาสออกกำลังกายได้ตามเงื่อนไขของแพ็กเกจและตารางคลาสประจำเดือน"
+  },
+  {
+    questionTh: "สระว่ายน้ำเปิดกี่โมง?",
+    answerTh: "สระว่ายน้ำเปิดจันทร์-ศุกร์ 08:00-21:30 น. และเสาร์-อาทิตย์/วันหยุดนักขัตฤกษ์ 08:00-20:30 น."
+  },
+  {
+    questionTh: "จองสนามแบด/สนามบอลได้ที่ไหน?",
+    answerTh: "โทรจองสนามแบดมินตันหรือสนามฟุตบอลได้ที่ 094-406-1555"
+  },
+  {
+    questionTh: "มีซาวน่า/สตีมไหม?",
+    answerTh: "มีซาวน่าและสตีม โดยค่าเข้าสระผู้ใหญ่ 150 บาทรวมซาวน่าและสตีมแล้ว และสมาชิกใช้ตามสิทธิ์แพ็กเกจ"
+  },
+  {
+    questionTh: "ติดต่อ MOSSA ได้ช่องทางไหน?",
+    answerTh: "ติดต่อได้ที่ LINE @Mossa2018 โทร 033-012-181, 094-696-6179 หรือจองสนามที่ 094-406-1555"
+  }
+];
+
 const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 
@@ -141,37 +215,44 @@ function initServiceShortcuts(pricing) {
 
 function renderServices(services, pricing) {
   const grid = qs("#service-grid");
+  if (!grid) return;
   grid.innerHTML = "";
 
-  const activeServices = services
-    .filter((service) => service.status === "active" && !service.parentServiceId)
-    .sort((a, b) => a.sortOrder - b.sortOrder);
+  LANDING_SERVICE_CARDS.forEach((config) => {
+    const service = services.find((item) => item.status === "active" && item.id === config.id);
+    if (!service) return;
 
-  activeServices.forEach((service) => {
-      const card = createEl("button", `service-card ${service.id === state.selectedServiceId ? "is-selected" : ""}`);
-      card.type = "button";
-      card.dataset.serviceId = service.id;
-      card.setAttribute("aria-pressed", String(service.id === state.selectedServiceId));
-      const image = createEl("div", "service-image");
-      image.style.backgroundImage = `linear-gradient(180deg, rgba(9, 9, 13, 0.16), rgba(9, 9, 13, 0.72)), url("${service.imageUrl}")`;
+    const card = createEl("article", `service-card landing-service-card ${service.id === state.selectedServiceId ? "is-selected" : ""}`);
+    card.dataset.serviceId = service.id;
+    const image = createEl("div", "service-image");
+    image.style.backgroundImage = `linear-gradient(180deg, rgba(9, 9, 13, 0.12), rgba(9, 9, 13, 0.7)), url("${service.imageUrl}")`;
 
-      const body = createEl("div", "service-card-body");
-      body.append(createEl("p", "eyebrow", service.categoryLabel));
-      body.append(createEl("h3", "", service.nameTh));
-      body.append(createEl("p", "", service.shortDescriptionTh));
+    const body = createEl("div", "service-card-body");
+    body.append(createEl("p", "eyebrow", service.categoryLabel));
+    body.append(createEl("h3", "", config.title));
+    body.append(createEl("p", "", config.summary || service.shortDescriptionTh));
 
-      const meta = createEl("div", "service-meta");
-      service.tags.forEach((tag, index) => {
-        meta.append(createEl("span", `tag ${index % 2 ? "orange" : ""}`, tag));
-      });
-      body.append(meta);
-      body.append(createEl("span", "detail-link", "เปิดรายละเอียด / ราคา"));
-      card.append(image, body);
-      card.addEventListener("click", () => {
-        openServiceById(service.id, pricing);
-      });
-      grid.append(card);
+    const meta = createEl("div", "service-meta");
+    (service.tags || []).slice(0, 3).forEach((tag, index) => {
+      meta.append(createEl("span", `tag ${index % 2 ? "orange" : ""}`, tag));
     });
+    body.append(meta);
+
+    const actions = createEl("div", "service-card-actions");
+    const detailButton = createEl("button", "detail-link", "ดูรายละเอียด");
+    detailButton.type = "button";
+    detailButton.addEventListener("click", () => openServiceById(service.id, pricing));
+
+    const askLink = createEl("a", "detail-link is-ask", "สอบถาม");
+    askLink.href = state.data.contact?.lineUrl || "#lead";
+    askLink.target = "_blank";
+    askLink.rel = "noreferrer";
+
+    actions.append(detailButton, askLink);
+    body.append(actions);
+    card.append(image, body);
+    grid.append(card);
+  });
 }
 
 function closeServiceDetail() {
@@ -424,7 +505,7 @@ function renderServiceDetail(service, pricing) {
     const label = registration.label || "ลงทะเบียน";
     const url = registration.url || registration.href || "";
     const registrationLink = createEl("a", url ? "btn btn-secondary" : "btn btn-disabled", url ? label : `${label} (รอลิงก์)`);
-    registrationLink.href = url || "#contact";
+    registrationLink.href = url || "#lead";
     if (url) {
       registrationLink.target = "_blank";
       registrationLink.rel = "noreferrer";
@@ -474,6 +555,7 @@ function renderServiceDetail(service, pricing) {
 
 function renderPricingTabs(pricing) {
   const tabs = qs("#pricing-tabs");
+  if (!tabs) return;
   tabs.innerHTML = "";
   tabs.classList.add("pricing-jump-list");
 
@@ -489,6 +571,7 @@ function renderPricingTabs(pricing) {
 
 function renderPricing(pricing) {
   const grid = qs("#pricing-content");
+  if (!grid) return;
   grid.innerHTML = "";
   grid.classList.add("pricing-overview-grid");
 
@@ -518,11 +601,65 @@ function renderPricing(pricing) {
   });
 }
 
-function renderTrial(trial) {
-  qs("#trial-title").textContent = trial.titleTh;
-  qs("#trial-eligibility").textContent = trial.eligibilityTh;
+function renderMembershipPlans(pricing) {
+  const grid = qs("#membership-plan-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
 
+  const membership = pricing.items.find((item) => item.id === "membership-packages");
+  const rows = membership?.rows || [];
+
+  MEMBERSHIP_PLAN_ROWS.forEach((plan, index) => {
+    const row = rows.find((item) => item[0] === plan.lookup);
+    if (!row) return;
+
+    const card = createEl("article", `membership-plan-card ${index === 0 ? "is-day-pass" : ""} ${index === 4 ? "is-featured" : ""}`);
+    card.append(createEl("p", "eyebrow", index === 0 ? "Day Pass" : "Membership"));
+    card.append(createEl("h3", "", plan.label));
+    card.append(createEl("strong", "membership-price", row[1]));
+    card.append(createEl("p", "", plan.helper));
+
+    const list = createEl("ul", "membership-list");
+    [
+      "ฟิตเนส",
+      "คลาสออกกำลังกาย",
+      "สระว่ายน้ำ",
+      "ซาวน่า/สตีม",
+      "ผ้าเช็ดตัวตามเงื่อนไขแพ็กเกจ"
+    ].forEach((item) => list.append(createEl("li", "", item)));
+    card.append(list);
+
+    const cta = createEl("a", index === 4 ? "btn btn-primary" : "btn btn-secondary", "สอบถามสมาชิก");
+    cta.href = state.data.contact?.lineUrl || "#lead";
+    cta.target = "_blank";
+    cta.rel = "noreferrer";
+    card.append(cta);
+    grid.append(card);
+  });
+}
+
+function renderClassHighlights() {
+  const grid = qs("#class-highlight-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  CLASS_HIGHLIGHTS.forEach((className) => {
+    const item = createEl("article", "class-highlight-card");
+    item.append(createEl("strong", "", className));
+    item.append(createEl("span", "", "คลาสยอดนิยมของ MOSSA"));
+    grid.append(item);
+  });
+}
+
+function renderTrial(trial) {
+  const title = qs("#trial-title");
+  const eligibility = qs("#trial-eligibility");
   const steps = qs("#trial-steps");
+  if (!title || !eligibility || !steps) return;
+
+  title.textContent = trial.titleTh;
+  eligibility.textContent = trial.eligibilityTh;
+
   steps.innerHTML = "";
   trial.items.forEach((item) => {
     const step = createEl("div", "trial-step");
@@ -534,6 +671,7 @@ function renderTrial(trial) {
 
 function renderHours(hours) {
   const grid = qs("#hours-grid");
+  if (!grid) return;
   grid.innerHTML = "";
 
   hours.forEach((group) => {
@@ -561,6 +699,7 @@ function renderClassFilters() {
 
 function renderClasses(schedule) {
   const list = qs("#class-list");
+  if (!list) return;
   list.innerHTML = "";
 
   if (!schedule.imageUrl) {
@@ -594,6 +733,7 @@ function renderClasses(schedule) {
 function renderCorporate(corporates) {
   const input = qs("#corporate-query");
   const results = qs("#corporate-results");
+  if (!input || !results) return;
 
   const draw = () => {
     const query = input.value.trim().toLowerCase();
@@ -750,6 +890,7 @@ function renderExperts(experts, trainers = []) {
 
 function renderPromotions(promotions) {
   const grid = qs("#promotion-grid");
+  if (!grid) return;
   grid.innerHTML = "";
 
   const today = new Date();
@@ -783,6 +924,7 @@ function renderPromotions(promotions) {
 
 function renderGallery(gallery) {
   const grid = qs("#gallery-grid");
+  if (!grid) return;
   grid.innerHTML = "";
 
   gallery.forEach((item) => {
@@ -798,12 +940,16 @@ function renderGallery(gallery) {
 }
 
 function renderContact(contact) {
-  qs("#contact-address").textContent = contact.addressTh;
-  qs("#map-status").textContent = contact.googleMapsUrl
+  const address = qs("#contact-address");
+  const mapStatus = qs("#map-status");
+  const actions = qs("#contact-actions");
+  if (!address || !mapStatus || !actions) return;
+
+  address.textContent = contact.addressTh;
+  mapStatus.textContent = contact.googleMapsUrl
     ? "เปิดปุ่มนำทางด้วย Google Maps แล้ว"
     : "รอลิงก์ Google Maps ที่ยืนยันแล้ว จึงยังไม่แสดงปุ่มนำทางจริง";
 
-  const actions = qs("#contact-actions");
   actions.innerHTML = "";
   const instagramHandle = String(contact.instagram || "").replace(/^@/, "");
   const tiktokHandle = String(contact.tiktok || "").startsWith("@") ? contact.tiktok : `@${contact.tiktok}`;
@@ -835,13 +981,44 @@ function renderContact(contact) {
 
 function renderFaq(faq) {
   const list = qs("#faq-list");
+  if (!list) return;
   list.innerHTML = "";
 
-  faq.forEach((item) => {
+  const items = LANDING_FAQ.length ? LANDING_FAQ : faq;
+  items.forEach((item) => {
     const card = createEl("article", "faq-item");
     card.append(createEl("h3", "", item.questionTh));
     card.append(createEl("p", "", item.answerTh));
     list.append(card);
+  });
+}
+
+function initLeadForm(contact) {
+  const form = qs("#lead-form");
+  const message = qs("#lead-message");
+  if (!form || !message) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const lead = {
+      name: String(data.get("name") || "").trim(),
+      phone: String(data.get("phone") || "").trim(),
+      service: String(data.get("service") || "").trim(),
+      note: String(data.get("note") || "").trim(),
+      createdAt: new Date().toISOString()
+    };
+
+    const savedLeads = JSON.parse(localStorage.getItem("mossa-leads") || "[]");
+    savedLeads.push(lead);
+    localStorage.setItem("mossa-leads", JSON.stringify(savedLeads.slice(-20)));
+
+    message.textContent = "บันทึกข้อมูลตัวอย่างแล้ว กรุณากดแอด LINE หรือโทรหา MOSSA เพื่อให้ทีมงานรับเรื่องทันที";
+    message.classList.add("is-success");
+
+    const lineUrl = contact?.lineUrl || "";
+    if (lineUrl) window.open(lineUrl, "_blank", "noreferrer");
+    form.reset();
   });
 }
 
@@ -853,12 +1030,15 @@ async function init() {
     state.data = await loadData();
     initContactLinks(state.data.contact);
     initServiceShortcuts(state.data.pricing);
+    initLeadForm(state.data.contact);
     renderAbout(state.data.about);
     renderServices(state.data.services, state.data.pricing);
     renderFacilities(state.data.facilities);
     renderExperts(state.data.experts, state.data.trainers);
+    renderMembershipPlans(state.data.pricing);
     renderPricingTabs(state.data.pricing);
     renderPricing(state.data.pricing);
+    renderClassHighlights();
     renderTrial(state.data.trial);
     renderHours(state.data.hours);
     renderClassFilters();
