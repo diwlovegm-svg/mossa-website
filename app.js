@@ -791,33 +791,43 @@ function renderAbout(about) {
 
   const intro = createEl("div", "about-intro");
   intro.append(createEl("p", "eyebrow", about.eyebrow || "About MOSSA"));
+  intro.append(document.createTextNode(" "));
   intro.append(createEl("h2", "", about.titleTh || "รู้จัก MOSSA Sport Society"));
+  intro.append(document.createTextNode(" "));
   intro.append(createEl("p", "lead-text", about.introTh || ""));
 
   const factGrid = createEl("div", "fact-grid");
   (about.facts || []).forEach((fact) => {
     const card = createEl("article", "fact-card");
     card.append(createEl("span", "", fact.label));
+    card.append(document.createTextNode(" "));
     card.append(createEl("strong", "", fact.value));
     factGrid.append(card);
+    factGrid.append(document.createTextNode(" "));
   });
 
   const vision = createEl("div", "vision-panel");
   vision.append(createEl("p", "eyebrow", "Vision"));
+  vision.append(document.createTextNode(" "));
   vision.append(createEl("h3", "", "แนวคิด MOSSA"));
+  vision.append(document.createTextNode(" "));
   vision.append(createEl("p", "", about.visionTh || ""));
 
   const values = createEl("div", "value-grid");
   (about.values || []).forEach((value) => {
     const item = createEl("article", "value-card");
     item.append(createEl("span", "value-letter", value.letter));
+    item.append(document.createTextNode(" "));
     item.append(createEl("strong", "", value.title));
+    item.append(document.createTextNode(" "));
     item.append(createEl("p", "", value.descriptionTh));
     values.append(item);
+    values.append(document.createTextNode(" "));
   });
 
+  vision.append(document.createTextNode(" "));
   vision.append(values);
-  root.append(intro, factGrid, vision);
+  root.append(intro, document.createTextNode(" "), factGrid, document.createTextNode(" "), vision);
 }
 
 function renderFacilities(facilities) {
