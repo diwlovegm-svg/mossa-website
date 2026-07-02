@@ -63,9 +63,9 @@
           <p class="hero-copy">ออกกำลังกายได้ครบทั้งฟิตเนส สระน้ำเกลือ คลาสออกกำลังกาย ซาวน่า/สตีม สนามแบดมินตัน และสนามฟุตบอล ในสปอร์ตคลับเดียวที่ระยอง</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#lead">สอบถามสมาชิก</a>
-            <a class="btn btn-secondary" href="#pricing">ดูราคา</a>
-            <a class="btn btn-ghost" data-line-link href="#" target="_blank" rel="noreferrer">ติดต่อผ่าน LINE</a>
-            <a class="btn btn-ghost" data-main-phone href="#">โทรหา MOSSA</a>
+            <a class="btn btn-secondary" data-track="click_pricing" href="#pricing">ดูราคา</a>
+            <a class="btn btn-ghost" data-line-link data-track="click_line" href="#" target="_blank" rel="noreferrer">ติดต่อผ่าน LINE</a>
+            <a class="btn btn-ghost" data-main-phone data-track="click_call" href="#">โทรหา MOSSA</a>
           </div>
           <dl class="hero-stats">
             <div>
@@ -86,11 +86,11 @@
 
       <section class="quick-actions" aria-label="ทางลัด">
         <a href="#lead">สอบถามสมาชิก</a>
-        <a href="#pricing">ดูราคา</a>
+        <a data-track="click_pricing" href="#pricing">ดูราคา</a>
         <a href="#services">บริการของ MOSSA</a>
-        <a data-line-link href="#" target="_blank" rel="noreferrer">ติดต่อผ่าน LINE</a>
-        <a data-main-phone href="#">โทรหา MOSSA</a>
-        <a href="tel:0944061555">โทรจองสนาม</a>
+        <a data-line-link data-track="click_line" href="#" target="_blank" rel="noreferrer">ติดต่อผ่าน LINE</a>
+        <a data-main-phone data-track="click_call" href="#">โทรหา MOSSA</a>
+        <a data-track="click_call" href="tel:0944061555">โทรจองสนาม</a>
       </section>
 
       <section id="why-mossa" class="section why-section" aria-label="ทำไมเลือก MOSSA">
@@ -192,6 +192,40 @@
         </div>
       </section>
 
+      <section id="package-guide" class="section package-guide-section">
+        <div class="section-heading">
+          <p class="eyebrow">Choose Your Plan</p>
+          <h2>เลือกแพ็กเกจที่เหมาะกับคุณ</h2>
+          <p>เลือกตามเป้าหมายการใช้งาน แล้วกดดูราคา หรือคุยกับทีม MOSSA ได้ทันที</p>
+        </div>
+        <div class="package-guide-grid">
+          <article class="package-guide-card">
+            <span>Day Pass</span>
+            <h3>อยากทดลองใช้บริการ</h3>
+            <p>เหมาะกับคนที่อยากลองใช้ฟิตเนส คลาส สระน้ำ ซาวน่า/สตีม ก่อนตัดสินใจสมัครสมาชิก</p>
+            <a class="btn btn-secondary" data-track="click_pricing" href="#pricing">ดูราคา Day Pass</a>
+          </article>
+          <article class="package-guide-card is-featured">
+            <span>Membership</span>
+            <h3>ออกกำลังกายต่อเนื่อง</h3>
+            <p>เหมาะกับคนที่ต้องการใช้บริการสม่ำเสมอ ทั้งรายเดือน ราย 3 เดือน ราย 6 เดือน หรือรายปี</p>
+            <a class="btn btn-primary" data-track="click_pricing" href="#pricing">ดูราคา Membership</a>
+          </article>
+          <article class="package-guide-card">
+            <span>Corporate Benefits</span>
+            <h3>พนักงานบริษัทคู่สัญญา</h3>
+            <p>เหมาะกับพนักงานที่ต้องการตรวจสอบสิทธิ์ฟิตเนส สระว่ายน้ำ และเงื่อนไขการใช้บริการ</p>
+            <a class="btn btn-secondary" data-line-link data-track="click_corporate_benefit" href="#" target="_blank" rel="noreferrer">สอบถามสิทธิ์บริษัท</a>
+          </article>
+          <article class="package-guide-card">
+            <span>PT / Training</span>
+            <h3>มีผู้เชี่ยวชาญดูแล</h3>
+            <p>เหมาะกับคนที่ต้องการเทรนส่วนตัว Boxing PT, Aquatic PT หรือโปรแกรมฝึกที่มีทีมดูแลใกล้ชิด</p>
+            <a class="btn btn-secondary" data-line-link data-track="click_line" href="#" target="_blank" rel="noreferrer">คุยกับทีม MOSSA</a>
+          </article>
+        </div>
+      </section>
+
       <section id="benefits" class="section section-panel benefits-section">
         <div class="section-heading">
           <p class="eyebrow">Compare Benefits</p>
@@ -222,8 +256,8 @@
           </div>
           <div class="trial-steps" id="trial-steps"></div>
           <div class="trial-actions">
-            <a class="btn btn-primary" data-line-link href="#" target="_blank" rel="noreferrer">สอบถามสิทธิ์ทดลองใช้บริการ</a>
-            <a class="btn btn-secondary" data-main-phone href="#">โทรหา MOSSA</a>
+            <a class="btn btn-primary" data-line-link data-track="click_line" href="#" target="_blank" rel="noreferrer">สอบถามสิทธิ์ทดลองใช้บริการ</a>
+            <a class="btn btn-secondary" data-main-phone data-track="click_call" href="#">โทรหา MOSSA</a>
           </div>
         </div>
       </section>
@@ -245,8 +279,8 @@
         </div>
         <div id="class-highlight-grid" class="class-highlight-grid" aria-live="polite"></div>
         <div class="class-highlight-actions">
-          <a class="btn btn-primary" href="#class-schedule">ดูตารางคลาส</a>
-          <a class="btn btn-ghost" data-line-link href="#" target="_blank" rel="noreferrer">สอบถามคลาส</a>
+          <a class="btn btn-primary" data-track="click_class_schedule" href="#class-schedule">ดูตารางคลาส</a>
+          <a class="btn btn-ghost" data-line-link data-track="click_line" href="#" target="_blank" rel="noreferrer">สอบถามคลาส</a>
         </div>
         <div id="class-schedule" class="class-schedule-block">
           <div class="section-heading compact-heading">
@@ -268,7 +302,7 @@
             <strong>ต้องการเช็กสิทธิ์บริษัท?</strong>
             <p>แอด LINE หรือโทรหา MOSSA เพื่อตรวจสอบสิทธิ์ฟิตเนส สระว่ายน้ำ และเงื่อนไขครอบครัวก่อนเข้าใช้บริการ</p>
           </div>
-          <a class="btn btn-primary" data-line-link href="#" target="_blank" rel="noreferrer">สอบถามสิทธิ์บริษัท</a>
+          <a class="btn btn-primary" data-line-link data-track="click_corporate_benefit" href="#" target="_blank" rel="noreferrer">สอบถามสิทธิ์บริษัท</a>
         </div>
         <div class="corporate-search">
           <label for="corporate-query">ค้นหาบริษัทของคุณ</label>
@@ -286,12 +320,30 @@
         <div id="gallery-grid" class="gallery-grid"></div>
       </section>
 
+      <section id="social-proof" class="section social-proof-section" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">Member Stories</p>
+          <h2>เสียงจากสมาชิก MOSSA</h2>
+          <p>พื้นที่สำหรับรีวิวสมาชิกจริง ภาพบรรยากาศจริง และผลลัพธ์จากผู้ใช้บริการจริงของ MOSSA</p>
+        </div>
+        <div class="social-proof-grid">
+          <article class="social-proof-card">
+            <strong>รีวิวสมาชิกจริง</strong>
+            <p>เพิ่มข้อความรีวิวจริงพร้อมชื่อหรือภาพ เมื่อทีม MOSSA มีข้อมูลที่ได้รับอนุญาตให้เผยแพร่</p>
+          </article>
+          <article class="social-proof-card">
+            <strong>ภาพบรรยากาศจริง</strong>
+            <p>เพิ่มภาพคลาส ฟิตเนส สระว่ายน้ำ สนามกีฬา และกิจกรรมจริง เพื่อช่วยสร้างความมั่นใจให้ลูกค้า</p>
+          </article>
+        </div>
+      </section>
+
       <section id="lead" class="section lead-section">
         <div class="lead-shell">
           <div class="lead-copy">
             <p class="eyebrow">Contact / Lead Form</p>
-            <h2>ให้เจ้าหน้าที่ติดต่อกลับ</h2>
-            <p class="lead-text">กรอกข้อมูลเบื้องต้นเพื่อส่งรายละเอียดให้ทีม MOSSA ผ่าน LINE หรือโทรสอบถามได้ทันที</p>
+            <h2>ให้ทีม MOSSA แนะนำแพ็กเกจที่เหมาะกับคุณ</h2>
+            <p class="lead-text">กรอกชื่อ เบอร์โทร และบริการที่สนใจ ระบบจะเปิด LINE พร้อมข้อความสรุปสำหรับส่งให้ทีม MOSSA</p>
             <div class="contact-mini">
               <p id="contact-address" class="lead-text"></p>
               <p id="map-status" class="map-status"></p>
@@ -311,6 +363,7 @@
               <span>บริการที่สนใจ</span>
               <select name="service" required>
                 <option value="">เลือกบริการ</option>
+                <option>ให้ทีม MOSSA แนะนำแพ็กเกจ</option>
                 <option>Membership / ฟิตเนส</option>
                 <option>Group Class</option>
                 <option>Swimming Pool</option>
@@ -320,12 +373,8 @@
                 <option>บริษัทคู่สัญญา</option>
               </select>
             </label>
-            <label>
-              <span>ข้อความเพิ่มเติม</span>
-              <textarea name="note" rows="4"></textarea>
-            </label>
-            <button class="btn btn-primary" type="submit">ส่งข้อมูลผ่าน LINE</button>
-            <p id="lead-message" class="lead-message" aria-live="polite">กรอกข้อมูลแล้วกดส่ง ระบบจะเปิด LINE เพื่อให้ส่งรายละเอียดให้ทีม MOSSA</p>
+            <button class="btn btn-primary" type="submit">ส่งข้อมูลให้ทีม MOSSA</button>
+            <p id="lead-message" class="lead-message" aria-live="polite">หลังส่งฟอร์ม ระบบจะเปิด LINE เพื่อส่งข้อมูลให้ทีม MOSSA</p>
           </form>
         </div>
       </section>
@@ -345,10 +394,9 @@
     </footer>
 
     <div class="sticky-cta" aria-label="ติดต่อด่วน">
-      <a href="#lead">สอบถามสมาชิก</a>
-      <a href="#pricing">ดูราคา</a>
-      <a data-line-link href="#" target="_blank" rel="noreferrer">LINE</a>
-      <a data-main-phone href="#">โทรหา MOSSA</a>
+      <a data-line-link data-track="click_line" href="#" target="_blank" rel="noreferrer">LINE</a>
+      <a data-main-phone data-track="click_call" href="#">โทร</a>
+      <a data-track="click_pricing" href="#pricing">ดูราคา</a>
     </div>
 
     <script src="app.js" defer></script>

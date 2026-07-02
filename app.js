@@ -106,6 +106,55 @@ const LANDING_FAQ = [
 const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 
+const CONVERSION_EVENTS = new Set([
+  "click_line",
+  "click_call",
+  "click_pricing",
+  "submit_lead_form",
+  "click_class_schedule",
+  "click_corporate_benefit"
+]);
+
+function trackConversion(eventName, payload = {}) {
+  if (!CONVERSION_EVENTS.has(eventName)) return;
+
+  const eventPayload = {
+    event: eventName,
+    source: "mossa_website",
+    ...payload
+  };
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(eventPayload);
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, eventPayload);
+  }
+
+  if (typeof window.fbq === "function") {
+    window.fbq("trackCustom", eventName, eventPayload);
+  }
+
+  document.dispatchEvent(new CustomEvent("mossa:conversion", { detail: eventPayload }));
+}
+
+function initConversionTracking() {
+  qsa("[data-track]").forEach((element) => {
+    if (element.dataset.trackingBound === "true") return;
+
+    element.dataset.trackingBound = "true";
+    element.addEventListener("click", () => {
+      trackConversion(element.dataset.track, {
+        label: element.textContent.trim(),
+        href: element.getAttribute("href") || "",
+        location: element.dataset.trackLocation || ""
+      });
+    });
+  });
+}
+
+window.mossaTrackConversion = trackConversion;
+
 function createEl(tag, className, text) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -185,9 +234,11 @@ function initThemeToggle() {
 function initContactLinks(contact) {
   qsa("[data-line-link]").forEach((link) => {
     link.href = contact.lineUrl;
+    if (!link.dataset.track) link.dataset.track = "click_line";
   });
   qsa("[data-main-phone]").forEach((link) => {
     link.href = `tel:${contact.mainPhones[0].replace(/-/g, "")}`;
+    if (!link.dataset.track) link.dataset.track = "click_call";
   });
 }
 
@@ -637,6 +688,8 @@ function renderMembershipPlans(pricing) {
     cta.href = state.data.contact?.lineUrl || "#lead";
     cta.target = "_blank";
     cta.rel = "noreferrer";
+    cta.dataset.track = "click_line";
+    cta.dataset.trackLocation = "membership_plan";
     card.append(cta);
     grid.append(card);
   });
@@ -727,6 +780,8 @@ function renderClasses(schedule) {
     downloadLink.href = schedule.downloadUrl;
     downloadLink.target = "_blank";
     downloadLink.rel = "noreferrer";
+    downloadLink.dataset.track = "click_class_schedule";
+    downloadLink.dataset.trackLocation = "class_schedule_image";
     caption.append(downloadLink);
   }
 
@@ -969,22 +1024,26 @@ function renderContact(contact) {
   const tiktokHandle = String(contact.tiktok || "").startsWith("@") ? contact.tiktok : `@${contact.tiktok}`;
 
   const buttons = [
-    ["ติดต่อผ่าน LINE", contact.lineUrl, "btn btn-primary", true],
-    [`โทรหา MOSSA ${contact.mainPhones[0]}`, `tel:${contact.mainPhones[0].replace(/-/g, "")}`, "btn btn-secondary", false],
-    [`โทรหา MOSSA ${contact.mainPhones[1]}`, `tel:${contact.mainPhones[1].replace(/-/g, "")}`, "btn btn-secondary", false],
-    ["โทรจองสนาม", `tel:${contact.fieldBookingPhone.replace(/-/g, "")}`, "btn btn-ghost", false],
-    ["Inbox Facebook", contact.facebookInboxUrl, "btn btn-ghost", true],
-    ["Instagram", contact.instagramUrl || `https://www.instagram.com/${instagramHandle}/`, "btn btn-ghost", true],
-    ["TikTok", contact.tiktokUrl || `https://www.tiktok.com/${tiktokHandle}`, "btn btn-ghost", true]
+    ["ติดต่อผ่าน LINE", contact.lineUrl, "btn btn-primary", true, "click_line"],
+    [`โทรหา MOSSA ${contact.mainPhones[0]}`, `tel:${contact.mainPhones[0].replace(/-/g, "")}`, "btn btn-secondary", false, "click_call"],
+    [`โทรหา MOSSA ${contact.mainPhones[1]}`, `tel:${contact.mainPhones[1].replace(/-/g, "")}`, "btn btn-secondary", false, "click_call"],
+    ["โทรจองสนาม", `tel:${contact.fieldBookingPhone.replace(/-/g, "")}`, "btn btn-ghost", false, "click_call"],
+    ["Inbox Facebook", contact.facebookInboxUrl, "btn btn-ghost", true, ""],
+    ["Instagram", contact.instagramUrl || `https://www.instagram.com/${instagramHandle}/`, "btn btn-ghost", true, ""],
+    ["TikTok", contact.tiktokUrl || `https://www.tiktok.com/${tiktokHandle}`, "btn btn-ghost", true, ""]
   ];
 
   if (contact.googleMapsUrl) {
-    buttons.push(["นำทางด้วย Google Maps", contact.googleMapsUrl, "btn btn-ghost", true]);
+    buttons.push(["นำทางด้วย Google Maps", contact.googleMapsUrl, "btn btn-ghost", true, ""]);
   }
 
-  buttons.forEach(([label, href, className, external]) => {
+  buttons.forEach(([label, href, className, external, eventName]) => {
     const link = createEl("a", className, label);
     link.href = href;
+    if (eventName) {
+      link.dataset.track = eventName;
+      link.dataset.trackLocation = "contact";
+    }
     if (external) {
       link.target = "_blank";
       link.rel = "noreferrer";
@@ -1018,23 +1077,27 @@ function initLeadForm(contact) {
     const lead = {
       name: String(data.get("name") || "").trim(),
       phone: String(data.get("phone") || "").trim(),
-      service: String(data.get("service") || "").trim(),
-      note: String(data.get("note") || "").trim()
+      service: String(data.get("service") || "").trim()
     };
 
     const leadText = [
-      "สวัสดีครับ/ค่ะ สนใจสอบถามบริการ MOSSA",
+      "สวัสดีครับ/ค่ะ ทีม MOSSA",
+      "สนใจให้แนะนำบริการหรือแพ็กเกจ",
       lead.name ? `ชื่อ: ${lead.name}` : "",
       lead.phone ? `เบอร์โทร: ${lead.phone}` : "",
       lead.service ? `บริการที่สนใจ: ${lead.service}` : "",
-      lead.note ? `ข้อความเพิ่มเติม: ${lead.note}` : ""
+      "ต้องการให้ทีม MOSSA ติดต่อกลับเพื่อแนะนำรายละเอียด"
     ].filter(Boolean).join("\n");
 
     if (navigator.clipboard?.writeText) {
       navigator.clipboard.writeText(leadText).catch(() => {});
     }
 
-    message.textContent = "ระบบเปิด LINE ให้แล้ว หาก LINE ไม่เปิด กรุณากดปุ่มติดต่อผ่าน LINE หรือโทรหา MOSSA";
+    trackConversion("submit_lead_form", {
+      service: lead.service
+    });
+
+    message.textContent = "ส่งข้อมูลเรียบร้อย ทีม MOSSA จะติดต่อกลับโดยเร็ว หาก LINE ไม่เปิด กรุณากดปุ่ม LINE หรือโทรหา MOSSA";
     message.classList.add("is-success");
 
     const lineUrl = contact?.lineUrl || "";
@@ -1069,6 +1132,7 @@ async function init() {
     renderGallery(state.data.gallery);
     renderContact(state.data.contact);
     renderFaq(state.data.faq);
+    initConversionTracking();
   } catch (error) {
     const main = qs("main");
     const message = createEl("div", "section data-error", `โหลดข้อมูลไม่สำเร็จ: ${error.message}`);

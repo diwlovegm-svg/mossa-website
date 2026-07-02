@@ -57,6 +57,7 @@ html[data-theme="light"] {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -66,6 +67,7 @@ body {
   font-family: var(--font-body);
   line-height: 1.65;
   letter-spacing: 0;
+  overflow-x: hidden;
 }
 
 body.service-modal-open {
@@ -104,6 +106,19 @@ h3,
 .theme-toggle,
 .sticky-cta {
   font-family: var(--font-display);
+}
+
+h1,
+h2,
+h3,
+p,
+li,
+dd,
+a,
+strong,
+span {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .site-header {
@@ -1467,6 +1482,57 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   color: var(--orange-2);
 }
 
+.package-guide-section {
+  padding-top: 38px;
+}
+
+.package-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.package-guide-card {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 12px;
+  min-height: 300px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(124, 60, 255, 0.13), rgba(255, 138, 31, 0.06)),
+    var(--card-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.package-guide-card.is-featured {
+  border-color: rgba(255, 138, 31, 0.56);
+  background:
+    linear-gradient(145deg, rgba(255, 138, 31, 0.18), rgba(124, 60, 255, 0.16)),
+    var(--surface);
+}
+
+.package-guide-card span {
+  color: var(--orange-2);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.package-guide-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.35rem;
+}
+
+.package-guide-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .benefit-table {
   display: grid;
   overflow: hidden;
@@ -1879,6 +1945,31 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   font-weight: 800;
 }
 
+.social-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.social-proof-card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+}
+
+.social-proof-card strong {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+}
+
+.social-proof-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
 .faq-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2188,7 +2279,7 @@ html[data-theme="light"] .quick-actions a:focus-visible {
 }
 
 .site-footer {
-  padding: 36px 18px 92px;
+  padding: 36px 18px 118px;
   text-align: center;
   color: var(--muted);
   border-top: 1px solid var(--line);
@@ -2201,9 +2292,10 @@ html[data-theme="light"] .quick-actions a:focus-visible {
 .sticky-cta {
   position: fixed;
   left: 50%;
-  bottom: 14px;
+  bottom: max(14px, env(safe-area-inset-bottom));
   z-index: 50;
-  width: min(calc(100% - 28px), 520px);
+  width: calc(100vw - 28px);
+  max-width: 560px;
   transform: translateX(-50%);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2213,6 +2305,7 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   border-radius: 8px;
   background: var(--surface);
   backdrop-filter: blur(16px);
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.28);
 }
 
 .sticky-cta a {
@@ -2279,6 +2372,7 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   }
 
   .quick-actions,
+  .package-guide-grid,
   .plan-choice-grid,
   .why-grid,
   .membership-plan-grid,
@@ -2296,6 +2390,7 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   .gallery-grid,
   .admin-grid,
   .corporate-results,
+  .social-proof-grid,
   .faq-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2359,6 +2454,36 @@ html[data-theme="light"] .quick-actions a:focus-visible {
 
   .site-header {
     padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .theme-toggle {
+    min-width: 0;
+    padding: 8px;
+  }
+
+  .theme-toggle [data-theme-label] {
+    display: none;
+  }
+
+  .theme-toggle-icon {
+    padding: 3px 6px;
+    font-size: 0.7rem;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand > span {
+    min-width: 0;
+  }
+
+  .brand strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .brand small {
@@ -2387,6 +2512,7 @@ html[data-theme="light"] .quick-actions a:focus-visible {
 
   .hero-stats,
   .quick-actions,
+  .package-guide-grid,
   .plan-choice-grid,
   .why-grid,
   .membership-plan-grid,
@@ -2405,6 +2531,7 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   .gallery-grid,
   .admin-grid,
   .corporate-results,
+  .social-proof-grid,
   .faq-list,
   .rights-grid {
     grid-template-columns: 1fr;
@@ -2486,6 +2613,20 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   .section {
     padding-top: 56px;
     padding-bottom: 56px;
+  }
+
+  .sticky-cta {
+    width: 94vw;
+    max-width: 360px;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .sticky-cta a {
+    min-height: 42px;
+    padding: 0 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
   }
 
   .service-card {
