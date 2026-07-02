@@ -804,7 +804,7 @@ function renderAbout(about) {
 
   const vision = createEl("div", "vision-panel");
   vision.append(createEl("p", "eyebrow", "Vision"));
-  vision.append(createEl("h3", "", "วิสัยทัศน์"));
+  vision.append(createEl("h3", "", "แนวคิด MOSSA"));
   vision.append(createEl("p", "", about.visionTh || ""));
 
   const values = createEl("div", "value-grid");

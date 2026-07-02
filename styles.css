@@ -1489,6 +1489,8 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   padding: 14px 16px;
   border-left: 1px solid var(--line);
   color: var(--muted);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .benefit-row span:first-child {
@@ -2413,6 +2415,10 @@ html[data-theme="light"] .quick-actions a:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .benefit-head {
+    display: none;
+  }
+
   .benefit-row span {
     border-left: 0;
     border-top: 1px solid var(--line);
@@ -2421,6 +2427,20 @@ html[data-theme="light"] .quick-actions a:focus-visible {
   .benefit-row span:first-child {
     border-top: 0;
     background: rgba(124, 60, 255, 0.1);
+  }
+
+  .benefit-row span[role="cell"]:not(:first-child) {
+    display: grid;
+    grid-template-columns: minmax(92px, 0.36fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+
+  .benefit-row span[role="cell"]:not(:first-child)::before {
+    content: attr(data-label);
+    color: var(--orange-2);
+    font-family: var(--font-display);
+    font-weight: 900;
   }
 
   .membership-plan-card {
