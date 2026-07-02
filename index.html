@@ -16,7 +16,13 @@
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem("mossa-theme");
+        document.documentElement.dataset.theme = savedTheme === "light" ? "light" : "dark";
+      })();
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Kanit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -28,9 +34,15 @@
           <small>Fitness & Sport Society in Rayong</small>
         </span>
       </a>
-      <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">
-        เมนู
-      </button>
+      <div class="header-controls">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="สลับโหมดมืดและสว่าง">
+          <span class="theme-toggle-icon" data-theme-icon>LIGHT</span>
+          <span data-theme-label>โหมดสว่าง</span>
+        </button>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">
+          เมนู
+        </button>
+      </div>
       <nav id="site-nav" class="site-nav" data-site-nav>
         <a href="#about">รู้จัก MOSSA</a>
         <a href="#services">บริการ</a>
@@ -52,7 +64,7 @@
           <p class="hero-copy">ฟิตเนสและสปอร์ตคลับครบวงจรในระยอง เลือกบริการและแพ็กเกจได้ง่ายในหน้าเดียว ทั้ง Membership, สระว่ายน้ำ, สนามกีฬา และ PT</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#plan-finder">เลือกแพ็กเกจ</a>
-            <a class="btn btn-secondary" href="#services">บริการของ MOSSA</a>
+            <a class="btn btn-secondary" href="#pricing">ดูราคาทั้งหมด</a>
             <a class="btn btn-secondary" href="#experts">ดูเทรนเนอร์</a>
             <a class="btn btn-ghost" data-line-link href="#" target="_blank" rel="noreferrer">แอด LINE</a>
           </div>
@@ -186,10 +198,10 @@
       <section id="pricing" class="section">
         <div class="section-heading">
           <p class="eyebrow">Pricing</p>
-          <h2>บริการและราคา</h2>
-          <p>ข้อมูลราคาเริ่มต้นจากชุดเอกสาร MOSSA และแยกตามหมวดบริการ</p>
+          <h2>บริการและราคาทั้งหมด</h2>
+          <p>รวมราคาทุกหมวดไว้หน้าเดียว ไม่ต้องกดแท็บสลับ เห็นราคาเริ่มต้นและแพ็กเกจสำคัญได้เร็วที่สุด</p>
         </div>
-        <div class="tab-list" id="pricing-tabs" role="tablist" aria-label="หมวดราคา"></div>
+        <div class="tab-list" id="pricing-tabs" role="navigation" aria-label="ทางลัดหมวดราคา"></div>
         <div id="pricing-content" class="pricing-grid" aria-live="polite"></div>
       </section>
 

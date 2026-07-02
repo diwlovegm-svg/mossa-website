@@ -81,6 +81,29 @@ function initMenu() {
   });
 }
 
+function applyTheme(theme) {
+  const activeTheme = theme === "light" ? "light" : "dark";
+  document.documentElement.dataset.theme = activeTheme;
+
+  const label = qs("[data-theme-label]");
+  const icon = qs("[data-theme-icon]");
+  if (label) label.textContent = activeTheme === "light" ? "โหมดมืด" : "โหมดสว่าง";
+  if (icon) icon.textContent = activeTheme === "light" ? "DARK" : "LIGHT";
+}
+
+function initThemeToggle() {
+  const toggle = qs("[data-theme-toggle]");
+  const savedTheme = localStorage.getItem("mossa-theme");
+  applyTheme(savedTheme === "light" ? "light" : "dark");
+  if (!toggle) return;
+
+  toggle.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    localStorage.setItem("mossa-theme", nextTheme);
+    applyTheme(nextTheme);
+  });
+}
+
 function initContactLinks(contact) {
   qsa("[data-line-link]").forEach((link) => {
     link.href = contact.lineUrl;
@@ -167,8 +190,8 @@ function closeServiceDetail() {
   detail.innerHTML = "";
 }
 
-function createPriceCard(item, categoryName) {
-  const card = createEl("article", "price-card");
+function createPriceCard(item, categoryName, variant = "") {
+  const card = createEl("article", ["price-card", variant].filter(Boolean).join(" "));
   card.append(createEl("p", "eyebrow", item.groupLabel || categoryName));
   card.append(createEl("h3", "", item.nameTh));
 
@@ -432,7 +455,7 @@ function renderServiceDetail(service, pricing) {
 
     servicePriceItems.forEach((item) => {
       const category = pricing.categories.find((categoryItem) => categoryItem.id === item.categoryId);
-      priceWrap.append(createPriceCard(item, category?.nameTh || service.categoryLabel));
+      priceWrap.append(createPriceCard(item, category?.nameTh || service.categoryLabel, "is-compact"));
     });
   } else {
     priceWrap.append(createEl("div", "empty-state", service.id === "group-class" ? "Group Class รวมอยู่ในสิทธิ์ Membership / Day Pass ตามเงื่อนไข MOSSA และดูรอบเรียนจากตารางคลาสรายเดือน" : "บริการนี้ดูรายละเอียดหลักจากตารางคลาสและช่องทางติดต่อ MOSSA"));
@@ -452,14 +475,13 @@ function renderServiceDetail(service, pricing) {
 function renderPricingTabs(pricing) {
   const tabs = qs("#pricing-tabs");
   tabs.innerHTML = "";
+  tabs.classList.add("pricing-jump-list");
 
   pricing.categories.forEach((category) => {
-    const button = createEl("button", category.id === state.pricingCategory ? "is-active" : "", category.nameTh);
+    const button = createEl("button", "", category.nameTh);
     button.type = "button";
     button.addEventListener("click", () => {
-      state.pricingCategory = category.id;
-      renderPricingTabs(pricing);
-      renderPricing(pricing);
+      qs(`#price-category-${category.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     tabs.append(button);
   });
@@ -467,18 +489,32 @@ function renderPricingTabs(pricing) {
 
 function renderPricing(pricing) {
   const grid = qs("#pricing-content");
-  const category = pricing.categories.find((item) => item.id === state.pricingCategory);
-  const items = pricing.items.filter((item) => item.categoryId === state.pricingCategory);
   grid.innerHTML = "";
+  grid.classList.add("pricing-overview-grid");
 
-  if (category?.notice) {
-    const notice = createEl("div", "empty-state", category.notice);
-    notice.style.gridColumn = "1 / -1";
-    grid.append(notice);
-  }
+  pricing.categories.forEach((category) => {
+    const items = pricing.items.filter((item) => item.categoryId === category.id);
+    if (!items.length) return;
 
-  items.forEach((item) => {
-    grid.append(createPriceCard(item, category.nameTh));
+    const section = createEl("section", "pricing-category");
+    section.id = `price-category-${category.id}`;
+
+    const head = createEl("div", "pricing-category-head");
+    head.append(createEl("p", "eyebrow", category.nameTh));
+    head.append(createEl("h3", "", category.nameTh));
+    head.append(createEl("span", "pricing-count", `${items.length} รายการราคา`));
+    section.append(head);
+
+    if (category.notice) {
+      section.append(createEl("div", "empty-state", category.notice));
+    }
+
+    const categoryGrid = createEl("div", "pricing-category-grid");
+    items.forEach((item) => {
+      categoryGrid.append(createPriceCard(item, category.nameTh, "is-overview"));
+    });
+    section.append(categoryGrid);
+    grid.append(section);
   });
 }
 
@@ -810,6 +846,7 @@ function renderFaq(faq) {
 }
 
 async function init() {
+  initThemeToggle();
   initMenu();
   initServiceModalEvents();
   try {
